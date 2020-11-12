@@ -1,0 +1,40 @@
+name: Website Deploy, Static to Blob CI
+
+on:
+  push:
+      branches: [ main, workflowTest ]
+
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_DEPLOYMENT_CREDENTIALS }}
+    
+    - name: NPM Build
+      run: npm install && npm run build
+    
+    - name: Upload
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.0.72
+        inlineScript: |
+            az storage blob upload-batch --account-name ${{secrets.AZURE_STORAGE_ACCT_NAME}} -d '$web' -s build
+
+#    - name: Purge CDN
+#      uses: azure/CLI@v1
+#      with:
+#        azcliversion: 2.0.72
+#        inlineScript: |
+#            az cdn endpoint purge --content-paths  "/*" --profile-name ${{ secrets.CDN_PROFILE_NAME }} --name ${{ secrets.CDN_ENDPOINT_NAME }} --resource-group ${{ secrets.CDN_RESOURCE_GROUP }}
+    
+    # Azure logout 
+    - name: logout
+      run: |
+          az logout
