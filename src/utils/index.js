@@ -14,3 +14,7 @@ export {
   getDisplayBalance,
   getFullDisplayBalance 
 } from './formatBalance'
+
+export {
+  getEtherscanAddress
+} from './network'

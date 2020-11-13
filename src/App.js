@@ -1,15 +1,19 @@
+import ModalsProvider from 'contexts/Modals'
+import NetworkProvider from 'contexts/Network'
+import ThemeProvider from 'contexts/Theme'
 import React from 'react'
-import { ThemeProvider } from '@material-ui/core'
-import WalletProvider from 'use-wallet'
-import theme from './theme'
+import Routes from 'routes'
+
 
 const App = () => {
   return (
-    <WalletProvider chainId={1}>
-      <ThemeProvider theme={theme}>
-        <div />
+    <NetworkProvider>
+      <ThemeProvider>
+        <ModalsProvider>
+          <Routes />
+        </ModalsProvider>
       </ThemeProvider>
-    </WalletProvider>
+    </NetworkProvider>
   )
 }
 
