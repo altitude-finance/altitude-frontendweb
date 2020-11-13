@@ -1,4 +1,4 @@
-import { Container, Dialog, DialogContent, DialogTitle, Grid } from '@material-ui/core'
+import { Dialog, DialogTitle} from '@material-ui/core'
 import React, { useEffect } from 'react'
 import MetamaskLogo from 'assets/img/metamask-fox.svg'
 import WalletConnectLogo from 'assets/img/wallet-connect.svg'

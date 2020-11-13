@@ -7,7 +7,8 @@ import { Slopes } from './Slopes'
 import { Avalanche } from './Avalanche'
 import { Leaderboards } from './Leaderboards'
 import { About } from './About'
-import { Docs } from './Docs'
+import { Wiki } from './Wiki'
+import { NoMatch } from './NoMatch'
 
 const Routes = () => {
   return (
@@ -21,7 +22,8 @@ const Routes = () => {
         <Route path="/avalanche" component={Avalanche} />
         <Route path="/leaderboards" component={Leaderboards} />
         <Route path="/about" component={About} />
-        <Route path="/docs" component={Docs} />
+        <Route path="/wiki" component={Wiki} />
+        <Route component={NoMatch} />
       </Switch>
 
       <Footer />

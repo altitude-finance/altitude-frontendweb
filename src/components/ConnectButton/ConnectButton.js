@@ -1,19 +1,12 @@
 import React from 'react'
-import { Button, makeStyles } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { useModal } from 'hooks/useModal'
 import { useWallet } from 'use-wallet'
 import { formatAddress } from 'utils'
 import { ConnectDialog } from '../ConnectDialog'
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
 
-const useStyles = makeStyles(() => ({
-  button: {
-    height: "auto"
-  }
-}))
-
 export const ConnectButton = () => {
-  const styles = useStyles()
   const [showConnectModal] = useModal(<ConnectDialog />)
   const { account, reset } = useWallet()
 

@@ -1,4 +1,4 @@
-import { Box, Button, makeStyles } from '@material-ui/core'
+import { Box, Button } from '@material-ui/core'
 import React from 'react'
 
 export const ConnectDialogButton = ({

@@ -1,0 +1,1 @@
+export { Wiki } from './Wiki'
