@@ -12,7 +12,9 @@ const ThemeProvider = ({ children }) => {
   const [colorMode, setColorMode] = useState(() => prefersDarkMode ? 'dark' : 'light')
 
   const theme = useMemo(() => {
-    return colorMode === 'dark' ? getDarkTheme() : getLightTheme() 
+    const next = colorMode === 'dark' ? getDarkTheme() : getLightTheme()
+    window.theme = next
+    return next
   }, [colorMode])
 
   const toggleColorMode = () => {

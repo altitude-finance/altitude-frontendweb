@@ -1,15 +1,36 @@
 import React from 'react'
 import { useTheme } from 'hooks/useTheme'
-import { Switch } from '@material-ui/core'
+import { Switch, FormControlLabel, FormGroup, Typography } from '@material-ui/core'
 
-export const ThemeSwitch = () => {
+export const ThemeSwitch = ({
+  labeled=false
+}) => {
   const { colorMode, toggleColorMode } = useTheme()
 
   return (
-    <Switch 
-      checked={colorMode === 'dark'} 
-      onChange={toggleColorMode}
-      name="themeSwitch"
-    />
+    <>
+      {labeled ? (
+        <FormGroup>
+        <FormControlLabel 
+          labelPlacement="top"
+          label={<Typography variant="overline" style={{fontSize:12}}>Theme</Typography>}
+          control={
+            <Switch 
+              checked={colorMode === 'dark'} 
+              onChange={toggleColorMode}
+              name="themeSwitch"
+              size="small"
+            />
+          }
+        />
+        </FormGroup>
+      ) : (
+        <Switch 
+          checked={colorMode === 'dark'} 
+          onChange={toggleColorMode}
+          name="themeSwitch"
+        />
+      )}
+    </>
   )
 }

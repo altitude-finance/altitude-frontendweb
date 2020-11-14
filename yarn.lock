@@ -7301,6 +7301,11 @@ fontsource-courier-prime@^3.0.5:
   resolved "https://registry.yarnpkg.com/fontsource-courier-prime/-/fontsource-courier-prime-3.0.5.tgz#0f549d091bc2031c00e33d554e713dc5a189504d"
   integrity sha512-0wG99thekkwDLAU+9/EtvIDLevYLoxCZMs/EFZDSPTjX7IqPOHnm1119Jb/uvPromGszzVQRyJSmKfrN6p4a3A==
 
+fontsource-league-spartan@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/fontsource-league-spartan/-/fontsource-league-spartan-3.0.5.tgz#9e0d4c125148cec102d2b09eba66c5197258e621"
+  integrity sha512-aQRDtvyEvzrH/izqjrSZ7RcYmMCdxRMeao5tkOyd4GJxaozB1hX6vjccE7yyKNEG2RJszCXEiBIMcckQj8EJrg==
+
 fontsource-roboto@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/fontsource-roboto/-/fontsource-roboto-3.0.3.tgz#99c312babeabce22b3e933b3edf2951d4508f4f7"
@@ -12285,6 +12290,13 @@ react-error-overlay@^6.0.8:
   version "6.0.8"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.8.tgz#474ed11d04fc6bda3af643447d85e9127ed6b5de"
   integrity sha512-HvPuUQnLp5H7TouGq3kzBeioJmXms1wHy9EGjz2OURWBp4qZO6AfGEcnxts1D/CbwPLRAgTMPCEgYhA3sEM4vw==
+
+react-icons@^3.11.0:
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.11.0.tgz#2ca2903dfab8268ca18ebd8cc2e879921ec3b254"
+  integrity sha512-JRgiI/vdF6uyBgyZhVyYJUZAop95Sy4XDe/jmT3R/bKliFWpO/uZBwvSjWEdxwzec7SYbEPNPck0Kff2tUGM2Q==
+  dependencies:
+    camelcase "^5.0.0"
 
 react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.0, react-is@^16.8.1:
   version "16.13.1"

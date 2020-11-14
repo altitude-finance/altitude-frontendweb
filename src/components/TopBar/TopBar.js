@@ -1,23 +1,33 @@
-import React from 'react'
-import { AppBar, Box, Toolbar, useTheme, useMediaQuery, Button } from '@material-ui/core'
+import React, { useState } from 'react'
+import { AppBar, Box, Toolbar, useTheme, useMediaQuery, Button, makeStyles } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { MobileMenu } from 'components/MobileMenu'
 import { ConnectButton } from 'components/ConnectButton'
 import { ThemeSwitch } from 'components/ThemeSwitch'
 import { Brand } from 'components/Brand'
+import LaunchIcon from '@material-ui/icons/Launch'
+
+const useStyles = makeStyles(() => ({
+  appBar: {
+    position: 'relative',
+    zIndex: 1400
+  }
+}))
 
 export const TopBar = () => {
   const theme = useTheme()
   const displayMobileMenu = useMediaQuery(theme.breakpoints.down("sm"))
   const history = useHistory()
+  const classes = useStyles()
 
   return (
-    <AppBar position="static">
+    <AppBar className={classes.appBar}>
       <Toolbar>
+        {displayMobileMenu && <MobileMenu />}
+            
         <Brand />
-        {displayMobileMenu ? (
-          <MobileMenu />
-        ) : (
+        
+        {!displayMobileMenu && (
           <Box display="flex" justifyContent="space-evenly" alignItems="center">
             <Button color="inherit" onClick={() => history.push("/")}>
               Home
@@ -26,22 +36,23 @@ export const TopBar = () => {
               Slopes
             </Button>
             <Button color="inherit" onClick={() => history.push("/avalanche")}>
-              Storm{/* Avalanche */}
+              Avalanche
             </Button>
             <Button color="inherit" onClick={() => history.push("/leaderboards")}>
-              Stats{/* Leaderboards */}
+              Leaderboards
             </Button>
-            <Button color="inherit" onClick={() => history.push("/about")}>
-              About
+            <Button color="inherit" onClick={() => history.push("/docs")}> 
+              Docs
             </Button>
-            <Button color="inherit" onClick={() => history.push("/wiki")}> 
-              Wiki
+            <Button
+              href="https://degen.altitude.finance/"
+              target="_blank"
+              color="secondary"
+            >
+              Chart
+              <LaunchIcon style={{fontSize:12}} />
             </Button>
-            {/* <Link href="https://degen.altitude.finance/" color="secondary">
-              Degen <LaunchIcon />
-            </Link> */}
             
-            <ThemeSwitch />
             <ConnectButton />
           </Box>
         )}
