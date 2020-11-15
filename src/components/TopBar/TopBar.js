@@ -48,6 +48,7 @@ export const TopBar = () => {
               href="https://degen.altitude.finance/"
               target="_blank"
               color="secondary"
+              style={{marginRight: 8}}
             >
               Chart
               <LaunchIcon style={{fontSize:12}} />
