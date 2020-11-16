@@ -4,6 +4,9 @@ on:
   push:
       branches: [ main, workflowTest ]
 
+env:
+  PACKAGE_PATH: 'build'  
+  NODE_VERSION: '12.x'
 
 jobs:
   build-and-deploy:
@@ -12,29 +15,36 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        
+    - name: NPM Install and Build
+      run: |
+        npm install
+        npm run build --if-present
+      env:
+        CI: false #avoids warnings triggering errors
+    
     - name: Azure Login
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_DEPLOYMENT_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_DEPLOYMENT_CREDENTIALS }}        
     
-    - name: NPM Build
-      run: npm install && npm run build
+    - name: Upload to Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+        package: ${{ env.PACKAGE_PATH }}
     
-    - name: Upload
+    - name: Upload Static Site Backup
       uses: azure/CLI@v1
       with:
         azcliversion: 2.0.72
         inlineScript: |
             az storage blob upload-batch --account-name ${{secrets.AZURE_STORAGE_ACCT_NAME}} -d '$web' -s build
 
-#    - name: Purge CDN
-#      uses: azure/CLI@v1
-#      with:
-#        azcliversion: 2.0.72
-#        inlineScript: |
-#            az cdn endpoint purge --content-paths  "/*" --profile-name ${{ secrets.CDN_PROFILE_NAME }} --name ${{ secrets.CDN_ENDPOINT_NAME }} --resource-group ${{ secrets.CDN_RESOURCE_GROUP }}
-    
-    # Azure logout 
-    - name: logout
+    - name: Logout
       run: |
           az logout
