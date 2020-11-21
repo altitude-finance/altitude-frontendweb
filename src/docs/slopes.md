@@ -15,27 +15,27 @@ During the initial distribution phase, Slopes have a base fixed APR of 1000%. Th
   - Initial Fixed APR: 5000%
   - Risk of Impermanent Loss: Yes
   - Borrowable: No
-2. Green Square
+2. Bunny Slope
   - Token: Tether (USDT)
   - Initial Fixed APR: 1000%
   - Risk of Impermanent Loss: No
   - Borrowable: Yes
-3. Yellow Triangle
+3. Green Circle
   - Token: Dai (DAI)
   - Initial Fixed APR: 1000%
   - Risk of Impermanent Loss: No
   - Borrowable: Yes
-4. Blue Circle
+4. Terrain Park
   - Token: USD Coin (USDC)
   - Initial Fixed APR: 1000%
   - Risk of Impermanent Loss: No
   - Borrowable: Yes
-5. Silver Diamond
+5. Blue Square
   - Token: Wrapped Ethereum (wETH)
   - Initial Fixed APR: 1000%
   - Risk of Impermanent Loss: No
   - Borrowable: Yes
-6. Gold Circle
+6. Half Pipe
   - Token: Wrapped Bitcoin (wBTC)
   - Initial Fixed APR: 1000%
   - Risk of Impermanent Loss: No
