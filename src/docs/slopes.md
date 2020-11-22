@@ -8,6 +8,10 @@ All Slopes, with the exception of the PWDR-ETH LP Slope, have no risk of imperma
 
 During the initial distribution phase, Slopes have a base fixed APR of 1000%. This does ​not​ guarantee a 1000% return for investors. It simply means more PWDR gets rewarded to stakers if the price drops during the distribution phase. The max supply prevents fixed APR Slopes from becoming unsustainable. For more information on Tokenomics, see here [link]().
 
+## Slope Entry Fee
+
+When entering a Slope, a **5%** Fee is taken. This fee is split between a Round Robin fee and Token Buyback at a ratio of X:Y. To encourage stakers to stay in the pool, the Round Robin fee is evenly distributed to all of the active pool participants. The remaining fee is converted to wETH and used to buyback PWDR. Bought back PWDR tokens are sent to the Avalanche during the Accumulation phase.
+
 ## Active Slopes
 
 1. Black Diamond
