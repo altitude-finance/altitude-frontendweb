@@ -1,10 +1,10 @@
-import { DisplayView } from 'components/DisplayView'
+import { HeaderView } from 'components/HeaderView'
 import React from 'react'
 
 export const Avalanche = () => {
   return (
-    <DisplayView>
+    <HeaderView title="Avalanche">
       
-    </DisplayView>
+    </HeaderView>
   )
 }

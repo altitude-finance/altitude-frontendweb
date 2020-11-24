@@ -1,23 +1,35 @@
-import { Box, Button, Grid, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import React from 'react'
-
 import { DisplayView } from 'components/DisplayView'
-import { Logo } from 'components/Logo'
 import { SocialButtonGroup } from 'components/SocialButtonGroup'
+import { Brand } from 'components/Brand'
+import { FlexCenter } from 'components/FlexCenter'
+import { TextDecoration } from 'components/TextDecoration'
 
 export const Home = () => {
   return (
     <DisplayView>
-      <Logo size={300} withTitle withSubtitle />
+      <FlexCenter>
+        <Brand vertical size={300} />
+      </FlexCenter>
+      {/* <Logo size={300} withTitle withSubtitle /> */}
       {/* <Grid item> */}
       
       {/* </Grid> */}
       
-      <Box my={2} display="flex" direction="column" alignItems="center" justifyContent="center">
+      <FlexCenter flexDirection="column">
+        <Typography 
+            variant="subtitle2" 
+            color="textSecondary" 
+            align="center"
+            style={{fontSize: 16}}
+          >
+          Reach New Altitudes, Attain Peak Capital
+        </Typography>
+        <TextDecoration />
         <SocialButtonGroup />
         {/* <Button variant="outlined" color="secondary">Learn More</Button> */}
-      </Box>
-      
+      </FlexCenter>
     </DisplayView>
   )
 }

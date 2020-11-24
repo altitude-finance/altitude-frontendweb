@@ -9,7 +9,7 @@ import LaunchIcon from '@material-ui/icons/Launch'
 
 const useStyles = makeStyles(() => ({
   appBar: {
-    position: 'relative',
+    position: 'fixed',
     zIndex: 1400
   }
 }))
@@ -24,8 +24,11 @@ export const TopBar = () => {
     <AppBar className={classes.appBar}>
       <Toolbar>
         {displayMobileMenu && <MobileMenu />}
-            
-        <Brand />
+        
+        <Box flexGrow={1} display="flex" alignItems="center">
+          <Brand size={48} dark={false} />
+        </Box>
+        
         
         {!displayMobileMenu && (
           <Box display="flex" justifyContent="space-evenly" alignItems="center">

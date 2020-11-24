@@ -10,9 +10,11 @@ import { About } from './About'
 import { Docs } from './Docs'
 import { NoMatch } from './NoMatch'
 import { Account } from './Account'
+import { Box } from '@material-ui/core'
 
 const Routes = () => {
   return (
+    // <Box display="flex" flexDirection="column" p={3} flexGrow={1}>
     <Router>
       <TopBar />
 
@@ -21,16 +23,18 @@ const Routes = () => {
         <Route path="/about" component={About} />
         <Route path="/account" component={Account} />
         <Route path="/avalanche" component={Avalanche} />
-        <Route path="/slopes" component={Slopes} />
-        <Route path="/slopes/:slopeId" component={() => {}} /> {/* If we decide to subroute, put them all here */}
-        <Route path="/leaderboards" component={Leaderboards} />
+        <Route path="/docs/:folderId/:docId" component={Docs} />
+        <Route path="/docs/:docId" component={Docs} />
         <Route path="/docs" component={Docs} />
+        <Route path="/leaderboards" component={Leaderboards} />
+        <Route path="/slopes" component={Slopes} />
         
         <Route component={NoMatch} />
       </Switch>
 
       <Footer />
     </Router>
+    // </Box>
   )
 }
 

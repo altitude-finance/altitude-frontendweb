@@ -1,10 +1,10 @@
-import { DisplayView } from 'components/DisplayView'
+import { HeaderView } from 'components/HeaderView'
 import React from 'react'
 
 export const Slopes = () => {
   return (
-    <DisplayView>
+    <HeaderView title="Slopes">
       
-    </DisplayView>
+    </HeaderView>
   )
 }

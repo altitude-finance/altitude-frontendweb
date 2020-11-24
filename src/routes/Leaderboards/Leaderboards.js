@@ -1,10 +1,10 @@
-import { DisplayView } from 'components/DisplayView'
+import { HeaderView } from 'components/HeaderView'
 import React from 'react'
 
 export const Leaderboards = () => {
   return (
-    <DisplayView>
+    <HeaderView title="Leaderboards">
       
-    </DisplayView>
+    </HeaderView>
   )
 }
