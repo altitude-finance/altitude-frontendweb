@@ -12,7 +12,7 @@ Individual Donation Cap: 20 ETH
 
 The Liquidity Generation Event (LGE) aims to bootstrap liquidity on Uniswap and ensure future sustainability. Anyone can donate Ethereum to the LGE contract at a max rate of 20 ETH per address. Addresses that donate to the LGE will receive PWDR tokens at a rate of 1 ETH:X PWDR upon completion of the event.
 
-Addresses that donate 20/15 ETH also are eligible to receive an NFT which grants boosts across the Altitude network. NFTs are limited in quantity. See the NFT page for more info [link]().
+Addresses that contribute 20/15 ETH also are eligible to receive an NFT which grants boosts across the Altitude network. NFTs are limited in quantity. See the NFT page for more info [link]().
 
 ## Transfer Fee
 
