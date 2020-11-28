@@ -7,7 +7,8 @@ import React from 'react'
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    //position: "relative",
+    position: "relative",
+    bottom: 0,
     zIndex: 1400,
     paddingTop: theme.spacing(2),
     width: "100%",

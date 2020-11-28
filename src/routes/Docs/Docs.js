@@ -1,20 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import marked from 'marked'
-import { DisplayView } from 'components/DisplayView'
 import { DocsContent } from './components/DocsContent'
 import { DocsDrawer } from './components/DocsDrawer'
-
 import HOME_DOC from '../../docs/altitude.md'
 import SLOPES_DOC from '../../docs/slopes.md'
 import AVALANCHE_DOC from '../../docs/avalanche.md'
-import { Box, useMediaQuery, useTheme } from '@material-ui/core'
+import { useMediaQuery, useTheme } from '@material-ui/core'
 import { DocsMenu } from './components/DocsMenu'
 import { ColumnView } from 'components/ColumnView'
 
 export const Docs = () => {
   const { docId } = useParams()
-  console.log(docId)
   const theme = useTheme()
   const useMobile = useMediaQuery(theme.breakpoints.down("sm"))
   const [content, setContent] = useState("")
