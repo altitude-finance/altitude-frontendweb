@@ -25,7 +25,7 @@ export const Footer = () => {
       {/* Altitude Finance */}
       {/* <Toolbar /> */}
       <Grid container alignItems="center" justify="center">
-        <Grid item sm={12} md={4}>
+        <Grid item xs={12} md={4}>
           <FlexCenter>
             <Brand vertical size={96} />
           </FlexCenter>
@@ -33,7 +33,7 @@ export const Footer = () => {
           
           
         </Grid>
-        <Grid item sm={12} md={4}>
+        <Grid item xs={12} md={4}>
           <Grid container justify="center" direction="row">
             <Button size="small" color="primary">Home</Button>
             <Button size="small" color="primary">Slopes</Button>
@@ -48,7 +48,7 @@ export const Footer = () => {
             <ThemeSwitch />
           </FlexCenter>
         </Grid>
-        <Grid item sm={12} md={4}>
+        <Grid item xs={12} md={4}>
           <Typography align="center" variant="h6"><b>Connect With Us</b></Typography>
           <SocialButtonGroup />
         </Grid>

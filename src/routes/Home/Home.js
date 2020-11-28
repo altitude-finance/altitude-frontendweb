@@ -17,7 +17,7 @@ export const Home = () => {
       
       {/* </Grid> */}
       
-      <FlexCenter flexDirection="column">
+      <FlexCenter flexDirection="column" style={{alignSelf: 'center'}}>
         <Typography 
             variant="subtitle2" 
             color="textSecondary" 

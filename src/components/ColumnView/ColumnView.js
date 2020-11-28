@@ -13,7 +13,6 @@ export const ColumnView = ({
   return (
     <Box
       display="flex"
-      // flexGrow={1}
       flexDirection="column"
       //height="100vh"
       {...props}

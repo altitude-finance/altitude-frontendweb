@@ -42,7 +42,7 @@ export const TopBar = () => {
               Avalanche
             </Button>
             <Button color="inherit" onClick={() => history.push("/leaderboards")}>
-              Leaderboards
+              Dashboard
             </Button>
             <Button color="inherit" onClick={() => history.push("/docs")}> 
               Docs

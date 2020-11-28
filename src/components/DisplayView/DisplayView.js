@@ -17,7 +17,7 @@ export const DisplayView = ({children, ...props}) => {
       <Grid 
         direction="column" 
         justify="center"
-        alignItems="center"
+        // alignItems="center"
         className={classes.display}
         container
         {...props}

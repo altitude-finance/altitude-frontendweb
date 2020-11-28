@@ -1,4 +1,5 @@
 import { Box, Grid } from '@material-ui/core'
+import { ColumnView } from 'components/ColumnView'
 import { FlexCenter } from 'components/FlexCenter'
 import { SurfaceTabs } from 'components/SurfaceTabs'
 import React from 'react'
@@ -9,7 +10,7 @@ const ACCOUNT_TABS = ["Farming", "Flash", "Settings"]
 export const ActiveAccount = () => {
 
   return (
-    <FlexCenter flexDirection="column">
+    <ColumnView>
       <AccountHeader />
       <Grid container >
         <Grid item xs={12}>
@@ -20,6 +21,6 @@ export const ActiveAccount = () => {
         </SurfaceTabs>
         </Grid>
       </Grid>
-    </FlexCenter>
+    </ColumnView>
   )
 }

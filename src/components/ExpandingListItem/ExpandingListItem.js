@@ -5,6 +5,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import { makeStyles } from '@material-ui/core/styles'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -14,9 +15,10 @@ const useStyles = makeStyles((theme) => ({
 
 export const ExpandingListItem = ({
   title,
-  defaultOpen=true,
-  children,
+  items=[],
+  defaultOpen=false,
 }) => {
+  const history = useHistory()
   const classes = useStyles()
   const [open, setOpen] = useState(defaultOpen)
 
@@ -28,9 +30,11 @@ export const ExpandingListItem = ({
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <ListItemText primary="Starred" />
-          </ListItem>
+          {items && items.map((item, i) => (
+            <ListItem button className={classes.nested} onClick={() => history.push(item.route)}>
+              <ListItemText primary={item.title} />
+            </ListItem>
+          ))}
         </List>
       </Collapse>
     </>

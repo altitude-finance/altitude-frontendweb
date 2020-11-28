@@ -3,6 +3,7 @@ import ReactMarkdown from 'markdown-to-jsx'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
+import { LinkTypography } from './components/LinkTypography'
 
 const styles = (theme) => ({
   listItem: {

@@ -6,10 +6,12 @@ import { ExpandingListItem } from 'components/ExpandingListItem'
 
 const useStyles = makeStyles((theme) => ({
   drawerPaper: {
-    width: 240
+    width: 240,
+    paddingTop: theme.mixins.toolbar.minHeight
   },
   drawer: {
     width: 240,
+    
     //flexShrink: 0
   }
 }))
@@ -26,22 +28,50 @@ export const DocsDrawer = () => {
       className={classes.drawer}
       classes={{paper: classes.drawerPaper}}
     > 
-      <Toolbar />
+      {/* <Toolbar /> */}
       <Divider />
-      <Box overflow="auto">
+      <Box overflow="auto" mt={1}>
         <List>
           <ListItem button onClick={() => history.push("/docs/")}>
             {/* <ListItem */}
-            <ListItemText primary={"Altitude Docs"} />
+            <ListItemText primary="Altitude Docs" />
           </ListItem>
-          <ListItem button onClick={() => history.push("/docs/slopes")}>
-            <ListItemText primary={"Slopes"} />
+          <Divider />
+          <ListItem button onClick={() => history.push("/docs/lge")}>
+            <ListItemText primary="Token Basics" />
           </ListItem>
+          <ListItem button onClick={() => history.push("/docs/lge")}>
+            <ListItemText primary="Liquidity Generation" />
+          </ListItem>
+          <ExpandingListItem 
+            title="Yield Farming"
+            items={[
+              {
+                title: "Slopes Basics",
+                route: "/docs/slopes"
+              },
+              {
+                title: "Slopes Basics",
+                route: "/docs/slopes/#active-slopes"
+              }
+            ]}
+          />
           <ListItem button onClick={() => history.push("/docs/avalanche")}>
-            <ListItemText primary={"Avalanche"} />
+            <ListItemText primary="Avalanche" />
           </ListItem>
-          <ExpandingListItem title="Tokenomics" />
+          <ExpandingListItem 
+            title="Tokenomics"
+            items={[
+              {
+                title: "Token",
+                route: "/docs/"
+              }
+            ]}
+          />
         </List>
+        <ListItem button onClick={() => history.push("/docs/glossary")}>
+            <ListItemText primary="Glossary" />
+          </ListItem>
       </Box>
     </Drawer>
   )

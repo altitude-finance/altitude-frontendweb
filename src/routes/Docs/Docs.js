@@ -39,7 +39,6 @@ export const Docs = () => {
 
   return (
       <ColumnView flexDirection="row">
-        {useMobile && <DocsMenu />}
         {!useMobile && <DocsDrawer />}
         <DocsContent content={content} />
       </ColumnView>
