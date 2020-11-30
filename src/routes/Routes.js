@@ -5,11 +5,12 @@ import { Footer } from 'components/Footer'
 import { Home } from './Home'
 import { Slopes } from './Slopes'
 import { Avalanche } from './Avalanche'
-import { Leaderboards } from './Leaderboards'
-import { About } from './About'
+import { Dashboard } from './Dashboard'
 import { Docs } from './Docs'
 import { NoMatch } from './NoMatch'
 import { Account } from './Account'
+import { Legal } from './Legal'
+import { Lodge } from './Lodge'
 import { Box } from '@material-ui/core'
 
 const Routes = () => {
@@ -19,14 +20,16 @@ const Routes = () => {
       <TopBar />
 
       <Switch>
+        {/* Alphabetical order with / first and nothing last as catch all */}
         <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
         <Route path="/account" component={Account} />
         <Route path="/avalanche" component={Avalanche} />
         <Route path="/docs/:folderId/:docId" component={Docs} />
         <Route path="/docs/:docId" component={Docs} />
         <Route path="/docs" component={Docs} />
-        <Route path="/leaderboards" component={Leaderboards} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/legal" component={Legal} />
+        <Route path="/lodge" component={Lodge} />
         <Route path="/slopes" component={Slopes} />
         
         <Route component={NoMatch} />

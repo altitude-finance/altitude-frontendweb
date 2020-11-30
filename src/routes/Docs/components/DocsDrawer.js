@@ -1,18 +1,19 @@
-import { Box, Divider, Drawer, List, ListItem, ListItemText, makeStyles, Toolbar } from '@material-ui/core'
+import { Box, Divider, Drawer, List, ListItem, ListItemText, makeStyles } from '@material-ui/core'
 import React  from 'react'
-import { useTheme } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import { ExpandingListItem } from 'components/ExpandingListItem'
+import DocsRouteMap from 'constants/DocsRouteMap'
 
 const useStyles = makeStyles((theme) => ({
   drawerPaper: {
-    width: 240,
-    paddingTop: theme.mixins.toolbar.minHeight
+    width: 320,
+    paddingTop: theme.mixins.toolbar.minHeight,
+    [theme.breakpoints.up('lg')]: {
+      paddingBottom: 115,
+    },
   },
   drawer: {
-    width: 240,
-    
-    //flexShrink: 0
+    width: 320
   }
 }))
 
@@ -20,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
 export const DocsDrawer = () => {
   const classes = useStyles()
   const history = useHistory()
+
+  const handlePush = (path) => {
+    history.push(path)
+  }
   
   return (
      <Drawer
@@ -28,50 +33,32 @@ export const DocsDrawer = () => {
       className={classes.drawer}
       classes={{paper: classes.drawerPaper}}
     > 
-      {/* <Toolbar /> */}
       <Divider />
       <Box overflow="auto" mt={1}>
         <List>
-          <ListItem button onClick={() => history.push("/docs/")}>
-            {/* <ListItem */}
-            <ListItemText primary="Altitude Docs" />
-          </ListItem>
-          <Divider />
-          <ListItem button onClick={() => history.push("/docs/lge")}>
-            <ListItemText primary="Token Basics" />
-          </ListItem>
-          <ListItem button onClick={() => history.push("/docs/lge")}>
-            <ListItemText primary="Liquidity Generation" />
-          </ListItem>
-          <ExpandingListItem 
-            title="Yield Farming"
-            items={[
-              {
-                title: "Slopes Basics",
-                route: "/docs/slopes"
-              },
-              {
-                title: "Slopes Basics",
-                route: "/docs/slopes/#active-slopes"
-              }
-            ]}
-          />
-          <ListItem button onClick={() => history.push("/docs/avalanche")}>
-            <ListItemText primary="Avalanche" />
-          </ListItem>
-          <ExpandingListItem 
-            title="Tokenomics"
-            items={[
-              {
-                title: "Token",
-                route: "/docs/"
-              }
-            ]}
-          />
+          {[...DocsRouteMap.active].map((route, i) => {
+            if (route.items) {
+              return (
+                <ExpandingListItem
+                  key={i}
+                  title={route.title}
+                  items={route.items}
+                />
+              )
+            } else {
+              return (
+                <ListItem
+                  button 
+                  key={i}
+                  onClick={() => handlePush(route.path)}
+                >
+                  {/* <ListItemIcon /> */}
+                  <ListItemText><b>{route.title}</b></ListItemText>
+                </ListItem>
+              )
+            }
+          })}
         </List>
-        <ListItem button onClick={() => history.push("/docs/glossary")}>
-            <ListItemText primary="Glossary" />
-          </ListItem>
       </Box>
     </Drawer>
   )

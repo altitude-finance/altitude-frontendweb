@@ -5,9 +5,17 @@ import React from 'react'
 const useStyles = makeStyles((theme) => ({
   safeArea: {
     paddingTop: theme.mixins.toolbar.minHeight,
-    // paddingBottom: theme.mixins.toolbar.minHeight,
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    // [theme.breakpoints.down('sm')]: {
+    //   marginBottom: 280,
+    // },
+    // [theme.breakpoints.up('md')]: {
+    //   paddingBottom: 120,
+    // },
+    // [theme.breakpoints.up('lg')]: {
+    //   paddingBottom: 110,
+    // },
   }
 }))
 

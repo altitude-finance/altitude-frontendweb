@@ -5,14 +5,14 @@ export const FlexCenter = ({
   flexDirection="row",
   align="center",
   justify="center",
-  m=0,
-  mb=0,
-  mt=0,
-  mx=0,
-  my=0,
+  m,
+  mb,
+  mt,
+  mx,
+  my,
   children, 
-  ...props}
-) => {
+  ...props
+}) => {
   return (
     <Box
       flexDirection={flexDirection}

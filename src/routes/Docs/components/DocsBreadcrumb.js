@@ -1,4 +1,5 @@
 import { Breadcrumbs, Link, Typography } from '@material-ui/core'
+import DocsRouteMap from 'constants/DocsRouteMap'
 import React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
@@ -22,10 +23,15 @@ export const DocsBreadcrumb = () => {
       </Link>
       {folderId && (
         <Link color="inherit" onClick={() => history.push(`/docs/${folderId}`)}>
-          Folder
+          {DocsRouteMap.titleMappings[folderId]}
         </Link>
       )}
-      {docId && <Typography color="textPrimary">Breadcrumb</Typography>}
+      {docId && (
+        <Typography color="textPrimary">
+          {DocsRouteMap.titleMappings[docId]}
+        </Typography>
+      )}
+      
     </Breadcrumbs>
   )
 }

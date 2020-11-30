@@ -3,25 +3,36 @@ import { Brand } from 'components/Brand'
 import { FlexCenter } from 'components/FlexCenter'
 import { SocialButtonGroup } from 'components/SocialButtonGroup'
 import { ThemeSwitch } from 'components/ThemeSwitch'
+import RouteMap from 'constants/RouteMap'
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   footer: {
     position: "relative",
     bottom: 0,
-    zIndex: 1400,
+    
     paddingTop: theme.spacing(2),
     width: "100%",
-    backgroundColor: theme.palette.background.footer //theme.palette.primary.main//
+    backgroundColor: theme.palette.background.footer, //theme.palette.primary.main//
+    [theme.breakpoints.up('lg')]: {
+      zIndex: 1400,
+    },
   }
 }))
 
 export const Footer = () => {
   const classes = useStyles()
+  const history = useHistory()
   // const theme = useTheme()
 
   return (
-    <Paper square variant="outlined" color="primary" classes={{root: classes.footer}}>
+    <Paper 
+      square 
+      variant="outlined" 
+      color="primary" 
+      classes={{root: classes.footer}}
+    >
       {/* Altitude Finance */}
       {/* <Toolbar /> */}
       <Grid container alignItems="center" justify="center">
@@ -35,18 +46,30 @@ export const Footer = () => {
         </Grid>
         <Grid item xs={12} md={4}>
           <Grid container justify="center" direction="row">
-            <Button size="small" color="primary">Home</Button>
-            <Button size="small" color="primary">Slopes</Button>
+            {[...RouteMap.active, ...RouteMap.footer].map((route, i) => (
+              <Button
+                key={i}
+                onClick={() => history.push(route.path)}
+                size="small" 
+                color="primary"
+              >
+                {route.title}
+              </Button>
+            ))}
+            {/* <Button size="small" color="primary">Slopes</Button>
             <Button size="small" color="primary">Avalanche</Button>
             <Button size="small" color="primary">Leaderboards</Button>
             <Button size="small" color="primary">About</Button>
             <Button size="small" color="primary">Wiki</Button>
-            <Button size="small" color="primary">Legal</Button>
+            <Button size="small" color="primary">Legal</Button> */}
             {/* <Button size="small">Home</Button> */}
           </Grid>
-          <FlexCenter>
-            <ThemeSwitch />
-          </FlexCenter>
+          {/* <FlexCenter> */}
+          <Grid container justify="center">
+            <ThemeSwitch labelPlacement="start" labeled />
+          </Grid>
+            
+          {/* </FlexCenter> */}
         </Grid>
         <Grid item xs={12} md={4}>
           <Typography align="center" variant="h6"><b>Connect With Us</b></Typography>

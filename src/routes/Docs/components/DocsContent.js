@@ -1,4 +1,4 @@
-import { Box, Typography, useMediaQuery, useTheme } from '@material-ui/core'
+import { Box, Button, Typography, useMediaQuery, useTheme } from '@material-ui/core'
 import Markdown from 'components/Markdown'
 import { SafeAreaView } from 'components/SafeAreaView'
 import React from 'react'
@@ -12,10 +12,11 @@ export const DocsContent = ({ content }) => {
 
   return (
     <SafeAreaView>
-      <Box p={3} display="flex" flexDirection="column" height="100vh">
+      <Box p={3} display="flex" flexDirection="column" minHeight="100vh" height="100%">
         {useMobile && <DocsMenu />}
         <DocsBreadcrumb />
         <Markdown children={content} />
+        {/* <Button>Next</Button> */}
       </Box>
     </SafeAreaView>
   )

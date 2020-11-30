@@ -4,8 +4,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import { makeStyles } from '@material-ui/core/styles'
 import { ExpandLess, ExpandMore } from '@material-ui/icons'
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -19,19 +19,38 @@ export const ExpandingListItem = ({
   defaultOpen=false,
 }) => {
   const history = useHistory()
+  const location = useLocation()
   const classes = useStyles()
   const [open, setOpen] = useState(defaultOpen)
 
+  const handleToggle = () => {
+    if (!open) {
+      history.push(items[0].path)
+    }
+    setOpen(!open)
+  }
+
+  useEffect(() => {
+    if (open && !location.pathname.includes(items[0].path)) {
+      setOpen(!open)
+    }
+  }, [location.pathname, setOpen, items, open]) 
+
   return (
     <>
-      <ListItem button onClick={() => setOpen(!open)}>
-        <ListItemText primary={title} />
+      <ListItem button onClick={handleToggle}>
+        <ListItemText><b>{title}</b></ListItemText>
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {items && items.map((item, i) => (
-            <ListItem button className={classes.nested} onClick={() => history.push(item.route)}>
+            <ListItem 
+              key={i}
+              onClick={() => history.push(item.route)}
+              className={classes.nested} 
+              button
+            >
               <ListItemText primary={item.title} />
             </ListItem>
           ))}

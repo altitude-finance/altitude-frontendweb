@@ -1,47 +1,76 @@
-import { Box, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
+import { Box, FormControl, InputLabel, makeStyles, MenuItem, Select } from '@material-ui/core'
+import DocsRouteMap from 'constants/DocsRouteMap'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
+
+const useStyles = makeStyles((theme) => ({
+  nestedMenuItem: {
+    marginLeft: theme.spacing(4)
+  },
+  headerItem: {
+    backgroundColor: theme.palette.primary
+  }
+}))
 
 export const DocsMenu = () => {
+  const classes = useStyles()
   const history = useHistory()
-  const [page, setPage] = useState(0)
+  const location = useLocation()
+  // const [page, setPage] = useState('/docs')
 
   const handleChange = (event) => {
     const { value } = event.target
-    setPage(value)
-    switch (value) {
-      case 0:
-        history.push("/docs")
-        break
-      case 1:
-        history.push("/docs`/slopes")
-        break
-      case 2:
-        history.push("/docs/avalanche")
-        break
-      default:
-        history.push("/docs")
-    }
+    // setPage(value)
+    history.push(value)
   }
 
-  useEffect(() => {
-
-  }, [])
-
   return (
-    <Box mb={1}>
+    <Box mb={1} display="flex">
       <FormControl variant="outlined" fullWidth>
         {/* <InputLabel id="docs-page-label">Docs</InputLabel> */}
         <Select
           // labelId="docs-page-label"
           id="docs-mobile-menu"
-          value={page}
+          variant="outlined"
+          defaultValue="/docs"
+          value={location.pathname}
           onChange={handleChange}
+          fullWidth
           // label="Age"
         >
-          <MenuItem value={0}>Docs Home</MenuItem>
-          <MenuItem value={1}>Slopes</MenuItem>
-          <MenuItem value={2}>Avalanche</MenuItem>
+          {[...DocsRouteMap.active].map((route, i) => {
+            if (route.items) {
+              return [
+                <MenuItem
+                  key={i}
+                  
+                  value={route.items[0].path}
+                  className={classes.headerItem}
+                  classes={{selected: classes.headerItem}}
+                >
+                  <b>{route.title}</b>
+                </MenuItem>,
+                route.items.map((subroute, j) => (
+                  <MenuItem
+                    key={`${i}-${j}`}
+                    value={subroute.path}
+                    // className={classes.nestedMenuItem}
+                  >
+                    {subroute.title}
+                  </MenuItem>
+                ))
+              ]
+            } else {
+              return (
+                <MenuItem
+                  key={i}
+                  value={route.path}
+                >
+                  <b>{route.title}</b>
+                </MenuItem>
+              )
+            }
+          })}
         </Select>
       </FormControl>
     </Box>
