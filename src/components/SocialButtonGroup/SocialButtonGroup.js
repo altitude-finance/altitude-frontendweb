@@ -14,31 +14,32 @@ export const SocialButtonGroup = () => {
       >
         <TwitterIcon />
       </SocialButton>
-      <SocialButton
-        name="telegram"
-        link="https://t.me/AltitudeFi"
-      >
-        <TelegramIcon />
-      </SocialButton>
-      <SocialButton
+      
+      {/* <SocialButton
         name="github"
         link="https://github.com/altitude-finance"
       >
         <FaGithub />
-      </SocialButton>
+      </SocialButton> */}
       <SocialButton
         name="medium"
         link="https://altitudefi.medium.com/"
       >
         <FaMediumM />
       </SocialButton>
-      
       <SocialButton
         name="discord"
         link="https://discord.gg/FRwPgaP4ZC"
       >
         <FaDiscord />
       </SocialButton>
+      <SocialButton
+        name="telegram"
+        link="https://t.me/AltitudeFi"
+      >
+        <TelegramIcon />
+      </SocialButton>
+      
     </Grid>
   )
 }

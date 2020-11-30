@@ -3,11 +3,11 @@ import { useTheme } from 'hooks/useTheme'
 import { Switch, FormControlLabel, FormGroup, Typography } from '@material-ui/core'
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 
-export const ThemeSwitch = ({
+export const SnowSwitch = ({
   labeled=false,
   // labelPlacement="top"
 }) => {
-  const { colorMode, toggleColorMode } = useTheme()
+  const { snowstorm, toggleSnowstorm } = useTheme()
 
   return (
     <>
@@ -15,12 +15,12 @@ export const ThemeSwitch = ({
         <FormGroup row>
         <FormControlLabel
           labelPlacement="end"
-          label={<Typography variant="overline" align="center">Theme</Typography>}
+          label={<Typography variant="overline" align="center">Snow</Typography>}
           control={
             <Switch 
-              checked={colorMode !== 'dark'} 
-              onChange={toggleColorMode}
-              name="themeSwitch"
+              checked={snowstorm}
+              onChange={toggleSnowstorm}
+              name="snowSwitch"
               size="small"
               // icon={<Brightness4Icon style={{display:'flex'}} />}
             />
@@ -29,9 +29,9 @@ export const ThemeSwitch = ({
         </FormGroup>
       ) : (
         <Switch 
-          checked={colorMode === 'dark'} 
-          onChange={toggleColorMode}
-          name="themeSwitch"
+          checked={snowstorm} 
+          onChange={toggleSnowstorm}
+          name="snowSwitch"
         />
       )}
     </>

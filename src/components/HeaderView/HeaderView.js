@@ -18,18 +18,21 @@ export const HeaderView = ({
 }) => {
   // const classes = useStl
   return (
-    <DisplayView justify="flex-start">
-      <Grid item style={{alignSelf: 'center'}}>
-        <ColumnView my={3} alignItems="center">
-          <Typography variant="h4" align={align}><b>{title}</b></Typography>
-          <TextDecoration />
-        </ColumnView>
-      </Grid>
-      <Grid item>
-        <ColumnView mx={3} mb={3}>
-          {children}
-        </ColumnView>
-      </Grid>
+    <DisplayView>
+      {/* <Grid item style={{alignSelf: 'center', justifySelf: ''}}> */}
+      <FlexCenter 
+        my={2}
+        flexDirection="column"
+        alignSelf="center"
+        // justifySelf="start"
+      >
+        <Typography variant="h4" align={align}><b>{title}</b></Typography>
+        <TextDecoration />
+      </FlexCenter>
+    {/* </Grid> */}
+      <ColumnView  height="100%" flexGrow={1}>
+        {children}
+      </ColumnView>
     </DisplayView>
   )
 }

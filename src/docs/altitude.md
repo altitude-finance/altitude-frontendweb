@@ -1,3 +1,5 @@
 # Altitude Finance
 
-The current yield farming landscape is one that encourages early entries while yields are high and quick exits as token supply increases, decreasing yield. This system is built to favor big players where few profit and many are left holding inflated tokens. Altitude (PWDR) is a high-yield cryptocurrency with cyclic tokenomics, supported by an arbitrage marketplace. This design is intended to combat the traditional quick-flip strategies and create an ecosystem that rewards long-term holders. The journey to financial freedom is not an easy one but it starts with the first foothold. Together, we will climb.
+Altitude (PWDR) is an evolutionary cryptocurrency that is pushing the limits of DeFi by combining yield farming, flash loans, and community governance.  
+
+Typical DeFi tokens tend to benefit whales that get in early, where few can profit and the many are left holding the bag. We aim to change that paradigm so everyone can secure value through the combination of sustainable high-APR farming, flash loans for ongoing long-term value, and a cyclical mechanism to retain value through platform fees, locked liquidity, and rewards for stakers. 

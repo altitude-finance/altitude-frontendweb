@@ -16,8 +16,8 @@ export const NoMatch = () => {
       <Button
         startIcon={<HomeIcon />}
         color="primary"
-        onClick={() => history.push('/')
-      }>
+        onClick={() => history.push('/')}
+      >
         Go Back Home
       </Button>
     </DisplayView>

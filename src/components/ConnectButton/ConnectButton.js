@@ -24,7 +24,7 @@ export const ConnectButton = ({...props}) => {
     <Button
       color="inherit"
       variant="outlined"
-      disableElevation
+      //disableElevation
       classes={{label: classes.label}}
       onClick={!!account 
         ? () => history.push('/account')

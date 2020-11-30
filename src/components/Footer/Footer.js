@@ -1,6 +1,7 @@
 import { Button, Grid, makeStyles, Paper, Typography } from '@material-ui/core'
 import { Brand } from 'components/Brand'
 import { FlexCenter } from 'components/FlexCenter'
+import { SnowSwitch } from 'components/SnowSwitch'
 import { SocialButtonGroup } from 'components/SocialButtonGroup'
 import { ThemeSwitch } from 'components/ThemeSwitch'
 import RouteMap from 'constants/RouteMap'
@@ -56,17 +57,10 @@ export const Footer = () => {
                 {route.title}
               </Button>
             ))}
-            {/* <Button size="small" color="primary">Slopes</Button>
-            <Button size="small" color="primary">Avalanche</Button>
-            <Button size="small" color="primary">Leaderboards</Button>
-            <Button size="small" color="primary">About</Button>
-            <Button size="small" color="primary">Wiki</Button>
-            <Button size="small" color="primary">Legal</Button> */}
-            {/* <Button size="small">Home</Button> */}
           </Grid>
-          {/* <FlexCenter> */}
           <Grid container justify="center">
             <ThemeSwitch labelPlacement="start" labeled />
+            {/* <SnowSwitch labelPlacement="start" labeled /> */}
           </Grid>
             
           {/* </FlexCenter> */}

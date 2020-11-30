@@ -7,6 +7,11 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export const ColumnView = ({
+  height,
+  minHeight,
+  m,
+  mx,
+  my,
   children,
   ...props
 }) => {
@@ -15,6 +20,11 @@ export const ColumnView = ({
       display="flex"
       flexDirection="column"
       //height="100vh"
+      height={height || undefined}
+      minHeight={minHeight || undefined}
+      m={m || undefined}
+      mx={mx || undefined}
+      my={my || undefined}
       {...props}
     >
       {children}

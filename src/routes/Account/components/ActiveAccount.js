@@ -14,11 +14,11 @@ export const ActiveAccount = () => {
       <AccountHeader />
       <Grid container >
         <Grid item xs={12}>
-        <SurfaceTabs tabs={ACCOUNT_TABS}>
+        {/* <SurfaceTabs tabs={ACCOUNT_TABS}>
           <Box>Test1</Box>
           <Box>Test2</Box>
           <Box></Box>
-        </SurfaceTabs>
+        </SurfaceTabs> */}
         </Grid>
       </Grid>
     </ColumnView>
