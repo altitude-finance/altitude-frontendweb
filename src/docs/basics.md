@@ -9,4 +9,4 @@
 - **Loyalty Points:** To stay competitive in the current market, Flash Loans must be competitively priced. Altitude implements a tiered loyalty system where discounts are provided to developers who use the platform frequently, providing an increasingly cheaper source of Flash Loans.
 - **NFT Item Boosts:** Exclusive NFT series releases that provide boosts for Altitude **Slopes** and **Flash Loan** activities.  
 - **Governance:** ​Extendable governance model with a role-based implementation. Initially, necessary Altitude ecosystem roles set up to control access. In the future, governance will extend to accommodate public voting contracts and quorums.
-- **Complete Upgradeability:** All Altitude contracts built with upgradeable contract logic, allowing the Altitude Ecosystem to completely evolve and meet the needs of network participants. 
+- **Complete Upgradeability:** All Altitude contracts built with upgradeable contract logic, allowing the Altitude Ecosystem to evolve and meet the needs of network participants. 
