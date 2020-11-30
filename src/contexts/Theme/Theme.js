@@ -1,6 +1,7 @@
 import { createContext, useMemo, useState } from 'react'
 import { CssBaseline, ThemeProvider as MaterialThemeProvider, useMediaQuery } from '@material-ui/core'
 import { getDarkTheme, getLightTheme } from 'theme'
+import SnowStorm from 'react-snowstorm'
 
 export const ThemeContext = createContext({
   colorMode: 'light',
@@ -9,7 +10,8 @@ export const ThemeContext = createContext({
 
 const ThemeProvider = ({ children }) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-  const [colorMode, setColorMode] = useState(() => prefersDarkMode ? 'dark' : 'light')
+  const [colorMode, setColorMode] = useState(() => !prefersDarkMode ? 'light' : 'dark')
+  const [snowstorm, setSnowstorm] = useState(true)
 
   const theme = useMemo(() => {
     const next = colorMode === 'dark' ? getDarkTheme() : getLightTheme()
@@ -19,10 +21,8 @@ const ThemeProvider = ({ children }) => {
 
   const toggleColorMode = () => {
     if (colorMode === 'dark') {
-      console.log(colorMode)
       setColorMode('light')
     } else {
-      console.log(colorMode)
       setColorMode('dark')
     }
   }
@@ -30,10 +30,17 @@ const ThemeProvider = ({ children }) => {
   return (
     <ThemeContext.Provider value={{
       colorMode,
-      toggleColorMode
+      toggleColorMode,
+      snowstorm,
+      setSnowstorm
     }}>
       <MaterialThemeProvider theme={theme}>
         <CssBaseline />
+        <SnowStorm 
+          animationInterval={100}
+          followMouse={false} 
+          excludeMobile
+        />
         {children}
       </MaterialThemeProvider>
     </ThemeContext.Provider>

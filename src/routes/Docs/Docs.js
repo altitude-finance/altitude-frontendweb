@@ -10,7 +10,6 @@ import DocsRouteMap from 'constants/DocsRouteMap'
 
 export const Docs = () => {
   const location = useLocation()
-  console.log(location.pathname)
   const { docId } = useParams()
   const theme = useTheme()
   const useMobile = useMediaQuery(theme.breakpoints.down("sm"))

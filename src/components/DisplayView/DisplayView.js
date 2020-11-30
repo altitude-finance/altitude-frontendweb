@@ -4,7 +4,8 @@ import { SafeAreaView } from 'components/SafeAreaView'
 
 const useStyles = makeStyles((theme) => ({
   display: {
-    height: '100vh',
+    minHeight: '100vh',
+    height: '100%',
     width: '100%',
     spacing: 0
   }
