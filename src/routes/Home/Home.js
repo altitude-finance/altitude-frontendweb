@@ -34,6 +34,15 @@ export const Home = () => {
         </Typography>
               <TextDecoration />
               <SocialButtonGroup />
+
+              <Typography
+                  variant="subtitle2"
+                  color="textSecondary"
+                  align="center"
+                  style={{ fontSize: 16 }}
+              >
+                  PWDR MAKING LGE BEGINS:
+        </Typography>
               <LGECountdown />
 
         {/* <Button variant="outlined" color="secondary">Learn More</Button> */}
