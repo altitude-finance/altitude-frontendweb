@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(2),
     width: "100%",
     backgroundColor: theme.palette.background.footer, //theme.palette.primary.main//
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('md')]: {
       zIndex: 1400,
     },
   }

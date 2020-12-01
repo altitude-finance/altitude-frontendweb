@@ -1,22 +1,21 @@
 import HOME_DOC from '../docs/altitude.md'
-import BASICS_DOC from '../docs/basics.md'
-import LGE_DOC from '../docs/lge.md'
-import INITIAL_DIST_DOC from '../docs/initial-distribution.md'
 import ECOSYSTEM_DOC from '../docs/ecosystem.md'
 
-import SLOPES_DOC from '../docs/slopes.md'
-import SLOPE_FEES_DOC from '../docs/slope-fees.md'
-import ACTIVE_SLOPES_DOC from '../docs/active-slopes.md'
+import TOKEN_DOC from '../docs/token/token.md'
+import LGE_DOC from '../docs/token/lge.md'
+import PHASES_DOC from '../docs/token/phases.md'
+import EPOCHS_DOC from '../docs/token/epochs.md'
 
-import AVALANCHE_DOC from '../docs/avalanche.md'
-import EPOCHS_DOC from '../docs/epochs.md'
+import SLOPES_DOC from '../docs/slopes/slopes.md'
+import ACTIVE_SLOPES_DOC from '../docs/slopes/active.md'
 
-import FLASH_LOANS_DOC from '../docs/flash-loans.md'
-import FLASH_LOAN_FEES_DOC from '../docs/flash-loan-fees.md'
-import LOYALTY_DOC from '../docs/loyalty.md'
+import AVALANCHE_DOC from '../docs/avalanche/avalanche.md'
 
-import LODGE_DOC from '../docs/lodge.md'
-import BOARDS_DOC from '../docs/pwdr-boards.md'
+import FLASH_LOAN_DOC from '../docs/flash/flash.md'
+import LOYALTY_DOC from '../docs/flash/loyalty.md'
+
+import LODGE_DOC from '../docs/lodge/lodge.md'
+import BOARDS_DOC from '../docs/lodge/boards.md'
 
 
 const DocsRouteMap = {
@@ -26,36 +25,36 @@ const DocsRouteMap = {
       path: "/docs",
     },
     {
-      title: "Altitude Basics",
-      path: "/docs/basics"
-    },
+      title: "Ecosystem",
+      path: "/docs/ecosystem"
+    },  
     {
-      title: "Distribution & Accumulation",
+      title: "PWDR - Token",
       items: [
         {
+          title: "PWDR Basics",
+          path: "/docs/token"
+        },
+        {
           title: "Liquidity Generation Event",
-          path: "/docs/distribution"
+          path: "/docs/token/lge"
         },
         {
-          title: "Initial Distribution",
-          path: "/docs/distribution/initial"
+          title: "Accumulation & Distribution",
+          path: "/docs/token/phases"
         },
         {
-          title: "Ecosystem",
-          path: "/docs/distribution/ecosystem"
-        },
+          title: "Epochs",
+          path: "/docs/token/epochs"
+        }
       ]
     },
     {
       title: "Slopes - Yield Farming",
       items: [
         {
-          title: "Fixed APR Farming",
+          title: "Slopes Basics",
           path: "/docs/slopes"
-        },
-        {
-          title: "Slope Entry Fees",
-          path: "/docs/slopes/fees"
         },
         {
           title: "Active Slopes",
@@ -64,35 +63,37 @@ const DocsRouteMap = {
       ]
     },
     {
-      title: "Avalanche",
-      path: "/docs/avalanche"
-    },
-    {
-      title: "Epochs",
-      path: "/docs/epochs"
+      title: "Avalanche - Buybacks",
+      path: "/docs/avalanche",
+      items: [
+        {
+          title: "Avalanche Basics",
+          path: "/docs/avalanche"
+        },
+        // {
+        //   title: "Token Stabilization",
+        //   path: "/docs/slopes/liquidity"
+        // },
+      ]
     },
     {
       title: "Flash Loans - Arbitration",
       items: [
         {
-          title: "What are Flash Loans?",
-          path: "/docs/flash-loans"
-        },
-        {
-          title: "Flash Loan Fees",
-          path: "/docs/flash-loans/fees"
+          title: "Flash Loan Basics",
+          path: "/docs/flash"
         },
         {
           title: "Loyalty Points",
-          path: "/docs/flash-loans/loyalty"
+          path: "/docs/flash/loyalty"
         }
       ]
     },
     {
-      title: "The Lodge - NFTs",
+      title: "Lodge - NFTs",
       items: [
         {
-          title: "Altitude NFT Bonuses",
+          title: "Lodge Basics",
           path: "/docs/lodge"
         },
         {
@@ -104,35 +105,35 @@ const DocsRouteMap = {
   ],
   mappings: {
     "/docs": HOME_DOC,
-    "/docs/basics": BASICS_DOC,
-    "/docs/distribution": LGE_DOC,
-    "/docs/distribution/initial": INITIAL_DIST_DOC,
-    "/docs/distribution/ecosystem": ECOSYSTEM_DOC,
+    "/docs/ecosystem": ECOSYSTEM_DOC,
+    "/docs/token": TOKEN_DOC,
+    "/docs/token/lge": LGE_DOC,
+    "/docs/token/phases": PHASES_DOC,
+    "/docs/token/epochs": EPOCHS_DOC,
     "/docs/slopes": SLOPES_DOC,
-    "/docs/slopes/fees": SLOPE_FEES_DOC,
     "/docs/slopes/active": ACTIVE_SLOPES_DOC,
     "/docs/avalanche": AVALANCHE_DOC,
-    "/docs/epochs": EPOCHS_DOC,
-    "/docs/flash-loans": FLASH_LOANS_DOC,
-    "/docs/flash-loans/fees": FLASH_LOAN_FEES_DOC,
-    "/docs/flash-loans/loyalty": LOYALTY_DOC,
+    // "/docs/avalanche/liquidity": AVALANCHE_DOC,
+    "/docs/flash": FLASH_LOAN_DOC,
+    // "/docs/flash/dev": FLASH_LOAN_DEV_DOC,
+    "/docs/flash/loyalty": LOYALTY_DOC,
     "/docs/lodge": LODGE_DOC,
     "/docs/lodge/boards": BOARDS_DOC
   },
   titleMappings: {
-    "basics": "Altitude Basics",
-    "distribution": "Distribution & Accumulation",
-    "initial": "Initial Distribution",
+    "docs": "Altitude Docs",
     "ecosystem": "Ecosystem",
-    "slopes": "Slopes",
-    "fees": "Fees",
-    "active": "Active Slopes",
-    "avalanche": "Avalanche",
+    "token": "PWDR",
+    "lge": "LGE",
+    "phases": "Phases",
     "epochs": "Epochs",
-    "flash-loans": "Flash Loans",
+    "slopes": "Slopes",
+    "active": "Active",
+    "avalanche": "Avalanche",
+    "flash": "Flash",
     "loyalty": "Loyalty",
     "lodge": "Lodge",
-    "boards": "PWDR Boards"
+    "boards": "Boards"
   }
 }
 

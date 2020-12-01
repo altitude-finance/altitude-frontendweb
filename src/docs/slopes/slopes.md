@@ -1,4 +1,4 @@
-# Slopes
+# Slopes Basics
 
 The Slopes are the farming and lending pools in Altitude. When staking tokens in the Slopes, interest in earned in the form of PWDR tokens and the staked ERC20 token. Developers and Price Arbiters can borrow against the slopes by performing flash loans. 
 
@@ -9,40 +9,7 @@ All Slopes, with the exception of the PWDR-ETH LP Slope, have no risk of imperma
 During the initial distribution phase, Slopes have a base fixed APR of 1000%. This does ​not​ guarantee a 1000% return for investors,it simply means more PWDR gets rewarded to stakers if the price drops during the distribution phase. The max supply prevents fixed APR Slopes from becoming unsustainable.
 The APRs will decrease by approximately 50% after each avalanche epoch concludes to account for the decreasing supply of tokens remaining to be minted.
 
-## Active Slopes
 
-1. Black Diamond
-  - Token: PWDR-ETH Uniswap LP (UNI-V2)
-  - Initial Fixed APR: 4000%
-  - Risk of Impermanent Loss: Yes
-  - Borrowable: No
-2. Bunny Slope
-  - Token: Tether (USDT)
-  - Initial Fixed APR: 800%
-  - Risk of Impermanent Loss: No
-  - Borrowable: Yes
-3. Green Circle
-  - Token: Dai (DAI)
-  - Initial Fixed APR: 800%
-  - Risk of Impermanent Loss: No
-  - Borrowable: Yes
-4. Terrain Park
-  - Token: USD Coin (USDC)
-  - Initial Fixed APR: 800%
-  - Risk of Impermanent Loss: No
-  - Borrowable: Yes
-5. Blue Square
-  - Token: Wrapped Ethereum (wETH)
-  - Initial Fixed APR: 800%
-  - Risk of Impermanent Loss: No
-  - Borrowable: Yes
-6. Half Pipe
-  - Token: Wrapped Bitcoin (wBTC)
-  - Initial Fixed APR: 800%
-  - Risk of Impermanent Loss: No
-  - Borrowable: Yes
-
-
-## Slope Entry Fees
+## Entry Fees
 
 When entering a Slope, a 5% Fee is taken. This fee is split between a Round Robin fee and Token Buyback at a fixed ratio that varies each epoch. To encourage stakers to stay in the pool, the Round Robin fee is evenly distributed to all of the active pool participants. The remaining fee is converted to wETH and used to buyback PWDR. Bought back PWDR tokens are sent to the Avalanche during the Accumulation phase.

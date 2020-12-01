@@ -47,7 +47,7 @@ export const ExpandingListItem = ({
           {items && items.map((item, i) => (
             <ListItem 
               key={i}
-              onClick={() => history.push(item.route)}
+              onClick={() => history.push(item.path)}
               className={classes.nested} 
               button
             >

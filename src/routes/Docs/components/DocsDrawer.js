@@ -8,9 +8,11 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: 320,
     paddingTop: theme.mixins.toolbar.minHeight,
-    [theme.breakpoints.up('lg')]: {
-      paddingBottom: 115,
-    },
+    // minHeight: '100vh',
+    // height: '100%'
+    // [theme.breakpoints.up('lg')]: {
+    //   paddingBottom: 115,
+    // },
   },
   drawer: {
     width: 320

@@ -1,4 +1,4 @@
-# Avalanche 
+# Avalanche Basics
 
 ​The Avalanche is a unique staking pool in the Altitude ecosystem which rewards Liquidity Providers and incentivizes long-term holding. The Avalanche only accepts PWDR/ETH Uniswap LP tokens and rewards PWDR. The Avalanche opens when the max token supply of the first Epoch is minted (PWDR #13,250,000) and rewarded. At this time, the PWDR/ETH LP Slope will close and the Avalanche will begin accepting deposits. Stakers in the PWDR/ETH LP Slope can migrate their tokens once this phase has been reached. This pool cannot be borrowed against.
 
