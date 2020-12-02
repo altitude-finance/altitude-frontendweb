@@ -5,7 +5,7 @@ The Liquidity Generation Event (LGE) aims to bootstrap liquidity on Uniswap and 
 
 Details of the event are as follows:
 - Length: 7 Days Maximum
-- Start Date: Dec. 4th, 2020 
+- Start Date: Dec. 11th, 2020 
 - Hard Cap: 2000 ETH 
 - Individual Contribution Cap: 20 ETH
 - PWDR LGE Supply: 2.625M PWDR

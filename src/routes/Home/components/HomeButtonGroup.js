@@ -8,7 +8,7 @@ export const HomeButtonGroup = () => {
   const history = useHistory()
 
   return (
-    <FlexCenter mt={1}>
+    <FlexCenter marginTop={1}>
       {/* <Button onClick={() => history.push("/docs")}>Docs</Button> */}
       <Button 
         href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
