@@ -12,18 +12,30 @@ import wBTCLogo from 'assets/img/wBTCLogo.png'
 import wETHLogo from 'assets/img/wETHLogo.png'
 import usdtLogo from 'assets/img/usdtLogo.png'
 import altitudeLogo from 'assets/img/altitude-logo.png'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+    containerPadding: {
+        padding: '20px',
+    }
+});
 
 export const Slopes = () => {
+
+    const classes = useStyles();
+
     return (
         <HeaderView title="Slopes">
             <SlopesHeader />
             <SlopesStats />
             <Grid
                 container
-                spacing={2}
+                spacing={4}
                 direction="row"
                 justify="center"
                 alignItems="center"
+                className={classes.containerPadding}
+
             >
                 <Grid item xs={4}>
                     <SlopesPoolCard

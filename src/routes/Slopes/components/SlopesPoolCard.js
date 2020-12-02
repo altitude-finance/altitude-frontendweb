@@ -10,8 +10,8 @@ import { spacing } from '@material-ui/system';
 
 const useStyles = makeStyles({
     media: {
-        height: 96,
-        width: 96,
+        height: 64,
+        width: 64,
     },
     slopeSign: {
         height: 128,
@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     },
     buttonPadding: {
         padding: '5px',
-    },
+    }
 });
 
 export const SlopesPoolCard = ({
@@ -38,7 +38,7 @@ export const SlopesPoolCard = ({
     return (
         <Paper>
             <Grid container direction="row" justify="center" alignItems="center">
-                <Grid container item md={12} justify="center" alignItems="center">
+                <Grid container item md={12} justify="center" alignItems="center" className={classes.buttonPadding}>
                     <Grid item>
                         <img
                             src={slopeLogo}
