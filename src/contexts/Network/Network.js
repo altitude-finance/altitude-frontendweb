@@ -1,3 +1,8 @@
+import { 
+  ARAGON_ENDPOINTS,
+  FORTMATIC_PUBLIC_KEYS,
+  PORTIS_DAPP_ID
+} from 'constants/Network';
 import { createContext } from 'react'
 import { UseWalletProvider } from 'use-wallet';
 
@@ -17,10 +22,11 @@ const NetworkProvider = ({ children }) => {
     }}>
       <UseWalletProvider
         chainId={chainId}
-        connectors={chainId === 1 
-          ? { walletconnect: { rpcUrl: 'https://mainnet.eth.aragon.network/' } } 
-          : undefined
-        }
+        connectors={{
+          formatic: { apiKey: FORTMATIC_PUBLIC_KEYS[chainId] },
+          portis: { dAppId: PORTIS_DAPP_ID },
+          walletconnect: { rpcUrl: ARAGON_ENDPOINTS[chainId] } 
+        }}
       >
         {children}
       </UseWalletProvider>

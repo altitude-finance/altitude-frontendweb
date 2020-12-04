@@ -60,7 +60,7 @@ export const Footer = () => {
           </Grid>
           <Grid container justify="center">
             <ThemeSwitch labelPlacement="start" labeled />
-            {/* <SnowSwitch labelPlacement="start" labeled /> */}
+            <SnowSwitch labelPlacement="start" labeled />
           </Grid>
             
           {/* </FlexCenter> */}

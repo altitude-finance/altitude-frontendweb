@@ -11,12 +11,13 @@ import { NoMatch } from './NoMatch'
 import { Account } from './Account'
 import { Legal } from './Legal'
 import { Lodge } from './Lodge'
-import { Box } from '@material-ui/core'
+import { Scroll } from 'components/Scroll'
 
 const Routes = () => {
   return (
     // <Box display="flex" flexDirection="column" p={3} flexGrow={1}>
     <Router>
+      <Scroll>
       <TopBar />
 
       <Switch>
@@ -36,6 +37,7 @@ const Routes = () => {
       </Switch>
 
       <Footer />
+      </Scroll>
     </Router>
     // </Box>
   )
