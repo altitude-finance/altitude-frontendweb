@@ -19,7 +19,8 @@ export const TextDecoration = ({
     my = 0,
     align = "center",
     justify = "center",
-    width = 25,
+    line1width = "80%",
+    line2width = "60%",
     height = "6px",
     border = 3
 }) => {
@@ -39,14 +40,14 @@ export const TextDecoration = ({
             width="100%"
         >
             <Box
-                width="80%"
+                width={line1width}
                 height={height}
                 border={border}
                 borderColor={theme.palette.secondary.main}
             />
             <Box
                 mt={1}
-                width="60%"
+                width={line2width}
                 height={height}
                 border={border}
                 borderColor={theme.palette.text.main}

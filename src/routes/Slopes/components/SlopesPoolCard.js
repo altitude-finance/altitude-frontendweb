@@ -1,5 +1,12 @@
 import React from 'react'
 import { Card, CardContent, CardActions, Button, Typography, CardMedia, Grid, Paper } from '@material-ui/core'
+import AppBar from '@material-ui/core/AppBar';
+import Tab from '@material-ui/core/Tab';
+import TabContext from '@material-ui/lab/TabContext';
+import TabList from '@material-ui/lab/TabList';
+import TabPanel from '@material-ui/lab/TabPanel';
+
+
 import { useTheme } from '@material-ui/core/styles';
 import { TextDecoration } from 'components/TextDecoration'
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,15 +14,14 @@ import { FlexCenter } from 'components/FlexCenter'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'; // External Links
 import { spacing } from '@material-ui/system';
 
-
 const useStyles = makeStyles({
     media: {
         height: 64,
         width: 64,
     },
     slopeSign: {
-        height: 128,
-        width: 128
+        height: 55,
+        width: 315
     },
     buttonPadding: {
         padding: '5px',
@@ -28,12 +34,19 @@ export const SlopesPoolCard = ({
     slopeApr,
     slopeStakedAmount,
     pendingPwdrRewards,
-    slopeSign
+    slopeSign,
+    slopeEntryFee,
+    totalStakedAmount
 
 }) => {
 
     const classes = useStyles();
+    const [value, setValue] = React.useState('1');
     const theme = useTheme();
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     return (
         <Paper>
@@ -41,25 +54,20 @@ export const SlopesPoolCard = ({
                 <Grid container item md={12} justify="center" alignItems="center" className={classes.buttonPadding}>
                     <Grid item>
                         <img
-                            src={slopeLogo}
+                            src={slopeSign}
                             title={slopeName}
-                            className={classes.media}
+                            className={classes.slopeSign}
                         />
                     </Grid>
-                    <Grid item>
-                        <Typography
-                            variant="h3"
-                            color="textSecondary"
-                            align="center"
-                        >
-                            {slopeName}
-                        </Typography>
-                    </Grid>
+
                 </Grid>
 
                 <TextDecoration
                     height="2px"
                     border={2}
+                    line1width="80%"
+                    line2width="60%"
+                    mb={1}
                 />
 
                 <Grid container md={12} justify="center" alignItems="center">
@@ -77,102 +85,209 @@ export const SlopesPoolCard = ({
                 <TextDecoration
                     height="2px"
                     border={2}
-                />
-
-                <Grid container md={12}>
-
-                    <Grid item md={6}>
-                        <Grid container item md={12}>
-                            <Grid container item md={12} justify="center" alignItems="center">
-                                <Grid item md={12}>
-                                    <Typography
-                                        variant="h3"
-                                        color="textSecondary"
-                                        align="center"
-                                    >
-                                        {slopeStakedAmount}
-                                    </Typography>
-                                </Grid>
-                                <Grid item md={12}>
-                                    <Typography
-                                        variant="h5"
-                                        color="textSecondary"
-                                        align="center"
-                                    >
-                                        My {slopeName} Staked
-                                        </Typography>
-                                </Grid>
-                            </Grid>
-                            <Grid container item alignContent="center" justify="center">
-                                <Grid item className={classes.buttonPadding}>
-                                    <Button
-                                        href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
-                                        target="_blank"
-                                        variant="contained"
-                                        color="primary"
-                                        style={{ color: 'white' }}
-                                        endIcon={<OpenInNewIcon />}
-                                    >
-                                        Stake
-                                        </Button>
-                                </Grid>
-                                <Grid item className={classes.buttonPadding}>
-                                    <Button
-                                        href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
-                                        target="_blank"
-                                        variant="contained"
-                                        color="primary"
-                                        style={{ color: 'white' }}
-                                        endIcon={<OpenInNewIcon />}
-                                    >
-                                        Unstake
-                                        </Button>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Grid>
+                    line1width="60%"
+                    line2width="40%"
+                    mb={1} />
 
 
-                    <Grid item md={6}>
-                        <Grid container item md={12}>
-                            <Grid container item md={12} justify="center" alignItems="center">
-                                <Grid item md={12}>
-                                    <Typography
-                                        variant="h3"
-                                        color="textSecondary"
-                                        align="center"
-                                    >
-                                        {pendingPwdrRewards}
-                                    </Typography>
-                                </Grid>
-                                <Grid item md={12}>
-                                    <Typography
-                                        variant="h5"
-                                        color="textSecondary"
-                                        align="center"
-                                    >
-                                        Pending Rewards
+                <TabContext value={value}>
+                    <Paper elevation={3}>
+                        <TabList onChange={handleChange} aria-label="simple tabs example" centered
+                            TabIndicatorProps={{
+                                style: {
+                                    backgroundColor: theme.palette.secondary.main
+
+                                }
+                            }}
+
+                        >
+                            <Tab label="My Info" value="1" />
+                            <Tab label="Slope Info" value="2" />
+                        </TabList>
+                    </Paper>
+                    <TabPanel value="1">
+                        <Grid container md={12}>
+
+
+
+                            <Grid item md={6}>
+                                <Grid container item md={12}>
+                                    <Grid container item md={12} justify="center" alignItems="center">
+                                        <Grid item md={12}>
+                                            <Typography
+                                                variant="h3"
+                                                color="textSecondary"
+                                                align="center"
+                                            >
+                                                {slopeStakedAmount}
                                             </Typography>
+                                        </Grid>
+                                        <Grid item md={12}>
+                                            <Typography
+                                                variant="h5"
+                                                color="textSecondary"
+                                                align="center"
+                                            >
+                                                My {slopeName} Staked
+                                        </Typography>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container item alignContent="center" justify="center">
+                                        <Grid item className={classes.buttonPadding}>
+                                            <Button
+                                                href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
+                                                target="_blank"
+                                                variant="contained"
+                                                color="primary"
+                                                style={{ color: 'white' }}
+                                                endIcon={<OpenInNewIcon />}
+                                            >
+                                                Stake
+                                        </Button>
+                                        </Grid>
+                                        <Grid item className={classes.buttonPadding}>
+                                            <Button
+                                                href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
+                                                target="_blank"
+                                                variant="contained"
+                                                color="primary"
+                                                style={{ color: 'white' }}
+                                                endIcon={<OpenInNewIcon />}
+                                            >
+                                                Unstake
+                                        </Button>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid container item alignContent="center" justify="center">
-                                <Grid item className={classes.buttonPadding}>
-                                    <Button
-                                        href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
-                                        target="_blank"
-                                        variant="contained"
-                                        color="primary"
-                                        style={{ color: 'white' }}
-                                        endIcon={<OpenInNewIcon />}
-                                    >
-                                        Claim Rewards
+
+
+                            <Grid item md={6}>
+                                <Grid container item md={12}>
+                                    <Grid container item md={12} justify="center" alignItems="center">
+                                        <Grid item md={12}>
+                                            <Typography
+                                                variant="h3"
+                                                color="textSecondary"
+                                                align="center"
+                                            >
+                                                {pendingPwdrRewards}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item md={12}>
+                                            <Typography
+                                                variant="h5"
+                                                color="textSecondary"
+                                                align="center"
+                                            >
+                                                Pending Rewards
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container item alignContent="center" justify="center">
+                                        <Grid item className={classes.buttonPadding}>
+                                            <Button
+                                                href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
+                                                target="_blank"
+                                                variant="contained"
+                                                color="primary"
+                                                style={{ color: 'white' }}
+                                                endIcon={<OpenInNewIcon />}
+                                            >
+                                                Claim Rewards
                                         </Button>
+                                        </Grid>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </Grid>
+                    </TabPanel>
 
+                    <TabPanel value="2">
+                        <Grid container md={12}>
+
+
+
+                            <Grid item md={6}>
+                                <Grid container item md={12}>
+                                    <Grid container item md={12} justify="center" alignItems="center">
+                                        <Grid item md={12}>
+                                            <Typography
+                                                variant="h3"
+                                                color="textSecondary"
+                                                align="center"
+                                            >
+                                                {totalStakedAmount}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item md={12}>
+                                            <Typography
+                                                variant="h5"
+                                                color="textSecondary"
+                                                align="center"
+                                            >
+                                                Total {slopeName} Staked
+                                        </Typography>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container item alignContent="center" justify="center">
+                                        <Grid item className={classes.buttonPadding}>
+                                            <Button
+                                                href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
+                                                target="_blank"
+                                                variant="contained"
+                                                color="primary"
+                                                style={{ color: 'white' }}
+                                                endIcon={<OpenInNewIcon />}
+                                            >
+                                                Stake
+                                        </Button>
+                                        </Grid>
+                                        <Grid item className={classes.buttonPadding}>
+                                            <Button
+                                                href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
+                                                target="_blank"
+                                                variant="contained"
+                                                color="primary"
+                                                style={{ color: 'white' }}
+                                                endIcon={<OpenInNewIcon />}
+                                            >
+                                                Unstake
+                                        </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+
+
+                            <Grid item md={6}>
+                                <Grid container item md={12}>
+                                    <Grid container item md={12} justify="center" alignItems="center">
+                                        <Grid item md={12}>
+                                            <Typography
+                                                variant="h3"
+                                                color="textSecondary"
+                                                align="center"
+                                            >
+                                                {slopeEntryFee}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item md={12}>
+                                            <Typography
+                                                variant="h5"
+                                                color="textSecondary"
+                                                align="center"
+                                            >
+                                                Slope Entry Fee
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </TabPanel>
+
+                </TabContext>
 
             </Grid>
         </Paper>
