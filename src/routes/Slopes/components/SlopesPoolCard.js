@@ -62,13 +62,6 @@ export const SlopesPoolCard = ({
         <Grid container md={12} justify="center" alignItems="center">
           <Grid item>
             <Typography
-              variant="h4"
-              // color="textSecondary"
-              align="center"
-            >
-              {slopeName}
-            </Typography>
-            <Typography
               variant="h3"
               color="textSecondary"
               align="center"

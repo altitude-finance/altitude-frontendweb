@@ -1,9 +1,29 @@
 import React from 'react'
+import SlopesSign from 'assets/img/slopes-signs.png'
+import { Container, makeStyles } from '@material-ui/core'
+import { FlexCenter } from 'components/FlexCenter'
+import avalanche from 'assets/img/avalanche.png'
+
+const useStyles = makeStyles((theme) => ({
+    headerSign: {
+        [theme.breakpoints.down('sm')]: {
+            width: "300"
+        },
+        [theme.breakpoints.up('md')]: {
+            width: "600"
+        }
+    }
+}))
 
 export const AvalancheHeader = () => {
-  return (
-    <div>
-      
-    </div>
+
+    const classes = useStyles()
+
+    return (
+
+        <div>
+
+        </div>
+
   )
 }
