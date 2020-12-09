@@ -8,7 +8,7 @@ import { AvalancheStats } from './components/AvalancheStats'
 import { Box, Container, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import SlopesMap from 'constants/SlopesMap'
-import avalanche from 'assets/img/AvalancheBG02.png'
+import avalanche from 'assets/img/AvalancheBG_2000x600.png'
 
 const useStyles = makeStyles({
     containerPadding: {

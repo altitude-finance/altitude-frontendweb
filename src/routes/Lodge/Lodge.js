@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Box, Container, Grid } from '@material-ui/core'
 import SlopesMap from 'constants/SlopesMap'
 
-import lodge from 'assets/img/Lodge_03.png'
+import lodge from 'assets/img/Lodge_04_2000x600.png'
 import pwdrBoard from 'assets/img/DefaultAlphav02.gif'
 
 
