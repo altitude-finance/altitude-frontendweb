@@ -19,7 +19,7 @@ export const LGECountdown = () => {
   return (
     <Grid container direction="row" justify="center">
       <FundClockProgress
-        campaignEndDate={'2020-12-11T18:00:00Z'}
+        campaignEndDate={'2020-12-14T18:00:00Z'}
         currentFund={0}
         hardcap={2000}
         icoClockStyle={{ backgroundColor: theme.palette.primary.main }}

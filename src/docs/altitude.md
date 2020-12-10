@@ -8,7 +8,7 @@ Typical DeFi tokens tend to benefit whales that get in early, where few can prof
 - **Token Symbol:** ​PWDR  
 - **Max Total Supply:** ​21,000,000  
 - **Transfer Fee:** ​1.5%    
-- **Flash Loan Fee:** 0.25% - 0.025%  
+- **Flash Loan Fee:** 0.08% - 0.01%  
 - **Yield Farming:​** PWDR is farmed by staking tokens in the **Slopes**. Yield from the slopes is earned in *BOTH* the staked token and PWDR. During the **initial distribution phase**, PWDR tokens are rewarded to stakers every block using a base fixed APY of **800%**. Future epochs change the fixed APR of the slopes per the PWDR Epoch Schedule. All slopes only require a single token so there is *NO RISK* of impermanent loss (IL).  
 - **Flash Loans:** Developers can easily use Altitude's flash loans to borrow against the Total Value Locked (TVL) in the slopes at a market leading rate. Fees collected from these flash loans are used to reward stakers in the slopes.
 - **Sustainable Tokenomics:** PWDR is released in **Epochs** with distinct *Accumulation* and *Distribution* phases. This cyclical emission strategy is designed to combat inflation and preserve PWDR value.
