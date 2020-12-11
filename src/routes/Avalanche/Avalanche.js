@@ -36,7 +36,7 @@ export const Avalanche = () => {
     return (
 
     <HeaderView title="Avalanche">
-     
+			<FeatureGatedView feature="AVALANCHE">
         <AvalancheHeader />
 			<AvalancheStats />
 
@@ -65,8 +65,8 @@ export const Avalanche = () => {
 							</Grid>
 					</Grid>
 				</Container>
-			</Box>
-     
+				</Box>
+			</FeatureGatedView>
     </HeaderView>
   )
 }

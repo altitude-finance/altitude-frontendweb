@@ -40,7 +40,8 @@ export const Lodge = () => {
     const classes = useStyles();
 
     return (
-        <HeaderView title="Lodge">
+		<HeaderView title="Lodge">
+			<FeatureGatedView feature="LODGE">
             <LodgeHeader />
 			<LodgeTrophyView />
 			<Box py={4} className={classes.lodgeBackground}>
@@ -71,7 +72,8 @@ export const Lodge = () => {
 						</Grid>
 					</Grid>
 				</Container>
-			</Box>
+				</Box>
+				</FeatureGatedView>
         </HeaderView>
     )
 }
