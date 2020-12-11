@@ -2,7 +2,7 @@ name: Website Deploy, Static to Blob CI
 
 on:
   push:
-      branches: [ main, workflowTest ]
+      branches: [ main, workflowTest, clock-update ]
 
 env:
   PACKAGE_PATH: 'build'  
