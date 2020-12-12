@@ -1,4 +1,4 @@
-name: Website Deploy, Static to Blob CI
+name: Website Deploy
 
 on:
   push:
@@ -32,19 +32,28 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_DEPLOYMENT_CREDENTIALS }}        
     
-    - name: Upload to Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
-        package: ${{ env.PACKAGE_PATH }}
-    
-    - name: Upload Static Site Backup
+    - name: Upload to Static Site
       uses: azure/CLI@v1
       with:
         azcliversion: 2.0.72
         inlineScript: |
-            az storage blob upload-batch --account-name ${{secrets.AZURE_STORAGE_ACCT_NAME}} -d '$web' -s build
+            az storage blob upload-batch --account-name ${{secrets.STORAGE_ACCT_NAME_1}} -d '$web' -s build
+            
+    - name: Upload to Rinkeby Env 
+      run: |
+          az storage blob upload-batch --account-name ${{secrets.STORAGE_ACCT_NAME_RINKEBY}} -d '$web' -s build
 
-    - name: Logout
+    - name: Upload to Web App Backup
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+        package: ${{ env.PACKAGE_PATH }}
+
+    - name: Az Logout
       run: |
           az logout
+
+    - name: Purge CDN
+      run: |
+          curl -X POST "${{ secrets.PURGE_CDN_URL }}" -H "Content-Type: application/json" --data '{}'
+        
