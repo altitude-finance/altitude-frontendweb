@@ -2,7 +2,6 @@ import React from 'react'
 import SlopesSign from 'assets/img/slopes-signs.png'
 import { Container, makeStyles } from '@material-ui/core'
 import { FlexCenter } from 'components/FlexCenter'
-import avalanche from 'assets/img/avalanche.png'
 
 const useStyles = makeStyles((theme) => ({
     headerSign: {
