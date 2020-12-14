@@ -1,4 +1,4 @@
-import LGE from '../abi/LGETest.json'
+import LGE from '../abi/LGE.json'
 import PWDR from '../abi/PWDR.json'
 import Lodge from '../abi/Lodge.json'
 import Avalanche from '../abi/Avalanche.json'
