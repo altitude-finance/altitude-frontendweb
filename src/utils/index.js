@@ -1,38 +1,16 @@
 import Web3 from 'web3'
-import BigNumber from 'bignumber.js'
+import { BigNumber } from 'bignumber.js'
 import { ethers } from 'ethers'
 import IERC20 from '../eth/abi/IERC20.json'
-
 
 BigNumber.config({
   DECIMAL_PLACES: 80,
   EXPONENTIAL_AT: 1000
 })
 
+
 export const sleep = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
-export const formatAddress = (address) => {
-  return address.slice(0, 6) + '...' + address.slice(-4)
-}
-
-export const getBalanceNumber = (balance, decimals = 18) => {
-  const displayBalance = balance.dividedBy(new BigNumber(10).pow(decimals))
-  return displayBalance.toNumber()
-}
-
-export const getDisplayBalance = (balance, decimals = 18) => {
-  const displayBalance = balance.dividedBy(new BigNumber(10).pow(decimals))
-  if (displayBalance.lt(1)) {
-    return displayBalance.toPrecision(4)
-  } else {
-    return displayBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  }
-}
-
-export const getFullDisplayBalance = (balance, decimals = 18) => {
-  return balance.dividedBy(new BigNumber(10).pow(decimals)).toFixed()
 }
 
 export const waitTransaction = async (provider, txHash) => {
@@ -119,6 +97,28 @@ export const getBalance = async (
     console.log('balance', e)
     return new BigNumber(0)
   }
+}
+
+export const formatAddress = (address) => {
+  return address.slice(0, 6) + '...' + address.slice(-4)
+}
+
+export const getBalanceNumber = (balance, decimals = 18) => {
+  const displayBalance = balance.dividedBy(new BigNumber(10).pow(decimals))
+  return displayBalance.toNumber()
+}
+
+export const getDisplayBalance = (balance, decimals = 18) => {
+  const displayBalance = balance.dividedBy(new BigNumber(10).pow(decimals))
+  if (displayBalance.lt(1)) {
+    return displayBalance.toPrecision(4)
+  } else {
+    return displayBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+  }
+}
+
+export const getFullDisplayBalance = (balance, decimals = 18) => {
+  return balance.dividedBy(new BigNumber(10).pow(decimals)).toFixed()
 }
 
 export const getEtherscanAddress = (chainId) => {

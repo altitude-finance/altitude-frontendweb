@@ -1,5 +1,6 @@
 import Web3 from 'web3'
 import Contracts from './lib/contracts'
+import Addresses from 'constants/Addresses'
 
 class Altitude {
   constructor(provider, chainId, options) {
@@ -26,16 +27,20 @@ class Altitude {
     if (options.defaultAccount) {
       this.web3.eth.defaultAccount = options.defaultAccount
     }
-
+    
     this.contracts = new Contracts(provider, this.web3, chainId, options)
-
-    // set any necessary addresses here
+    this.pwdrAddress = Addresses.PWDR[chainId];
+    this.lodgeAddress = Addresses.Lodge[chainId];
+    this.lgeAddress = Addresses.LGE[chainId];
+    this.slopesAddress = Addresses.Slopes[chainId];
+    this.avalancheAddress = Addresses.Avalanche[chainId];
+    this.loyaltyAddress = Addresses.Loyalty[chainId];
   }
 
   setProvider(provider, networkId) {
     this.web3.setProvider(provider)
     this.contracts.setProvider(provider, networkId)
-    this.operation.setNetworkId(networkId)
+    // this.operation.setNetworkId(networkId)
   }
 
   setDefaultAccount(account) {

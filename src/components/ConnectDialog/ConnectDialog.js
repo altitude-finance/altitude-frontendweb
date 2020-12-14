@@ -37,7 +37,7 @@ export const ConnectDialog = ({ isOpen, onDismiss }) => {
       <MuiDialogTitle disableTypography>
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <Typography variant="h6">Choose Your Web3 Provider</Typography>
-          <IconButton aria-label="close" onClick={onDismiss} classname={classes.closeButton}>
+          <IconButton aria-label="close" onClick={onDismiss} className={classes.closeButton}>
             <CloseIcon />
           </IconButton>
         </Box>

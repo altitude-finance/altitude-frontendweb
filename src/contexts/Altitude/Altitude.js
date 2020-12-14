@@ -15,12 +15,13 @@ const AltitudeProvider = ({ children }) => {
   useEffect(() => {
     if (ethereum) {
       const { chainId, selectedAddress } = ethereum
-      const altitudeLib = new Altitude(ethereum, chainId, {
+      const altitudeLib = new Altitude(ethereum, +(chainId.toString()), {
         defaultAccount: selectedAddress,
         ethereumNodeTimeout: 10000,
       })
       setAltitude(altitudeLib)
       window.altitude = altitudeLib
+      console.log(altitudeLib)
     }
   }, [ethereum, setAltitude])
 

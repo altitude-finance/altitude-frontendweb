@@ -1,36 +1,38 @@
-import { Grid } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import FundClockProgress from 'react-fundraising-countdown';
 import { useTheme } from '@material-ui/core/styles';
+import { CountdownClock } from 'components/CountdownClock';
 
-const milestonesData = [{
-    text: 'PWDR Making LGE Start',
-    cap: 0
-}, {
-    text: 'Minimum Goal 500 ETH',
-    cap: 500
-}, {
-    text: 'Maximum Goal 2,000 ETH',
-    cap: 2000
-},];
-
-export const LGECountdown = () => {
+export const LGECountdown = ({active}) => {
   const theme = useTheme();
   return (
-    <Grid container direction="row" justify="center">
-      <FundClockProgress
-        campaignEndDate={'2020-12-14T18:00:00Z'}
-        currentFund={0}
-        hardcap={2000}
-        icoClockStyle={{ backgroundColor: theme.palette.primary.main }}
-        icoClockFlipStyle={{ backgroundColor: theme.palette.primary.main }}
-        icoClockFlipTextStyle={{color: 'white'}}
-        milestones={milestonesData}
-        icoProgress={true}
-        // progressColor={'#29b6f6'}
-        unitLabelContainerStyle={{ backgroundColor: theme.palette.secondary.main, minHeight: theme.typography.fontSize + 8 }}
-        unitLabelTextStyle={{ color: theme.palette.background.default, fontWeight:'bold', fontSize: theme.typography.fontSize }}
-      />
+    <Grid container direction="column" justify="center">
+      {active ? (
+        <>
+          <Typography
+            variant="subtitle2"
+            color="textSecondary"
+            align="center"
+            style={{ fontSize: 16 }}
+          >
+            LATEST LGE ACTIVATION:
+          </Typography>
+          <CountdownClock endDate="2020-12-19T18:00:00Z" />
+        </>
+      ) : (
+        <>
+          <Typography
+            variant="subtitle2"
+            color="textSecondary"
+            align="center"
+            style={{ fontSize: 16 }}
+          >
+            PWDR MAKING LGE BEGINS:
+          </Typography>
+          <CountdownClock endDate="2020-12-14T18:00:00Z" />
+        </>
+      )}
     </Grid>
   )
 }

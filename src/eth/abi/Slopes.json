@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_address",
+        "name": "addressRegistry",
         "type": "address"
       }
     ],
@@ -12,21 +12,15 @@
   },
   {
     "anonymous": false,
-    "inputs": [],
-    "name": "Activated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
     "inputs": [
       {
         "indexed": false,
-        "internalType": "uint256",
-        "name": "_timestamp",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
       }
     ],
-    "name": "BaseFeeUpdated",
+    "name": "Activated",
     "type": "event"
   },
   {
@@ -53,7 +47,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "wETHAmount",
+        "name": "tokenAmount",
         "type": "uint256"
       }
     ],
@@ -74,6 +68,12 @@
         "internalType": "uint256",
         "name": "pwdrAmount",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "tokenAmounts",
+        "type": "uint256[]"
       }
     ],
     "name": "ClaimAll",
@@ -110,28 +110,46 @@
       {
         "indexed": true,
         "internalType": "address",
-        "name": "user",
+        "name": "_receiver",
         "type": "address"
       },
       {
         "indexed": true,
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
         "internalType": "uint256",
-        "name": "pid",
+        "name": "_amount",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "amount",
+        "name": "_totalFee",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "_protocolFee",
         "type": "uint256"
       }
     ],
-    "name": "EmergencyWithdraw",
+    "name": "FlashLoan",
     "type": "event"
   },
   {
     "anonymous": false,
     "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
       {
         "indexed": true,
         "internalType": "address",
@@ -161,53 +179,28 @@
         "internalType": "uint256",
         "name": "_protocolFee",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_timestamp",
-        "type": "uint256"
       }
     ],
-    "name": "FlashLoan",
+    "name": "FlashLoanCompleted",
     "type": "event"
   },
   {
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_tranche",
-        "type": "uint256"
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_points",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_timestamp",
+        "name": "amount",
         "type": "uint256"
       }
     ],
-    "name": "LoyaltyTrancheUpdated",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_timestamp",
-        "type": "uint256"
-      }
-    ],
-    "name": "ProtocolFeeUpdated",
+    "name": "Migrate",
     "type": "event"
   },
   {
@@ -261,6 +254,49 @@
     "type": "event"
   },
   {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_lpToken",
+        "type": "address"
+      }
+    ],
+    "name": "_getLpTokenPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_lpToken",
+        "type": "address"
+      }
+    ],
+    "name": "_getTokenPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "activate",
     "outputs": [],
@@ -283,25 +319,6 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "activePools",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "address",
         "name": "_token",
         "type": "address"
@@ -310,6 +327,11 @@
         "internalType": "address",
         "name": "_lpToken",
         "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "_lpStaked",
+        "type": "bool"
       },
       {
         "internalType": "uint256",
@@ -336,32 +358,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "avalancheActivated",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "baseFee",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -377,6 +373,19 @@
   {
     "inputs": [],
     "name": "claimAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "claimAllFor",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -432,38 +441,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "discountMultiplier",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "existingPools",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -497,6 +474,54 @@
         "internalType": "address",
         "name": "_token",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "getFeeForAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_pid",
+        "type": "uint256"
+      }
+    ],
+    "name": "getPoolStats",
+    "outputs": [
+      {
+        "internalType": "uint256[14]",
+        "name": "_pool",
+        "type": "uint256[14]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
       }
     ],
     "name": "getReservesAvailable",
@@ -514,16 +539,26 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_address",
+        "name": "_user",
         "type": "address"
       }
     ],
-    "name": "getTotalFeeForAddress",
+    "name": "getSlopesStats",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        "internalType": "bool",
+        "name": "_active",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "_accumulating",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256[14][]",
+        "name": "_stats",
+        "type": "uint256[14][]"
       }
     ],
     "stateMutability": "view",
@@ -538,7 +573,7 @@
   },
   {
     "inputs": [],
-    "name": "migrateLPtoAvalanche",
+    "name": "migrate",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -554,6 +589,11 @@
     "name": "poolInfo",
     "outputs": [
       {
+        "internalType": "bool",
+        "name": "active",
+        "type": "bool"
+      },
+      {
         "internalType": "address",
         "name": "token",
         "type": "address"
@@ -564,13 +604,28 @@
         "type": "address"
       },
       {
+        "internalType": "bool",
+        "name": "lpStaked",
+        "type": "bool"
+      },
+      {
         "internalType": "uint256",
         "name": "weight",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "lastPwdrRewardBlock",
+        "name": "lastReward",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalStaked",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalShares",
         "type": "uint256"
       },
       {
@@ -640,45 +695,32 @@
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [],
+    "name": "roundRobinFee",
+    "outputs": [
       {
         "internalType": "uint256",
-        "name": "_newFee",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "setBaseFee",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_newMultiplier",
-        "type": "uint256"
-      }
-    ],
-    "name": "setDiscountMultiplier",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_tranche",
+        "name": "_pid",
         "type": "uint256"
       },
       {
-        "internalType": "uint256",
-        "name": "_points",
-        "type": "uint256"
+        "internalType": "bool",
+        "name": "_active",
+        "type": "bool"
       }
     ],
-    "name": "setLoyaltyTranche",
+    "name": "setActive",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -686,12 +728,17 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "_newFee",
-        "type": "uint256"
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "_active",
+        "type": "bool"
       }
     ],
-    "name": "setProtocolFee",
+    "name": "setLendingToken",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -716,19 +763,6 @@
   },
   {
     "inputs": [],
-    "name": "slopesActivated",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "stakingFee",
     "outputs": [
       {
@@ -738,19 +772,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_address",
-        "type": "address"
-      }
-    ],
-    "name": "transferPoints",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -784,6 +805,11 @@
       {
         "internalType": "uint256",
         "name": "staked",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "shares",
         "type": "uint256"
       },
       {

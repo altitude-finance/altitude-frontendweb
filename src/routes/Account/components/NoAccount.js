@@ -6,7 +6,7 @@ import React from 'react'
 export const NoAccount = () => {
   return (
     <FlexCenter flexDirection="column">
-      <Typography variant="h4" align="center" gutterBottom>No Wallet Connected!</Typography>
+      <Typography variant="h4" align="center" gutterBottom>Connect Your Wallet</Typography>
       <ConnectButton />
     </FlexCenter>
   )

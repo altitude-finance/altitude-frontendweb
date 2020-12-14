@@ -14,7 +14,9 @@ export const FeatureGatedView = ({
   const{ account } = useWallet()
 
   const featureEnabled = (address) => {
-
+    if (PreviewFeatures.whitelist.includes(address)) {
+      return true;
+    }
   }
   
   return (

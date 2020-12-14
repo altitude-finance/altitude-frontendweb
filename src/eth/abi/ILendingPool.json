@@ -5,6 +5,12 @@
       {
         "indexed": true,
         "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "_receiver",
         "type": "address"
       },
@@ -31,15 +37,9 @@
         "internalType": "uint256",
         "name": "_protocolFee",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_timestamp",
-        "type": "uint256"
       }
     ],
-    "name": "FlashLoan",
+    "name": "FlashLoanCompleted",
     "type": "event"
   },
   {
@@ -74,12 +74,23 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_address",
+        "name": "_token",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
       }
     ],
-    "name": "getLoyaltyPoints",
-    "outputs": [],
+    "name": "getFeeForAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -87,12 +98,18 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_address",
+        "name": "_token",
         "type": "address"
       }
     ],
-    "name": "getTotalFeeForAddress",
-    "outputs": [],
+    "name": "getReservesAvailable",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   }

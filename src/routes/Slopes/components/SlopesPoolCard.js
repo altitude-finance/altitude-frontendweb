@@ -60,7 +60,7 @@ export const SlopesPoolCard = ({
         /> */}
 
         <Grid container md={12} justify="center" alignItems="center">
-          <Grid item>
+          {/* <Grid item>
             <Typography
               variant="h3"
               color="textSecondary"
@@ -68,19 +68,38 @@ export const SlopesPoolCard = ({
             >
               APR: {slopeApr}
             </Typography>
-          </Grid>
+          </Grid> */}
+          <FlexCenter
+            my={2}
+            flexDirection="column"
+            alignSelf="center"
+          // justifySelf="start"
+          >
+            <Typography variant="h4" align="center">
+              <b>{slopeSymbol} Slope</b>
+            </Typography>
+            <TextDecoration />
+
+            <Typography
+              variant="body1"
+              color="textSecondary"
+              align="center"
+            >
+              Waiting for LGE Completion
+            </Typography>
+          </FlexCenter>
         </Grid>
 
-        <TextDecoration
+        {/* <TextDecoration
           height="2px"
           border={2}
           // line1width="60%"
           // line2width="40%"
           mb={1} 
-        />
+        /> */}
 
 
-        <TabContext value={value}>
+        {/* <TabContext value={value}>
           <Paper elevation={3}>
             <TabList onChange={handleChange} aria-label="simple tabs example" centered
               TabIndicatorProps={{
@@ -185,7 +204,7 @@ export const SlopesPoolCard = ({
                         endIcon={<OpenInNewIcon />}
                       >
                         Claim Rewards
-                                      </Button>
+                      </Button>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -277,7 +296,7 @@ export const SlopesPoolCard = ({
             </Grid>
           </TabPanel>
 
-        </TabContext>
+        </TabContext> */}
 
       </FlexCenter>
 

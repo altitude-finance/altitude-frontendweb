@@ -3,12 +3,44 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_address",
+        "name": "_lpToken",
         "type": "address"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    "name": "_getLpTokenPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_lpToken",
+        "type": "address"
+      }
+    ],
+    "name": "_getTokenPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [
@@ -66,6 +98,11 @@
     "name": "poolInfo",
     "outputs": [
       {
+        "internalType": "bool",
+        "name": "active",
+        "type": "bool"
+      },
+      {
         "internalType": "address",
         "name": "token",
         "type": "address"
@@ -76,13 +113,28 @@
         "type": "address"
       },
       {
+        "internalType": "bool",
+        "name": "lpStaked",
+        "type": "bool"
+      },
+      {
         "internalType": "uint256",
         "name": "weight",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "lastPwdrRewardBlock",
+        "name": "lastReward",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalStaked",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalShares",
         "type": "uint256"
       },
       {
@@ -130,6 +182,11 @@
       {
         "internalType": "uint256",
         "name": "staked",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "shares",
         "type": "uint256"
       },
       {

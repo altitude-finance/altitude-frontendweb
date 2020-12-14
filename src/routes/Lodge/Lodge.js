@@ -12,6 +12,8 @@ import SlopesMap from 'constants/SlopesMap'
 
 import lodge from 'assets/img/Lodge_04_2000x600.png'
 import pwdrBoard from 'assets/img/DefaultAlphav02.gif'
+import { DisplayView } from 'components/DisplayView'
+import { FlexCenter } from 'components/FlexCenter'
 
 
 const useStyles = makeStyles({
@@ -23,10 +25,11 @@ const useStyles = makeStyles({
     lodgeBackground: {
         backgroundImage: `url(${lodge})`,
         backgroundPosition: 'center',
-        backgroundSize: '100% 100%',
+        backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         zIndex: "100",
-        height: "600px",
+				height: "100%",
+				minHeight: "100vh",
         position: "relative"
 	},
 	pwdrBoard: {
@@ -40,11 +43,11 @@ export const Lodge = () => {
     const classes = useStyles();
 
     return (
-		<HeaderView title="Lodge">
-			<FeatureGatedView feature="LODGE">
-            <LodgeHeader />
-			<LodgeTrophyView />
-			<Box py={4} className={classes.lodgeBackground}>
+		<DisplayView justify="center" className={classes.lodgeBackground}>
+			{/* <FeatureGatedView feature="LODGE"> */}
+			{/* <LodgeHeader /> */}
+			{/* <LodgeTrophyView /> */}
+			<FlexCenter>
 				<Container maxWidth="lg">
 					<Grid
 						container
@@ -67,13 +70,12 @@ export const Lodge = () => {
 							// totalStakedAmount={"2,431,221.25"}
 							/>
 						</Grid>
-						<Grid item xs={12} md={6}>
-							<img src={pwdrBoard} className={classes.pwdrBoard} />
-						</Grid>
+						<img src={pwdrBoard} className={classes.pwdrBoard} alt="my-board"/>
+						{/* </Grid> */}
 					</Grid>
 				</Container>
-				</Box>
-				</FeatureGatedView>
-        </HeaderView>
+				</FlexCenter>
+				{/* </FeatureGatedView> */}
+			</DisplayView>
     )
 }

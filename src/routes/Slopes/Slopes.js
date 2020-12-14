@@ -20,7 +20,7 @@ export const Slopes = () => {
 
 	return (
 		<HeaderView title="Slopes">
-			<FeatureGatedView feature="LODGE">
+			{/* <FeatureGatedView feature="LODGE"> */}
 			<SlopesHeader />
 			<SlopesStats />
 			
@@ -51,7 +51,7 @@ export const Slopes = () => {
 				</Grid>
 			</Container>
 				</Box>
-				</FeatureGatedView>
+				{/* </FeatureGatedView> */}
 		</HeaderView>
 	)
 }

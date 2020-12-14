@@ -9,7 +9,7 @@ export const NoMatch = () => {
   const history = useHistory()
 
   return (
-    <DisplayView alignItems="center">
+    <DisplayView alignItems="center" justify="center">
       <Brand size={100} />
       <Typography variant="h5">404</Typography>
       <Typography variant="subtitle2" color="textSecondary" gutterBottom>Slope Not Found</Typography>

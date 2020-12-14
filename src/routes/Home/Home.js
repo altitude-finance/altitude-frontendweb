@@ -10,6 +10,8 @@ import { HomeButtonGroup } from './components/HomeButtonGroup'
 
 
 export const Home = () => {
+  const lgeActive = Date.now() > 1607968800000
+
   return (
     <DisplayView justify="center">
       <FlexCenter>
@@ -27,18 +29,10 @@ export const Home = () => {
         </Typography>
         <TextDecoration />
         <SocialButtonGroup />
+        <LGECountdown active={lgeActive} />
+        <HomeButtonGroup active={lgeActive} />
+        
 
-        <Typography
-            variant="subtitle2"
-            color="textSecondary"
-            align="center"
-            style={{ fontSize: 16 }}
-        >
-            PWDR MAKING LGE BEGINS:
-        </Typography>
-        <LGECountdown />
-
-        <HomeButtonGroup />
         {/* <Button variant="outlined" color="secondary">Learn More</Button> */}
       </FlexCenter>
     </DisplayView>

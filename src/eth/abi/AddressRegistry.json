@@ -158,6 +158,19 @@
         "type": "address"
       }
     ],
+    "name": "VaultUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newAddress",
+        "type": "address"
+      }
+    ],
     "name": "WethUpdated",
     "type": "event"
   },
@@ -209,6 +222,19 @@
   {
     "inputs": [],
     "name": "getLodge",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getLoyalty",
     "outputs": [
       {
         "internalType": "address",
@@ -299,7 +325,7 @@
   },
   {
     "inputs": [],
-    "name": "getWeth",
+    "name": "getVault",
     "outputs": [
       {
         "internalType": "address",
@@ -312,9 +338,15 @@
   },
   {
     "inputs": [],
-    "name": "initialize",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "name": "getWeth",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -372,6 +404,19 @@
       }
     ],
     "name": "setLodge",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "setLoyalty",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -450,6 +495,19 @@
       }
     ],
     "name": "setUniswapRouter",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "setVault",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

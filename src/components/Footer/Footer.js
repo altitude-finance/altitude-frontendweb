@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     position: "relative",
     bottom: 0,
-    
+    // marginTop: theme.spacing(2),
     paddingTop: theme.spacing(2),
     width: "100%",
     backgroundColor: theme.palette.background.footer, //theme.palette.primary.main//

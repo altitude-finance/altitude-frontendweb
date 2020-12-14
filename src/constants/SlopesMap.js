@@ -22,18 +22,18 @@ const SlopesMap = {
       logo: altitudeLogo
     },
     {
-      pid: 0,
-      name: "Orange Diamond",
-      symbol: "WBTC",
-      sign: wbtcSign,
-      logo: wbtcLogo
-    },
-    {
-      pid: 2,
+      pid: 1,
       name: "Silver Diamond",
       symbol: "WETH",
       sign: wethSign,
       logo: wethLogo
+    },
+    {
+      pid: 2,
+      name: "Orange Diamond",
+      symbol: "WBTC",
+      sign: wbtcSign,
+      logo: wbtcLogo
     },
     {
       pid: 3,

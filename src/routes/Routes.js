@@ -12,6 +12,7 @@ import { Account } from './Account'
 import { Legal } from './Legal'
 import { Lodge } from './Lodge'
 import { Scroll } from 'components/Scroll'
+import { Event } from './Event'
 
 const Routes = () => {
   return (
@@ -30,6 +31,7 @@ const Routes = () => {
         <Route path="/docs" component={Docs} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/legal" component={Legal} />
+        <Route path="/lge" component={Event} />
         <Route path="/lodge" component={Lodge} />
         <Route path="/slopes" component={Slopes} />
         

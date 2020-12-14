@@ -12,46 +12,46 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew'; // External Links
 import { spacing } from '@material-ui/system';
 
 const useStyles = makeStyles({
-    // media: {
-    //   height: 64,
-    //   width: 64,
-    // },
-    // buttonPadding: {
-    //   padding: '5px',
-    // }
+	// media: {
+	//   height: 64,
+	//   width: 64,
+	// },
+	// buttonPadding: {
+	//   padding: '5px',
+	// }
 });
 
 export const LodgePoolCard = ({
-    slopeId,
-    slopeLogo,
-    slopeName,
-    slopeSymbol,
-    slopeApr = "800%",
-    slopeStakedAmount = "10,000",
-    pendingPwdrRewards = "1000",
-    slopeSign,
-    slopeEntryFee = "10%",
-    totalStakedAmount = "100000"
+	slopeId,
+	slopeLogo,
+	slopeName,
+	slopeSymbol,
+	slopeApr = "800%",
+	slopeStakedAmount = "10,000",
+	pendingPwdrRewards = "1000",
+	slopeSign,
+	slopeEntryFee = "10%",
+	totalStakedAmount = "100000"
 }) => {
 
-    const classes = useStyles();
-    const [value, setValue] = useState('1');
-    const theme = useTheme();
+	const classes = useStyles();
+	const [value, setValue] = useState('1');
+	const theme = useTheme();
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
 
-    return (
-        <Paper>
-            <FlexCenter flexDirection="column" alignItems="center" p={2}>
-                <img
+	return (
+		<Paper>
+			<FlexCenter flexDirection="column" alignItems="center" p={2}>
+				{/* <img
                     src={slopeSign}
                     alt={slopeName}
                     height={50}
-                />
+                /> */}
 
-                {/* <TextDecoration
+				{/* <TextDecoration
           height="2px"
           border={2}
           line1width="80%"
@@ -59,23 +59,42 @@ export const LodgePoolCard = ({
           mb={1}
         /> */}
 
-                <Grid container md={12} justify="center" alignItems="center">
-                    <Grid item>
-                        <Typography
+				<Grid container md={12} justify="center" alignItems="center">
+					<Grid item>
+						{/* <Typography
                             variant="h3"
                             color="textSecondary"
                             align="center"
                         >
                             APR: {slopeApr}
-                        </Typography>
-                    </Grid>
-                </Grid>
+                        </Typography> */}
+						<FlexCenter
+							my={2}
+							flexDirection="column"
+							alignSelf="center"
+						// justifySelf="start"
+						>
+							<Typography variant="h4" align="center">
+								<b>The Lodge</b>
+							</Typography>
+							<TextDecoration />
 
-                <TextDecoration
+							<Typography
+								variant="body1"
+								color="textSecondary"
+								align="center"
+							>
+								Waiting for LGE Completion
+							</Typography>
+						</FlexCenter>
+					</Grid>
+				</Grid>
+
+				{/* <TextDecoration
                     height="2px"
                     border={2}
-                    // line1width="60%"
-                    // line2width="40%"
+                    line1width="80%"
+                    line2width="60%"
                     mb={1}
                 />
 
@@ -277,10 +296,10 @@ export const LodgePoolCard = ({
                         </Grid>
                     </TabPanel>
 
-                </TabContext>
+                </TabContext> */}
 
-            </FlexCenter>
+			</FlexCenter>
 
-        </Paper>
-    )
+		</Paper>
+	)
 }
