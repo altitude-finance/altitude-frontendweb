@@ -399,9 +399,9 @@
         "type": "bool"
       },
       {
-        "internalType": "uint256[]",
+        "internalType": "uint256[20]",
         "name": "_stats",
-        "type": "uint256[]"
+        "type": "uint256[20]"
       }
     ],
     "stateMutability": "view",

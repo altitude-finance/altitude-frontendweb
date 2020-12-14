@@ -14,7 +14,7 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
+        "indexed": true,
         "internalType": "address",
         "name": "user",
         "type": "address"
@@ -130,12 +130,6 @@
         "internalType": "uint256",
         "name": "_totalFee",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_protocolFee",
-        "type": "uint256"
       }
     ],
     "name": "FlashLoan",
@@ -172,12 +166,6 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "_totalFee",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_protocolFee",
         "type": "uint256"
       }
     ],
@@ -508,9 +496,9 @@
     "name": "getPoolStats",
     "outputs": [
       {
-        "internalType": "uint256[14]",
+        "internalType": "uint256[20]",
         "name": "_pool",
-        "type": "uint256[14]"
+        "type": "uint256[20]"
       }
     ],
     "stateMutability": "view",
@@ -556,9 +544,9 @@
         "type": "bool"
       },
       {
-        "internalType": "uint256[14][]",
+        "internalType": "uint256[20][]",
         "name": "_stats",
-        "type": "uint256[14][]"
+        "type": "uint256[20][]"
       }
     ],
     "stateMutability": "view",
@@ -764,6 +752,25 @@
   {
     "inputs": [],
     "name": "stakingFee",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "tokenPools",
     "outputs": [
       {
         "internalType": "uint256",

@@ -31,12 +31,6 @@
         "internalType": "uint256",
         "name": "_totalFee",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "_protocolFee",
-        "type": "uint256"
       }
     ],
     "name": "FlashLoanCompleted",
