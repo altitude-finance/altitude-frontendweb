@@ -48,15 +48,8 @@ export const EventStats = ({ stats }) => {
                 title="Silver Boards Remaining" 
                               data={stats && stats.length ? 20 - +stats[5] : '0'}
                 decimals={0}
-              />
-                      </Grid>
-                      <Grid item xs={12} sm={12} md={12}>
-                          <EventData
-                              title="Current Market Cap"
-                              data={stats && stats.length ? 20 - +stats[6] : '0'}
-                              decimals={0}
                           />
-                      </Grid>
+                          </Grid>
           </Grid>
         </Box>  
       </Box>
