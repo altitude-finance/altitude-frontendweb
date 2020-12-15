@@ -31,7 +31,7 @@ export const Event = () => {
           <EventStats stats={stats} />
         </Box>
 
-        <Box>
+        <Box mb={2}>
           <AccountStats stats={stats} />
         </Box>
       </Container>
