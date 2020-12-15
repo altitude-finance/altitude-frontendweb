@@ -15,41 +15,48 @@ export const EventStats = ({ stats }) => {
             <Grid item xs={12} sm={6} md={4}>
               <EventData 
                 title="LGE Total Cap Ξ" 
-                data={stats && stats.length ? stats[0] : '0'} 
+                data={stats && stats.length ? stats[0].toFixed(0) : '0'} 
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <EventData 
                 title="Individual Cap Ξ" 
-                data={stats && stats.length ? stats[1] : '0'} 
+                              data={stats && stats.length ? stats[1].toFixed(0) : '0'} 
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <EventData 
                 title="Minimum Contribution Ξ" 
-                data={stats && stats.length ? stats[3] : '0'} 
+                              data={stats && stats.length ? stats[3].toFixed(0) : '0'} 
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <EventData 
                 title="Minimum NFT Contribution Ξ" 
-                data={stats && stats.length ? stats[2] : '0'} 
+                              data={stats && stats.length ? stats[2].toFixed(0) : '0'} 
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <EventData 
                 title="Golden Boards Remaining" 
-                data={stats && stats.length ? 10 - +stats[4] : '0'}
+                              data={stats && stats.length ? 10 - +stats[4].toFixed(0) : '0'}
                 decimals={0} 
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <EventData 
                 title="Silver Boards Remaining" 
-                data={stats && stats.length ? 20 - +stats[5] : '0'}
+                              data={stats && stats.length ? 20 - +stats[5].toFixed(0) : '0'}
                 decimals={0}
               />
-            </Grid>
+                      </Grid>
+                      <Grid item xs={12} sm={12} md={12}>
+                          <EventData
+                              title="Current Market Cap"
+                              data={stats && stats.length ? 20 - (+stats[6] * 600).toFixed(0) : '0'}
+                              decimals={0}
+                          />
+                      </Grid>
           </Grid>
         </Box>  
       </Box>

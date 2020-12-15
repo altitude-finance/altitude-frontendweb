@@ -25,7 +25,7 @@ export const ContributionInput = ({ max, min, current }) => {
         <TextField
           type="number"
           label="Contribute Ethereum"
-          placeholder="Enter an amount..."
+          placeholder="Enter an amount... (WHOLE NUMBERS ONLY!)"
           variant="outlined"
           value={value}
           onChange={(e) => setValue(e.target.value)}
