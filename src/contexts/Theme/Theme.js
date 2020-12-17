@@ -11,8 +11,8 @@ export const ThemeContext = createContext({
 })
 
 const ThemeProvider = ({ children }) => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-  const [colorMode, setColorMode] = useState(() => !prefersDarkMode ? 'light' : 'dark')
+  const prefersLightMode = useMediaQuery('(prefers-color-scheme: light)')
+  const [colorMode, setColorMode] = useState(() => !prefersLightMode ? 'dark' : 'light')
   const [snowstorm, setSnowstorm] = useState(!isMobile)
 
   const theme = useMemo(() => {
