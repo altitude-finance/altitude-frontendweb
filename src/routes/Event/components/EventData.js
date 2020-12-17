@@ -8,7 +8,7 @@ export const EventData = ({ title, data, info=undefined, decimals=18 }) => {
   return (
     <ColumnView>
       <Typography variant="h4" align="center">
-              {data && <b>{getDisplayBalanceFixed(new BigNumber(data), decimals)}</b>}
+        {data && <b>{getDisplayBalanceFixed(new BigNumber(data), decimals).toString()}</b>}
         {info && <b>{info}</b>}
       </Typography>
       <Typography variant="subtitle2" align="center">

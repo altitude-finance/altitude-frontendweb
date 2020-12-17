@@ -39,17 +39,17 @@ export const EventStats = ({ stats }) => {
             <Grid item xs={12} sm={6} md={4}>
               <EventData 
                 title="Golden Boards Remaining" 
-                              data={stats && stats.length ? 10 - +stats[4] : '0'}
+                data={stats && stats.length ? (10 - +stats[4] > 0 ? 10 - +stats[4] : '0') : '0'}
                 decimals={0} 
               />
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
               <EventData 
                 title="Silver Boards Remaining" 
-                              data={stats && stats.length ? 20 - +stats[5] : '0'}
+                data={stats && stats.length ? (20 - +stats[5] > 0 ? 20 - +stats[5] : '0') : '0'}
                 decimals={0}
-                          />
-                          </Grid>
+              />
+            </Grid>
           </Grid>
         </Box>  
       </Box>
