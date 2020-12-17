@@ -7,14 +7,14 @@ export const ConnectDialogButton = ({
   onClick
 }) => {
   return (
-    <Box ml={1} mr={1} mb={2}>
+    <Box>
       <Button
         variant="outlined"
         // startIcon={}
         onClick={onClick}
         fullWidth
       >
-        <Box p={1} display="flex" alignItems="center" justifyContent="center">
+        <Box p={2} display="flex" alignItems="center" justifyContent="center">
           <Box mr={1}>
             <img src={image} height="24" alt={provider} />
           </Box>

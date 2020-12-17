@@ -16,7 +16,7 @@ export const Event = () => {
   // useEffect()
 
   // const { claim, deposit, withdraw } = useLGE()
-  const { claim, contribute, stats } = useLGE()
+  const { claim, contribute, stats, active } = useLGE()
   
   // useEffect(() => {
     
@@ -32,7 +32,7 @@ export const Event = () => {
         </Box>
 
         <Box mb={2}>
-          <AccountStats stats={stats} />
+          <AccountStats active={active} stats={stats} />
         </Box>
       </Container>
     </HeaderView>

@@ -1,4 +1,4 @@
-import { Box, Dialog, Typography, Grid, IconButton, makeStyles, Divider} from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import React, { useEffect } from 'react'
 import AuthereumLogo from 'assets/img/authereum.png'
 import FortmaticLogo from 'assets/img/fortmatic.png'
@@ -7,24 +7,11 @@ import MetamaskLogo from 'assets/img/metamask-fox.svg'
 import PortisLogo from 'assets/img/portis.svg'
 import WalletConnectLogo from 'assets/img/wallet-connect.svg'
 import { ConnectDialogButton } from './components/ConnectDialogButton'
-import MuiDialogTitle from '@material-ui/core/DialogTitle'
-import CloseIcon from '@material-ui/icons/Close'
 import { useWallet } from 'use-wallet'
-
-const useStyles = makeStyles((theme) => ({
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1)
-  },
-  content: {
-    padding: theme.spacing(2)
-  }
-}))
+import { Dialog } from '../Dialog'
 
 export const ConnectDialog = ({ isOpen, onDismiss }) => {
   const { account, connect } = useWallet()
-  const classes = useStyles()
 
   useEffect(() => {
     if (account) {
@@ -33,28 +20,23 @@ export const ConnectDialog = ({ isOpen, onDismiss }) => {
   }, [account, onDismiss])
 
   return (
-    <Dialog open={isOpen} onClose={onDismiss} maxWidth="lg">
-      <MuiDialogTitle disableTypography>
-        <Box display="flex" alignItems="center" justifyContent="space-between">
-          <Typography variant="h6">Choose Your Web3 Provider</Typography>
-          <IconButton aria-label="close" onClick={onDismiss} className={classes.closeButton}>
-            <CloseIcon />
-          </IconButton>
-        </Box>
-      </MuiDialogTitle>
-      <Divider />
-      <Grid container className={classes.content}>
+    <Dialog isOpen={isOpen} onDismiss={onDismiss} title="Connect To Ethereum">
+      <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <ConnectDialogButton
             image={MetamaskLogo}
             provider="Metamask"
             onClick={() => connect('injected')}
           />
+        </Grid>
+        <Grid item xs={12} md={6}>
           <ConnectDialogButton
             image={WalletConnectLogo}
             provider="WalletConnect"
             onClick={() => connect('walletconnect')}
           />
+        </Grid>
+        <Grid item xs={12} md={6}>
           <ConnectDialogButton
             image={PortisLogo}
             provider="Portis"
@@ -67,11 +49,15 @@ export const ConnectDialog = ({ isOpen, onDismiss }) => {
             provider="Authereum"
             onClick={() => connect('authereum')}
           />
+        </Grid>
+        <Grid item xs={12} md={6}>
           <ConnectDialogButton
             image={FortmaticLogo}
             provider="Fortmatic"
             onClick={() => connect('fortmatic')}
           />
+        </Grid>
+        <Grid item xs={12} md={6}>
           <ConnectDialogButton
             image={FrameLogo}
             provider="Frame"
@@ -79,11 +65,6 @@ export const ConnectDialog = ({ isOpen, onDismiss }) => {
           />
         </Grid>
       </Grid>
-        
-        
-      {/* <DialogActions>
-
-      </DialogActions> */}
     </Dialog>
   )
 }

@@ -1,3 +1,42 @@
+// Lodge
+
+export const getLodgeBalances = async (Lodge, user, ids) => {
+  try {
+    const balances = await Lodge.methods
+      .balanceOfBatch(ids.map(() => user), ids)
+      .call()
+    return balances
+  } catch (e) {
+    console.log(e)
+    return ids.map(() => '0')
+  }
+}
+
+export const getLodgeApproval = async (Lodge, user, spender) => {
+  try {
+    const approval = await Lodge.methods
+      .isApprovedForAll(user, spender)
+      .call()
+    return approval
+  } catch (e) {
+    console.log(e)
+    return false
+  }
+}
+
+export const setLodgeApproval = async (Lodge, user, spender) => {
+  try {
+    const txHash = await Lodge.methods
+      .setApprovalForAll(spender, true)
+      .send({ from: user })
+      .on('transactionHash', (tx) => tx.transactionHash)
+    return txHash
+  } catch (e) {
+    console.log(e)
+  
+  }
+}
+
 // LGE interaction
 
 export const claimLGE = async (LGE, user) => {
@@ -52,67 +91,218 @@ export const getLGEStats = async (LGE, user) => {
     }
   } catch (e) {
     console.log(e)
-    return []
+    return {
+      active: false,
+      stats: []
+    }
   }
 }
 
-// lodge staking
+// loyalty/lodge staking
 
-export const depositLodge = async (user, id) => {
-
+export const depositLoyalty = async (Loyalty, user, id) => {
+  try {
+    const txHash = await Loyalty.methods
+      .deposit(id, 1)
+      .send({ from: user })
+      .on('transactionHash', (tx) => tx.transactionHash)
+      return txHash 
+  } catch (e) {
+    console.log(e)
+    // return 
+  }
 }
 
-export const withdrawLodge = async (user, id) => {
-
+export const withdrawLoyalty = async (Loyalty, user, id) => {
+  try {
+    const txHash = await Loyalty.methods
+      .withdraw(id, 1)
+      .send({ from: user })
+      .on('transactionHash', (tx) => tx.transactionHash)
+      return txHash 
+  } catch (e) {
+    console.log(e)
+    // return 
+  }
 }
 
-export const getStatsLodge = async (user) => {
-
+export const getLoyaltyStats = async (Loyalty, user) => {
+  try {
+    const stats = await Loyalty.methods
+      .getLoyaltyStats(user)
+      .call()
+    
+    return {
+      active: stats._active,
+      stats: stats._stats
+    }
+  } catch (e) {
+    console.log(e)
+    return {
+      active: false,
+      stats: []
+    }
+  }
 }
 
 // Slopes
 
-export const claimSlopes = async (user, pid) => {
-
+export const claimSlopes = async (Slopes, user, pid) => {
+  try {
+    const txHash = await Slopes.methods
+      .claim(pid)
+      .send({ from: user })
+      .on('transactionHash', (tx) => tx.transactionHash)
+      return txHash 
+  } catch (e) {
+    console.log(e)
+    // return 
+  }
 }
 
-export const depositSlopes = async (user, pid, amount) => {
-
+export const depositSlopes = async (Slopes, user, pid, amount) => {
+  try {
+    const txHash = await Slopes.methods
+      .deposit(pid, amount)
+      .send({ from: user })
+      .on('transactionHash', (tx) => tx.transactionHash)
+      return txHash 
+  } catch (e) {
+    console.log(e)
+    // return 
+  }
 }
 
-export const withdrawSlopes = async (user, pid, amount) => {
-
+export const withdrawSlopes = async (Slopes, user, pid, amount) => {
+  try {
+    const txHash = await Slopes.methods
+      .withdraw(pid, amount)
+      .send({ from: user })
+      .on('transactionHash', (tx) => tx.transactionHash)
+      return txHash 
+  } catch (e) {
+    console.log(e)
+    // return 
+  }
 }
 
-export const claimAllSlopes = async (user) => {
-
+export const claimAllSlopes = async (Slopes, user) => {
+  try {
+    const txHash = await Slopes.methods
+      .claimAll()
+      .send({ from: user })
+      .on('transactionHash', (tx) => tx.transactionHash)
+      return txHash 
+  } catch (e) {
+    console.log(e)
+    // return 
+  }
 }
 
-export const migrateSlopes = async (user) => {
-
+export const migrateSlopes = async (Slopes, user) => {
+  try {
+    const txHash = await Slopes.methods
+      .migrate()
+      .send({ from: user })
+      .on('transactionHash', (tx) => tx.transactionHash)
+      return txHash 
+  } catch (e) {
+    console.log(e)
+    // return 
+  }
 }
 
-export const getStatsSlopes = async (user) => {
+export const getSlopesStats = async (Slopes, user) => {
   // return array of all pools
-
-  // 
+  try {
+    const stats = await Slopes.methods
+      .getSlopesStats(user)
+      .call()
+    console.log(stats)
+    return {
+      active: stats._active,
+      accumulating: stats._accumulating,
+      stats: stats._stats
+    }
+  } catch (e) {
+    console.log(e)
+    return {
+      active: false,
+      stats: []
+    }
+  }
 }
 
+export const getPoolStats = async (Slopes, user, pid) => {
+  // return array of one pool
+  try {
+    const pool = await Slopes.methods
+      .getPoolStats(user, pid)
+      .call()
+    return pool
+  } catch (e) {
+    console.log(e)
+    return []
+  }
+}
 
 // Avalanche
 
-export const claimAvalanche = async (user) => {
-
+export const claimAvalanche = async (Avalanche, user) => {
+  try {
+    const txHash = await Avalanche.methods
+      .claim()
+      .send({ from: user })
+      .on('transactionHash', (tx) => tx.transactionHash)
+      return txHash 
+  } catch (e) {
+    console.log(e)
+    // return 
+  }
 }
 
-export const depositAvalanche = async (user, amount) => {
-
+export const depositAvalanche = async (Avalanche, user, amount) => {
+  try {
+    const txHash = await Avalanche.methods
+      .deposit(amount)
+      .send({ from: user })
+      .on('transactionHash', (tx) => tx.transactionHash)
+      return txHash 
+  } catch (e) {
+    console.log(e)
+    // return 
+  }
 }
 
-export const withdrawAvalanche = async (user, amount) => {
-  
+export const withdrawAvalanche = async (Avalanche, user, amount) => {
+  try {
+    const txHash = await Avalanche.methods
+      .withdraw(amount)
+      .send({ from: user })
+      .on('transactionHash', (tx) => tx.transactionHash)
+      return txHash 
+  } catch (e) {
+    console.log(e)
+    // return 
+  }
 }
 
-export const getStatsAvalanche = async (user) => {
-  
+export const getAvalancheStats = async (Avalanche, user) => {
+  try {
+    const stats = await Avalanche.methods
+      .getAvalancheStats(user)
+      .call()
+    
+    return {
+      active: stats._active,
+      accumulating: stats._accumulating,
+      stats: stats._stats
+    }
+  } catch (e) {
+    console.log(e)
+    return {
+      active: false,
+      stats: []
+    }
+  }
 }

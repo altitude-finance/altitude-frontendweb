@@ -33,6 +33,7 @@ export const useLGE = () => {
 
   const fetchStats = useCallback(async () => {
     const { active, stats } = await getLGEStats(LGEContract, account)
+    console.log(active, stats)
     setStats(stats)
     setActive(active)
   }, [setStats, setActive, LGEContract, account])

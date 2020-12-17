@@ -16,10 +16,10 @@ export const getLightTheme = () => createMuiTheme({
       paper: "#fff",
       // default: "#fafafa"
       default: "#e0e0e0"
+    },
+    custom: {
+      tertiary: "#0e4686"
     }
-    // primary: {
-    //   main: cyan[500],
-    // }
   },
   typography: {
     fontWeightLight: 300,

@@ -29,9 +29,6 @@ export const ContributionInput = ({ max, min, current }) => {
           variant="outlined"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          
-          // error={error}
-          //helperText={formState.helperText}
           fullWidth
           InputProps={{
             startAdornment: <InputAdornment position="start">Ξ</InputAdornment>,
@@ -53,7 +50,7 @@ export const ContributionInput = ({ max, min, current }) => {
             variant="contained"
             fullWidth
           >
-            LOCK ETH
+            CONTRIBUTE ETH
           </Button>
         </Box>
       </FormGroup>

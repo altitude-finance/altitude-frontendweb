@@ -16,6 +16,9 @@ export const getDarkTheme = () => createMuiTheme({
       footer: "#0e4686",
       paper: "#424242",
       default: "#303030"
+    },
+    custom: {
+      tertiary: "#e0e0e0"
     }
   },
   typography: {

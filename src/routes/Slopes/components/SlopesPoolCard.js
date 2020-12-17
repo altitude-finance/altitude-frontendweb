@@ -10,76 +10,69 @@ import { makeStyles } from '@material-ui/core/styles';
 import { FlexCenter } from 'components/FlexCenter'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'; // External Links
 import { spacing } from '@material-ui/system';
+import { ValueDisplay } from 'components/ValueDisplay'
+import { ConnectView } from 'components/ConnectView'
+import { useModal } from 'hooks/useModal';
+import { SlopesDialog } from './SlopesDialog';
 
-const useStyles = makeStyles({
-  // media: {
-  //   height: 64,
-  //   width: 64,
-  // },
-  // buttonPadding: {
-  //   padding: '5px',
-  // }
-});
+const useStyles = makeStyles((theme) => ({
+  slopeSign: {
+    [theme.breakpoints.down('sm')]: {
+      width: "256px"
+    },
+    [theme.breakpoints.up('md')]: {
+      width: "384px"
+    }
+  },
+  uniswapButton: {
+
+  }
+}))
 
 export const SlopesPoolCard = ({
-  slopeId,
-  slopeLogo,
-  slopeName,
-  slopeSymbol,
-  slopeApr="800%",
-  slopeStakedAmount="10,000",
-  pendingPwdrRewards="1000",
-  slopeSign,
-  slopeEntryFee="10%",
-  totalStakedAmount="100000"
+  active,
+  slope,
+  stats
 }) => {
+  const { symbol, sign, name, decimals, lpStaked, address } = slope
 
   const classes = useStyles();
-  const [value, setValue] = useState('1');
+  const [value, setValue] = useState('1')
   const theme = useTheme();
+  const [showModal] = useModal(<SlopesDialog active={active} slope={slope} stats={stats} />)
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
+  }
+
 
   return (
-    <Paper>
-      <FlexCenter flexDirection="column" alignItems="center" p={2}>
-        <img
-          src={slopeSign}
-          alt={slopeName}
-          height={50}
-        />
-
-        {/* <TextDecoration
-          height="2px"
-          border={2}
-          line1width="80%"
-          line2width="60%"
-          mb={1}
-        /> */}
+    <Paper variant="outlined">
+      <Box p={2}>
+        <FlexCenter>
+          <img
+            src={sign}
+            alt={name}
+            // height={50}
+            className={classes.slopeSign}
+          />
+        </FlexCenter>
 
         <Grid container md={12} justify="center" alignItems="center">
-          {/* <Grid item>
-            <Typography
-              variant="h3"
-              color="textSecondary"
-              align="center"
-            >
-              APR: {slopeApr}
-            </Typography>
-          </Grid> */}
           <FlexCenter
             my={2}
             flexDirection="column"
             alignSelf="center"
-          // justifySelf="start"
           >
             <Typography variant="h4" align="center">
-              <b>{slopeSymbol} Slope</b>
+              <b>{symbol} Slope</b>
             </Typography>
             <TextDecoration />
-
+          </FlexCenter>
+        </Grid>
+        <ConnectView>
+          {!active ? (
             <Typography
               variant="body1"
               color="textSecondary"
@@ -87,219 +80,120 @@ export const SlopesPoolCard = ({
             >
               Waiting for LGE Completion
             </Typography>
-          </FlexCenter>
-        </Grid>
-
-        {/* <TextDecoration
-          height="2px"
-          border={2}
-          // line1width="60%"
-          // line2width="40%"
-          mb={1} 
-        /> */}
-
-
-        {/* <TabContext value={value}>
-          <Paper elevation={3}>
-            <TabList onChange={handleChange} aria-label="simple tabs example" centered
-              TabIndicatorProps={{
-                style: {
-                  backgroundColor: theme.palette.secondary.main
-
-                }
-              }}
-
-            >
-              <Tab label="My Info" value="1" />
-              <Tab label="Slope Info" value="2" />
-            </TabList>
-          </Paper>
-          <TabPanel value="1">
-            <Grid container md={12}>
-
-
-
-              <Grid item md={6}>
-                <Grid container item md={12}>
-                  <Grid container item md={12} justify="center" alignItems="center">
-                    <Grid item md={12}>
-                      <Typography
-                        variant="h3"
-                        color="textSecondary"
-                        align="center"
-                      >
-                        {slopeStakedAmount}
-                      </Typography>
+          ) : (
+            <Box>
+              <FlexCenter>
+                <ValueDisplay 
+                  title="Fixed APR" 
+                  info={stats && stats.apr ? `${stats.apr}%` : "800%"} 
+                />
+              </FlexCenter>
+              <TabContext value={value}>
+                <TabList 
+                  onChange={handleChange}
+                  aria-label={`${slope.symbol}-slopes-tabs`}
+                  TabIndicatorProps={{
+                    style: {backgroundColor: theme.palette.secondary.main}
+                  }}
+                  centered
+                >
+                  <Tab label="Slope Info" value="1" />
+                  <Tab label="My Info" value="2" />
+                </TabList>
+                <TabPanel value="1">
+                  <Grid container>
+                    <Grid item xs={12} md={6}>
+                      <ValueDisplay
+                        title={`Total ${symbol} Staked`}
+                        value={stats && stats.totalStaked ? stats.totalStaked : '0'}
+                        decimals={decimals}
+                      />
                     </Grid>
-                    <Grid item md={12}>
-                      <Typography
-                        variant="h5"
-                        color="textSecondary"
-                        align="center"
-                      >
-                        My {slopeSymbol} Staked
-                      </Typography>
+                    <Grid item xs={12} md={6}>
+                      <ValueDisplay
+                        title={`${symbol} Price`}
+                        startSymbol="$"
+                        value={stats && stats.totalStaked ? stats.totalStaked : '0'}
+                        decimals={decimals}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <ValueDisplay
+                        title="Total Value Staked"
+                        startSymbol="$"
+                        value={stats && stats.totalStaked ? stats.totalStaked : '0'}
+                        decimals={decimals}
+                      />
                     </Grid>
                   </Grid>
-                  <FlexCenter>
-                    <Box>
-                      <Button
-                        href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
-                        target="_blank"
-                        variant="contained"
-                        color="primary"
-                        style={{ color: 'white' }}
-                        endIcon={<OpenInNewIcon />}
-                      >
-                        Stake
-                      </Button>
-                    </Box>
-                    <Box>
-                      <Button
-                        href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
-                        target="_blank"
-                        variant="contained"
-                        color="danger"
-                        style={{ color: 'white' }}
-                        endIcon={<OpenInNewIcon />}
-                      >
-                        Unstake
-                      </Button>
-                    </Box>
-                  </FlexCenter>
-                </Grid>
-              </Grid>
+                </TabPanel>
 
-
-              <Grid item md={6}>
-                <Grid container item md={12}>
-                  <Grid container item md={12} justify="center" alignItems="center">
-                    <Grid item md={12}>
-                      <Typography
-                        variant="h3"
-                        color="textSecondary"
-                        align="center"
-                      >
-                        {pendingPwdrRewards}
-                      </Typography>
+                <TabPanel value="2">
+                  <Grid container>
+                    <Grid item xs={12} md={6}>
+                      <ValueDisplay
+                        title={`Pending ${symbol} Rewards`}
+                        value={stats && stats.tokenRewards ? stats.tokenRewards : '0'}
+                        decimals={decimals}
+                      />
                     </Grid>
-                    <Grid item md={12}>
-                      <Typography
-                        variant="h5"
-                        color="textSecondary"
-                        align="center"
-                      >
-                        Pending Rewards
-                      </Typography>
+                    <Grid item xs={12} md={6}>
+                      <ValueDisplay
+                        title={`Pending PWDR Rewards`}
+                        value={stats && stats.pwdrRewards ? stats.pwdrRewards : '0'}
+                      />
                     </Grid>
+                    <Grid item xs={12}>
+                      <ValueDisplay
+                        title={`${symbol} Staked  Balance`}
+                        startSymbol="$"
+                        value={stats && stats.stakedBalance ? stats.stakedBalance : '0'}
+                        decimals={decimals}
+                      />
+                    </Grid>
+                    {/* <Grid item xs={12}>
+                      <ValueDisplay
+                        title={`${symbol} Shares Balance`}
+                        startSymbol="$"
+                        value={stats && stats.sharesBalance ? stats.sharesBalance : '0'}
+                        decimals={decimals}
+                      />
+                    </Grid> */}
                   </Grid>
-                  <Grid container item alignContent="center" justify="center">
-                    <Grid item className={classes.buttonPadding}>
-                      <Button
-                        href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
-                        target="_blank"
-                        variant="contained"
-                        color="primary"
-                        style={{ color: 'white' }}
-                        endIcon={<OpenInNewIcon />}
-                      >
-                        Claim Rewards
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
-          </TabPanel>
-
-          <TabPanel value="2">
-            <Grid container md={12}>
-
-
-
-              <Grid item md={6}>
-                <Grid container item md={12}>
-                  <Grid container item md={12} justify="center" alignItems="center">
-                    <Grid item md={12}>
-                      <Typography
-                        variant="h3"
-                        color="textSecondary"
-                        align="center"
-                      >
-                        {totalStakedAmount}
-                      </Typography>
-                    </Grid>
-                    <Grid item md={12}>
-                      <Typography
-                        variant="h5"
-                        color="textSecondary"
-                        align="center"
-                      >
-                        Total {slopeName} Staked
-                                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid container item alignContent="center" justify="center">
-                    <Grid item className={classes.buttonPadding}>
-                      <Button
-                        href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
-                        target="_blank"
-                        variant="contained"
-                        color="primary"
-                        style={{ color: 'white' }}
-                        endIcon={<OpenInNewIcon />}
-                      >
-                        Stake
-                                      </Button>
-                    </Grid>
-                    <Grid item className={classes.buttonPadding}>
-                      <Button
-                        href="https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
-                        target="_blank"
-                        variant="contained"
-                        color="primary"
-                        style={{ color: 'white' }}
-                        endIcon={<OpenInNewIcon />}
-                      >
-                        Unstake
-                                      </Button>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-
-
-              <Grid item md={6}>
-                <Grid container item md={12}>
-                  <Grid container item md={12} justify="center" alignItems="center">
-                    <Grid item md={12}>
-                      <Typography
-                        variant="h3"
-                        color="textSecondary"
-                        align="center"
-                      >
-                        {slopeEntryFee}
-                      </Typography>
-                    </Grid>
-                    <Grid item md={12}>
-                      <Typography
-                        variant="h5"
-                        color="textSecondary"
-                        align="center"
-                      >
-                        Slope Entry Fee
-                                          </Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
-          </TabPanel>
-
-        </TabContext> */}
-
-      </FlexCenter>
-
+                  
+                </TabPanel>
+              </TabContext>
+              <FlexCenter flexDirection="column">
+                <Box mb={1} width="100%">
+                <Button
+                  onClick={showModal}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  View/Stake/Unstake in this Slope
+                </Button>
+                </Box>
+                
+                <Button
+                  href={lpStaked
+                    ? `https://info.uniswap.org/pair/${address}`
+                    : `https://info.uniswap.org/token/${address}`} 
+                  target="_blank"
+                  variant="contained"
+                  color="default"
+                  endIcon={<OpenInNewIcon />}
+                  fullWidth
+                >
+                  {lpStaked 
+                  ? `Get ${symbol} LP Tokens` 
+                  : `Buy ${symbol} on Uniswap`}
+                </Button>
+              </FlexCenter>
+            </Box>
+          )}
+        </ConnectView>
+      </Box>
     </Paper>
   )
 }
