@@ -7,9 +7,9 @@ import { CountdownClock } from 'components/CountdownClock';
 export const LGECountdown = ({active}) => {
   const theme = useTheme();
   return (
-    <Grid container direction="column" justify="center">
+    <Grid container direction="column" justify="center" alignItems="center">
       {active ? (
-        <>
+        <Grid item>
           <Typography
             variant="subtitle2"
             color="textSecondary"
@@ -19,9 +19,9 @@ export const LGECountdown = ({active}) => {
             LATEST LGE ACTIVATION:
           </Typography>
           <CountdownClock endDate="2020-12-19T18:00:00Z" />
-        </>
+        </Grid>
       ) : (
-        <>
+        <Grid item>
           <Typography
             variant="subtitle2"
             color="textSecondary"
@@ -31,7 +31,7 @@ export const LGECountdown = ({active}) => {
             PWDR MAKING LGE BEGINS:
           </Typography>
           <CountdownClock endDate="2020-12-14T18:00:00Z" />
-        </>
+        </Grid>
       )}
     </Grid>
   )
