@@ -8,6 +8,11 @@ import { useSlopes } from 'hooks/useSlopes'
 import BigNumber from 'bignumber.js'
 import { getBalanceNumber } from 'utils'
 
+BigNumber.config({
+  DECIMAL_PLACES: 80,
+  EXPONENTIAL_AT: 1000
+})
+
 export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
   const { symbol, lpStaked, address, lpAddress, pid, decimals } = slope
   const [depositInput, setDepositInput] = useState('')
@@ -25,7 +30,9 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
 
   const handleMax = useCallback((isDeposit) => {
     if (isDeposit) {
-      setDepositInput(pool ? getBalanceNumber(pool.tokenBalance, decimals) : '0')
+      setDepositInput(pool 
+        ? getBalanceNumber(lpStaked ? pool.lpBalance : pool.tokenBalance, decimals) :
+         '0')
     } else {
       setWithdrawInput(pool ? getBalanceNumber(pool.stakedBalance, decimals) : '0')
     }
@@ -124,7 +131,11 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
               />
             </Grid>
             <Grid item xs={12} md={6}>
-              <ValueDisplay title={`Pending ${symbol} Rewards`} value="0" />
+              <ValueDisplay 
+              title={`Pending ${symbol} Rewards`} 
+              value={pool ? pool.tokenRewards : '0'}
+              decimals={decimals}
+            />
             </Grid>
           </Grid>
         </Box>

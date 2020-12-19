@@ -115,7 +115,10 @@ export const SlopesPoolCard = ({
                     <Grid item xs={12}>
                       <ValueDisplay
                         title="Total Value Staked Ξ"
-                        value={pool ? new BigNumber(pool.totalStaked).times(lpStaked ? pool.lpPrice : pool.tokenPrice) : '0'}
+                        value={pool ? 
+                          new BigNumber(pool.totalStaked)
+                            .times(lpStaked ? pool.lpPrice : pool.tokenPrice)
+                            .div(new BigNumber(10).pow(decimals)) : '0'}
                         // decimals={decimals}
                       />
                     </Grid>
@@ -139,7 +142,7 @@ export const SlopesPoolCard = ({
                     </Grid>
                     <Grid item xs={12}>
                       <ValueDisplay
-                        title={`${symbol} Staked  Balance`}
+                        title={`${symbol} Staked Balance`}
                         value={pool ? pool.stakedBalance : '0'}
                         decimals={decimals}
                       />
