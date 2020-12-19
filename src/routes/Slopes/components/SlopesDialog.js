@@ -31,12 +31,13 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
   const handleMax = useCallback((isDeposit) => {
     if (isDeposit) {
       setDepositInput(pool 
-        ? getBalanceNumber(lpStaked ? pool.lpBalance : pool.tokenBalance, decimals) :
+        ? getBalanceNumber(lpStaked ? new BigNumber(pool.lpBalance) : new BigNumber(pool.tokenBalance), decimals) 
+        :
          '0')
     } else {
       setWithdrawInput(pool ? getBalanceNumber(pool.stakedBalance, decimals) : '0')
     }
-  }, [pool, decimals])
+  }, [pool, decimals, lpStaked])
 
   const handleApprove = useCallback(async () => {
     const receipt = await approve(lpStaked ? lpAddress : address)
@@ -74,17 +75,21 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
     }
 
     const value = new BigNumber(depositInput).times(new BigNumber(10).pow(decimals))
+    console.log(value)
+
 
     if (lpStaked && value.gt(pool.lpBalance)) {
       notify(`Input exceeds ${symbol} LP Token Balance`, 'error')
       return
-    } else if (!lpStaked && value.gt(pool.tokenBalance)) {
+    }
+    
+    if (!lpStaked && value.gt(pool.tokenBalance)) {
       notify(`Input exceeds ${symbol} Balance`, 'error')
       return
     }
 
-    if ((lpStaked && pool.lpAllowance === '0')
-      && (!lpStaked && pool.tokenAllowance === '0'))
+    if ((lpStaked && new BigNumber(pool.lpAllowance).eq('0'))
+      || (!lpStaked && new BigNumber(pool.tokenAllowance).eq('0')))
     {
       const approvalReceipt = await handleApprove()
       if (!approvalReceipt) {
@@ -150,8 +155,6 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
         </Button>
       </Box>
       
-
-      
       <ColumnView my={2}>
         <ValueDisplay 
           overline="My Balance" 
@@ -159,7 +162,6 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
           value={pool ? lpStaked ? pool.lpBalance : pool.tokenBalance : '0'}
           decimals={decimals}
         />
-
 
         {/* <Typography variant="headline" align="left" gutterBottom>Deposit</Typography> */}
         <TextField 
@@ -169,20 +171,20 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
           label={`Deposit ${symbol}`}
           variant="outlined"
           margin="dense" 
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Button
-                  onClick={() => handleMax(true)}
-                  style={{ padding: 0 }}
-                  variant="contained"
-                  color="secondary"
-                >
-                  MAX
-                </Button>
-              </InputAdornment>
-            ),
-          }}
+          // InputProps={{
+          //   endAdornment: (
+          //     <InputAdornment position="end">
+          //       <Button
+          //         onClick={() => handleMax(true)}
+          //         style={{ padding: 0 }}
+          //         variant="contained"
+          //         color="secondary"
+          //       >
+          //         MAX
+          //       </Button>
+          //     </InputAdornment>
+          //   ),
+          // }}
           fullWidth 
         />
         <Button
@@ -206,20 +208,20 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
           label={`Withdraw ${symbol}`}
           variant="outlined"
           margin="dense"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Button 
-                  onClick={() => handleMax(false)}
-                  style={{ padding: 0 }}
-                  variant="contained"
-                  color="secondary"
-                >
-                  MAX
-                </Button>
-              </InputAdornment>
-            ),
-          }}
+          // InputProps={{
+          //   endAdornment: (
+          //     <InputAdornment position="end">
+          //       <Button 
+          //         onClick={() => handleMax(false)}
+          //         style={{ padding: 0 }}
+          //         variant="contained"
+          //         color="secondary"
+          //       >
+          //         MAX
+          //       </Button>
+          //     </InputAdornment>
+          //   ),
+          // }}
           fullWidth 
         />
         <Button

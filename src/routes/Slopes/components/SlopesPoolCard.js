@@ -34,7 +34,7 @@ export const SlopesPoolCard = ({
   pool,
   active
 }) => {
-  const { symbol, sign, name, decimals, lpStaked, address } = slope
+  const { symbol, sign, name, decimals, lpStaked, address, lpAddress } = slope
   const classes = useStyles();
   const [value, setValue] = useState('1')
   const theme = useTheme();
@@ -164,7 +164,7 @@ export const SlopesPoolCard = ({
                 
                 <Button
                   href={lpStaked
-                    ? `https://info.uniswap.org/pair/${address}`
+                    ? `https://info.uniswap.org/pair/${lpAddress}`
                     : `https://info.uniswap.org/token/${address}`} 
                   target="_blank"
                   variant="contained"
