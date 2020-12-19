@@ -232,7 +232,7 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
           Unstake {symbol}
         </Button>
       </ColumnView>
-      <Typography variant="subtitle2" align="center">All deposits/withdraws will claim any pending rewards from the Slopes and Avalanche.</Typography>
+      <Typography variant="subtitle2" align="center">All deposits/withdraws will claim any pending rewards from the Slopes.</Typography>
 
     </Dialog>
   )

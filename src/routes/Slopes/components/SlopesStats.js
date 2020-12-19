@@ -5,6 +5,8 @@ import SlopesSign from 'assets/img/slopes-signs.png'
 import { ValueDisplay } from 'components/ValueDisplay'
 import BigNumber from 'bignumber.js'
 import { ConnectView } from 'components/ConnectView'
+import SlopesMap from 'constants/SlopesMap'
+import { useNetwork } from 'hooks/useNetwork'
 
 const useStyles = makeStyles((theme) => ({
   headerSign: {
@@ -17,14 +19,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export const SlopesStats = ({ stats }) => {
+export const SlopesStats = ({ stats, slope }) => {
   const classes = useStyles()
+  const { chainId } = useNetwork()
 
   const tvl = (pools) => {
     if (pools && pools.length) {
       let total = new BigNumber(0)
-      pools.forEach((pool) => {
-        total = total.plus(new BigNumber(pool.totalStaked).times(pool.tokenPrice))
+      const slopes = [...SlopesMap(chainId).pools]
+    
+      pools.forEach((pool, i) => {
+        const price = slopes[i].lpStaked ? pool.lpPrice : pool.tokenPrice
+        total = total.plus(new BigNumber(pool.totalStaked).times(price).div(new BigNumber(10).pow(slopes[i].decimals)))
       })
       return total
     } else {
@@ -51,13 +57,19 @@ export const SlopesStats = ({ stats }) => {
           <Box mt={1}>
             <ConnectView>
               <Grid container>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={4}>
                   <ValueDisplay
                     title="PWDR Price Ξ"
                     value={stats && stats.length ? stats[0].tokenPrice : '0'}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={4}>
+                  <ValueDisplay
+                    title="Total Value Locked Ξ"
+                    value={stats && stats.length ? tvl(stats) : '0'}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={4}>
                   <ValueDisplay
                     title="Staking Fee"
                     info="5%"
