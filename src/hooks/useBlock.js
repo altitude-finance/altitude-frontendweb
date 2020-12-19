@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import Web3 from 'web3'
 import { useWallet } from 'use-wallet'
+import Web3 from 'web3'
 
 export const useBlock = () => {
   const [block, setBlock] = useState(0)
@@ -15,10 +15,10 @@ export const useBlock = () => {
       if (block !== latestBlockNumber) {
         setBlock(latestBlockNumber)
       }
-    }, 1000)
+    }, 2000)
 
     return () => clearInterval(interval)
-  }, [ethereum])
+  }, [ethereum, setBlock])
 
   return block
 }

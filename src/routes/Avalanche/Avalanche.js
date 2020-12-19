@@ -1,17 +1,15 @@
-import { HeaderView } from 'components/HeaderView'
 import React from 'react'
-import { AvalancheHeader } from './components/AvalancheHeader'
 import { AvalanchePoolCard } from './components/AvalanchePoolCard'
 import { AvalancheStats } from './components/AvalancheStats'
 import { Box, Container, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import avalanche from 'assets/img/AvalancheBG_2000x600.png'
+import AvalancheBackground from 'assets/img/avalanche-bg.png'
 import { DisplayView } from 'components/DisplayView'
 import { FlexCenter } from 'components/FlexCenter'
 
 const useStyles = makeStyles({
 	avalancheBackground: {
-		backgroundImage: `url(${avalanche})`,
+		backgroundImage: `url(${AvalancheBackground})`,
 		backgroundPosition: 'center',
 		backgroundSize: 'cover',
 		backgroundRepeat: 'no-repeat',

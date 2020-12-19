@@ -1,4 +1,5 @@
 import Altitude from 'eth'
+import { useNetwork } from 'hooks/useNetwork'
 import { createContext, useEffect, useState } from 'react'
 import { useWallet } from 'use-wallet'
 
@@ -7,15 +8,17 @@ export const AltitudeContext = createContext({
 })
 
 const AltitudeProvider = ({ children }) => {
-  const { ethereum } = useWallet()
+  const { account, ethereum } = useWallet()
+  const { chainId } = useNetwork()
   const [altitude, setAltitude] = useState()
 
   window.eth = ethereum
   
   useEffect(() => {
     if (ethereum) {
-      const { chainId, selectedAddress } = ethereum
-      const altitudeLib = new Altitude(ethereum, +(chainId.toString()), {
+      const { selectedAddress } = ethereum
+
+      const altitudeLib = new Altitude(ethereum, chainId, {
         defaultAccount: selectedAddress,
         ethereumNodeTimeout: 10000,
       })
@@ -23,7 +26,7 @@ const AltitudeProvider = ({ children }) => {
       window.altitude = altitudeLib
       console.log(altitudeLib)
     }
-  }, [ethereum, setAltitude])
+  }, [account, ethereum, setAltitude])
 
   return (
     <AltitudeContext.Provider value={{

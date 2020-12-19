@@ -299,13 +299,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "endEpoch",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",

@@ -13,14 +13,29 @@ const useStyles = makeStyles((theme) => ({
   title: {
     margin: 0,
     padding: 0
+  },
+  modal: {
+    [theme.breakpoints.up('md')]: {
+      zIndex: 10000,
+    },
   }
 }))
 
-export const Dialog = ({ isOpen, onDismiss, title, children, marginBottom=2 }) => {
+export const Dialog = ({ isOpen, onDismiss, title, children, 
+  marginBottom=2, 
+  maxWidth="sm", 
+  fullWidth=false 
+}) => {
   const classes = useStyles()
 
   return (
-    <MuiDialog open={isOpen} onClose={onDismiss} maxWidth="sm">
+    <MuiDialog 
+      open={isOpen} 
+      onClose={onDismiss} 
+      maxWidth={maxWidth} 
+      fullWidth={fullWidth}
+      classes={{root:classes.modal}}
+    >
       <Box p={2}>
         <FlexCenter justify="space-between" align="center" m={1} marginBottom={2}>
           <Typography variant="h5" align="left" className={classes.title}><b>{title}</b></Typography>

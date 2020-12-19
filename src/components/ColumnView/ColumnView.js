@@ -10,6 +10,7 @@ export const ColumnView = ({
   height,
   minHeight,
   m,
+  mb,
   mx,
   my,
   children,
@@ -23,6 +24,7 @@ export const ColumnView = ({
       height={height || undefined}
       minHeight={minHeight || undefined}
       m={m || undefined}
+      marginBottom={mb || undefined}
       mx={mx || undefined}
       my={my || undefined}
       {...props}

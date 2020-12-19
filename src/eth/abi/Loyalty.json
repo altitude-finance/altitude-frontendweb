@@ -248,6 +248,21 @@
     "name": "getLoyaltyStats",
     "outputs": [
       {
+        "internalType": "bool",
+        "name": "_active",
+        "type": "bool"
+      },
+      {
+        "internalType": "bool",
+        "name": "_approved",
+        "type": "bool"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_balances",
+        "type": "uint256[]"
+      },
+      {
         "internalType": "uint256[]",
         "name": "_stats",
         "type": "uint256[]"
@@ -313,6 +328,25 @@
       }
     ],
     "name": "getTotalShares",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "ids",
     "outputs": [
       {
         "internalType": "uint256",
@@ -472,7 +506,7 @@
         "type": "uint256"
       }
     ],
-    "name": "setLoyaltyPoint",
+    "name": "setLoyaltyPoints",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -549,6 +583,19 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "_ids",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "updateIds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

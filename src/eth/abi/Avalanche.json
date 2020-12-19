@@ -520,6 +520,19 @@
   {
     "inputs": [
       {
+        "internalType": "bool",
+        "name": "_active",
+        "type": "bool"
+      }
+    ],
+    "name": "setActive",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "_unstakingFee",
         "type": "uint256"
@@ -616,6 +629,19 @@
   {
     "inputs": [],
     "name": "updatePool",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_weight",
+        "type": "uint256"
+      }
+    ],
+    "name": "updateWeight",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

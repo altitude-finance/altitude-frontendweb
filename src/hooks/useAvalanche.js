@@ -10,22 +10,8 @@ export const useAvalanche = () => {
   const block = useBlock()
   const { account } = useWallet()
   const [active, setActive] = useState(false)
-  const [stats, setStats] = useState({
-    apr: '',
-    totalStaked: '',
-    pwdrPrice: '',
-    nextEpochReward: '',
-    currentEpochReward: '',
-    currentEpochRewardPerDay: '',
-    startTime: '',
-    lastPayout: '',
-    payoutNumber: '',
-    unstakingFee: '',
-    lpBalance: '0',
-    lpAllowance: '0',
-    stakedBalance: '0',
-    pwdrRewards: '0'
-  })
+  const [accumulating, setAccumulating] = useState(false)
+  const [stats, setStats] = useState()
 
   const AvalancheContract = useMemo(() => {
     return getContractAvalanche(altitude)
@@ -47,10 +33,12 @@ export const useAvalanche = () => {
   }, [account, AvalancheContract])
   
   const fetchStats = useCallback(async () => {
-    const { active, stats } = await getAvalancheStats(AvalancheContract, account)
+    const { active, accumulating, stats } = await getAvalancheStats(AvalancheContract, account)
     
-    if (stats) {
-      setActive(active)
+    setActive(active)
+    setAccumulating(accumulating)
+
+    if (stats && stats.length) {
       setStats({
         apr: stats[0],
         totalStaked: stats[2],
@@ -78,6 +66,7 @@ export const useAvalanche = () => {
   
   return {
     active,
+    accumulating,
     stats,
     claim: handleClaim,
     deposit: handleDeposit,

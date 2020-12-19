@@ -1,5 +1,13 @@
 export { default } from './Altitude'
 
+export const getAddressPWDR = (altitude) => {
+  return altitude && altitude.pwdrAddress
+}
+
+export const getAddressLodge = (altitude) => {
+  return altitude && altitude.lodgeAddress
+}
+
 export const getContractPWDR = (altitude) => {
   return altitude && altitude.contracts && altitude.contracts.PWDR
 }

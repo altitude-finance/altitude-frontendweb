@@ -1,36 +1,36 @@
 import { Typography } from '@material-ui/core'
 import BigNumber from 'bignumber.js'
 import { ColumnView } from 'components/ColumnView'
-import React, { useCallback,useEffect } from 'react'
-import { getDisplayBalanceFixed, sleep } from 'utils'
+import { LGE_BALANCE_URL } from 'constants/Links'
+import React, { useCallback,useEffect, useState } from 'react'
+import { getDisplayBalanceFixed } from 'utils'
 
-const ENDPOINT = "https://assets.altitude.finance/lgebalance/pwdr_lge_balance.json"
+export const EventTitle = ({ data }) => {
+  const [value, setValue] = useState('0')
 
-export const EventTitle = ({ title, data }) => {
-
-  const getContribution = useCallback(async () => {
-    const contribution = await fetch(ENDPOINT, { 
+  const getContribution = useCallback(() => {
+    fetch(LGE_BALANCE_URL, { 
       method: 'GET',
-      mode: 'cors',
       cache: 'no-cache',
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "*"
-      }
-    }).then(r => r.json()).then(d => d)
-    const json = JSON.stringify(contribution)
-    console.log(json)
+      mode: 'cors'
+    })
+    .then((response) => response.json())
+    .then((json) => setValue(json && json.PWDR_LGE_Balance ? json.PWDR_LGE_Balance : '0'))
+    .catch((e) => console.log(e.message))
   }, [])
 
   useEffect(() => {
-    getContribution()
-    sleep(1000)
-  }, [])
+    const interval = setInterval(() => {
+      getContribution()
+    }, 5000) 
+
+    return () => clearInterval(interval)
+  }, [getContribution])
 
   return (
     <ColumnView mb={2}>
       <Typography variant="h2" align="center">
-        <b>{getDisplayBalanceFixed(new BigNumber(data))}</b>
+        <b>{data ? getDisplayBalanceFixed(new BigNumber(data)) : getDisplayBalanceFixed(new BigNumber(value), 0)}</b>
       </Typography>
       <Typography variant="subtitle1" align="center">
         Total Contributed Ξ

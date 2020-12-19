@@ -23,19 +23,19 @@ export const EventStats = ({ stats }) => {
               <Grid item xs={12} sm={6} md={4}>
                 <EventData 
                   title="Individual Cap Ξ" 
-                                data={stats && stats.length ? stats[1] : '0'} 
+                  data={stats && stats.length ? stats[1] : '0'} 
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <EventData 
                   title="Minimum Contribution Ξ" 
-                                data={stats && stats.length ? stats[3] : '0'} 
+                  data={stats && stats.length ? stats[3] : '0'} 
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <EventData 
                   title="Minimum NFT Contribution Ξ" 
-                                data={stats && stats.length ? stats[2] : '0'} 
+                  data={stats && stats.length ? stats[2] : '0'} 
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>

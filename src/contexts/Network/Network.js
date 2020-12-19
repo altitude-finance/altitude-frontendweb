@@ -3,22 +3,31 @@ import {
   FORTMATIC_PUBLIC_KEYS,
   PORTIS_DAPP_ID
 } from 'constants/Network';
-import { createContext } from 'react'
+import { createContext, useMemo } from 'react'
 import { UseWalletProvider } from 'use-wallet';
 
 export const NetworkContext = createContext({
   chainId: 1,
-  isDevelopment: false
+  isDevelopment: false,
+  isStaging: false,
+  isCanary: false,
 })
 
 const NetworkProvider = ({ children }) => {
-  const chainId = (window.location.host.indexOf("rinkeby") > -1) ? 4 : 1;
-  const isDevelopment = chainId === 4 || window.location.host.indexOf("frontenddev") > -1;
+  const isDevelopment = window.location.host.indexOf("localhost") > -1
+  const isStaging = window.location.host.indexOf("rinkeby") > -1
+  const isCanary = window.location.host.indexOf("frontenddev") > -1
+
+  const chainId = useMemo(() => {
+    return isStaging ? 4 : 1
+  }, [isStaging])
 
   return (
     <NetworkContext.Provider value={{
       chainId,
-      isDevelopment
+      isDevelopment,
+      isStaging,
+      isCanary
     }}>
       <UseWalletProvider
         chainId={chainId}

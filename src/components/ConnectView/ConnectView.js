@@ -8,10 +8,10 @@ export const ConnectView = ({ children }) => {
   const { account } = useWallet()
 
   return (
-    <Box>
+    <Box mt={2}>
       {!!account ? (
         <Box>
-        {children}
+          {children}
         </Box>
       ) : (
         <FlexCenter>

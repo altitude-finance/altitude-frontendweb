@@ -1,33 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Typography, Grid, Paper, Box } from '@material-ui/core'
-import { useTheme } from '@material-ui/core/styles';
 import { TextDecoration } from 'components/TextDecoration'
-import { makeStyles } from '@material-ui/core/styles'
-import { FlexCenter } from 'components/FlexCenter'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
-import { ConnectView } from 'components/ConnectView';
-import { useSlopes } from 'hooks/useSlopes';
-import { ValueDisplay } from 'components/ValueDisplay';
+import { ConnectView } from 'components/ConnectView'
+import { ValueDisplay } from 'components/ValueDisplay'
+import { useLoyalty } from 'hooks/useLoyalty'
+import OPEN_SEA_STOREFRONT_URL from 'constants/Addresses'
+import { useModal } from 'hooks/useModal'
+import { LodgeDialog } from './LodgeDialog'
 
-const useStyles = makeStyles({
-	// media: {
-	//   height: 64,
-	//   width: 64,
-	// },
-	// buttonPadding: {
-	//   padding: '5px',
-	// }
-});
+export const LodgePoolCard = ({ board, boost }) => {
+	const { active } = useLoyalty()
 
-export const LodgePoolCard = () => {
-
-	const classes = useStyles();
-	const [value, setValue] = useState('1');
-	const { active } = useSlopes()
-
-	const handleModal = () => {
-
-	}
+	const [handleModal] =  useModal(<LodgeDialog />)
 
 	return (
 		<Paper variant="outlined">
@@ -36,9 +21,16 @@ export const LodgePoolCard = () => {
 					<b>The Lodge</b>
 				</Typography>
 				<TextDecoration />
+				<Typography 
+					variant="subtitle1" 
+					align="center" 
+					gutterBottom
+				>
+					Earn Boost by depositing Altitude Lodge NFTs 
+				</Typography>
 
 				<ConnectView>
-					{!active ? (
+					{active ? (
 						<Typography
 							variant="body1"
 							color="textSecondary"
@@ -48,37 +40,42 @@ export const LodgePoolCard = () => {
 						</Typography>
 					) : (
 						<Box>
-							<Grid container>
-								<Grid item xs={12} md={6}>
-									<ValueDisplay
-										title="Currently Equipped Board"
-										info="Golden"
-									/>
+							<Box mb={2}>
+								<Grid container>
+									<Grid item xs={12} md={6}>
+										<ValueDisplay
+											title="Currently Equipped Board"
+											info={board}
+										/>
+									</Grid>
+									<Grid item xs={12} md={6}>
+										<ValueDisplay
+											title="Total Boost"
+											info={boost}
+										/>
+									</Grid>
 								</Grid>
-								<Grid item xs={12} md={6}>
-									<ValueDisplay
-										title="Total Boost"
-										info="50%"
-									/>
-								</Grid>
-							</Grid>
+							</Box>
+							<Box mb={1}>
 							<Button
 								onClick={handleModal}
 								color="primary"
 								variant="contained"
 								fullWidth
 							>
-								Deposit/Withdraw NFTs for Boost
+								Deposit / Withdraw
 							</Button>
+							</Box>
+							
 							<Button
-								href="https://opensea.io/"
+								href={OPEN_SEA_STOREFRONT_URL}
 								target="_blank"
 								color="default"
 								variant="contained"
 								endIcon={<OpenInNewIcon />}
 								fullWidth
 							>
-								View Lodge NFTs on OpenSea
+								View Lodge on OpenSea
 							</Button>
 						</Box>
 					)}

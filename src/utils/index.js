@@ -2,12 +2,14 @@ import Web3 from 'web3'
 import { BigNumber } from 'bignumber.js'
 import { ethers } from 'ethers'
 import IERC20 from '../eth/abi/IERC20.json'
+import IERC1155 from '../eth/abi/IERC1155.json'
 
 BigNumber.config({
   DECIMAL_PLACES: 80,
   EXPONENTIAL_AT: 1000
 })
 
+export { getBoardImage, getBoard } from './lodge'
 
 export const sleep = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -24,9 +26,33 @@ export const waitTransaction = async (provider, txHash) => {
   return txReceipt.status
 }
 
+export const awaitReceipt = async (tx, provider, onTxHash) => {
+  if (!tx) {
+    onTxHash && onTxHash("")
+    return false
+  }
+
+  const txHash = tx.transactionHash
+  if (onTxHash) {
+    onTxHash(txHash)
+  }
+  const status = await waitTransaction(provider, txHash);
+  if (!status) {
+    console.log("Approval transaction failed.");
+    return false
+  }
+  return true
+} 
+
 export const getContract = (provider, address) => {
   const web3 = new Web3(provider)
   const contract = new web3.eth.Contract(IERC20.abi, address)
+  return contract
+}
+
+export const getMultiTokenContract = (provider, address) => {
+  const web3 = new Web3(provider)
+  const contract = new web3.eth.Contract(IERC1155.abi, address)
   return contract
 }
 
@@ -44,6 +70,40 @@ export const approve = async (
       .send({ from: account, gas: 80000 }, async (error, txHash) => {
         if (error) {
           console.log("ERC20 could not be approved", error);
+          onTxHash && onTxHash("")
+          return false
+        }
+        if (onTxHash) {
+          onTxHash(txHash)
+        }
+        const status = await waitTransaction(provider, txHash);
+        if (!status) {
+          console.log("Approval transaction failed.");
+          return false
+        }
+        return true
+      })
+      
+  } catch (e) {
+    console.log('error approving', e)
+    return false
+  }
+}
+
+export const approveAll = async (
+  multiTokenAddress,
+  spenderAddress,
+  account,
+  provider,
+  onTxHash,
+) => {
+  try {
+    const tokenContract = getMultiTokenContract(provider, multiTokenAddress)
+    return tokenContract.methods
+      .setApprovalForAll(spenderAddress, true)
+      .send({ from: account, gas: 80000 }, async (error, txHash) => {
+        if (error) {
+          console.log("ERC1155 could not be approved", error);
           onTxHash && onTxHash("")
           return false
         }

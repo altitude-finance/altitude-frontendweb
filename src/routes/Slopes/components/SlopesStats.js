@@ -21,11 +21,16 @@ export const SlopesStats = ({ stats }) => {
   const classes = useStyles()
 
   const tvl = (pools) => {
-    const total = new BigNumber(0)
-    pools.forEach((pool) => {
-      total.plus(new BigNumber(pool.totalStaked).times(pool.tokenPrice))
-    })
-    return total
+    if (pools && pools.length) {
+      let total = new BigNumber(0)
+      pools.forEach((pool) => {
+        total = total.plus(new BigNumber(pool.totalStaked).times(pool.tokenPrice))
+      })
+      return total
+    } else {
+      return '0'
+    }
+    
   }
 
   return (
@@ -40,25 +45,25 @@ export const SlopesStats = ({ stats }) => {
       <Paper variant="outlined">
         <Box p={2}>
           <Box mb={2}>
-            <Typography variant="h5" align="center">Global Slope Stats</Typography>
+            <Typography variant="h5" align="center">Global Slopes Stats</Typography>
           </Box>
           <Divider />
           <Box mt={1}>
             <ConnectView>
               <Grid container>
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid item xs={12} sm={6}>
                   <ValueDisplay
-                    title="PWDR Price"
+                    title="PWDR Price Ξ"
                     value={stats && stats.length ? stats[0].tokenPrice : '0'}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6} md={4}>
+                {/* <Grid item xs={12} sm={6} md={4}>
                   <ValueDisplay
-                    title="Total Value Locked"
+                    title="Total Value Locked Ξ"
                     value={stats && stats.length ? tvl(stats) : '0'}
                   />
-                </Grid>
-                <Grid item xs={12} sm={6} md={4}>
+                </Grid> */}
+                <Grid item xs={12} sm={6}>
                   <ValueDisplay
                     title="Staking Fee"
                     info="5%"

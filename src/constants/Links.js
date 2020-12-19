@@ -6,3 +6,6 @@ export const TELEGRAM_ANN_URL = "https://t.me/AltitudeFiAnnouncements"
 export const TWITTER_URL = "https://twitter.com/AltitudeFi"
 
 export const WHITEPAPER_URL = "https://assets.altitude.finance/static/files/Altitude_Finance_Whitepaper.pdf"
+
+export const LGE_BALANCE_URL = "https://assets.altitude.finance/lgebalance/pwdr_lge_balance.json"
+export const OPEN_SEA_STOREFRONT_URL = "https://opensea.io/collection/unidentified-contract-bamsuxmiv4"

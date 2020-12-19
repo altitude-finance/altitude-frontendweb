@@ -20,8 +20,8 @@ export const FlexCenter = ({
       alignItems={align}
       justifyContent={justify}
       m={m || undefined}
-      mb={mb || undefined}
-      mt={mt || undefined}
+      marginBottom={mb || undefined}
+      marginTop={mt || undefined}
       mx={mx || undefined}
       my={my || undefined}
       {...props}

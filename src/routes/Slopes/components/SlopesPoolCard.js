@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 import { Button, Typography, Grid, Paper, Box } from '@material-ui/core'
-import Tab from '@material-ui/core/Tab';
-import TabContext from '@material-ui/lab/TabContext';
-import TabList from '@material-ui/lab/TabList';
-import TabPanel from '@material-ui/lab/TabPanel';
-import { useTheme } from '@material-ui/core/styles';
+import Tab from '@material-ui/core/Tab'
+import TabContext from '@material-ui/lab/TabContext'
+import TabList from '@material-ui/lab/TabList'
+import TabPanel from '@material-ui/lab/TabPanel'
+import { useTheme } from '@material-ui/core/styles'
 import { TextDecoration } from 'components/TextDecoration'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 import { FlexCenter } from 'components/FlexCenter'
-import OpenInNewIcon from '@material-ui/icons/OpenInNew'; // External Links
-import { spacing } from '@material-ui/system';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import { ValueDisplay } from 'components/ValueDisplay'
 import { ConnectView } from 'components/ConnectView'
-import { useModal } from 'hooks/useModal';
-import { SlopesDialog } from './SlopesDialog';
+import { useModal } from 'hooks/useModal'
+import { SlopesDialog } from './SlopesDialog'
 
 const useStyles = makeStyles((theme) => ({
   slopeSign: {
@@ -30,22 +29,19 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export const SlopesPoolCard = ({
-  active,
   slope,
-  stats
+  pool,
+  active
 }) => {
   const { symbol, sign, name, decimals, lpStaked, address } = slope
-
   const classes = useStyles();
   const [value, setValue] = useState('1')
   const theme = useTheme();
-  const [showModal] = useModal(<SlopesDialog active={active} slope={slope} stats={stats} />)
-
+  const [showModal] = useModal(<SlopesDialog active={active} slope={slope} pool={pool} />)
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setValue(newValue)
   }
-
 
   return (
     <Paper variant="outlined">
@@ -54,12 +50,11 @@ export const SlopesPoolCard = ({
           <img
             src={sign}
             alt={name}
-            // height={50}
             className={classes.slopeSign}
           />
         </FlexCenter>
 
-        <Grid container md={12} justify="center" alignItems="center">
+        <Grid container justify="center" alignItems="center">
           <FlexCenter
             my={2}
             flexDirection="column"
@@ -72,7 +67,7 @@ export const SlopesPoolCard = ({
           </FlexCenter>
         </Grid>
         <ConnectView>
-          {!active ? (
+          {active ? (
             <Typography
               variant="body1"
               color="textSecondary"
@@ -85,7 +80,7 @@ export const SlopesPoolCard = ({
               <FlexCenter>
                 <ValueDisplay 
                   title="Fixed APR" 
-                  info={stats && stats.apr ? `${stats.apr}%` : "800%"} 
+                  info={pool ? `${pool.apr}%` : "800%"} 
                 />
               </FlexCenter>
               <TabContext value={value}>
@@ -105,23 +100,21 @@ export const SlopesPoolCard = ({
                     <Grid item xs={12} md={6}>
                       <ValueDisplay
                         title={`Total ${symbol} Staked`}
-                        value={stats && stats.totalStaked ? stats.totalStaked : '0'}
+                        value={pool ? pool.totalStaked : '0'}
                         decimals={decimals}
                       />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <ValueDisplay
-                        title={`${symbol} Price`}
-                        startSymbol="$"
-                        value={stats && stats.totalStaked ? stats.totalStaked : '0'}
+                        title={`${symbol} Price Ξ`}
+                        value={pool ? lpStaked ? pool.lpPrice : pool.tokenPrice : '0'}
                         decimals={decimals}
                       />
                     </Grid>
                     <Grid item xs={12}>
                       <ValueDisplay
-                        title="Total Value Staked"
-                        startSymbol="$"
-                        value={stats && stats.totalStaked ? stats.totalStaked : '0'}
+                        title="Total Value Staked Ξ"
+                        value={pool ? pool.totalStaked : '0'}
                         decimals={decimals}
                       />
                     </Grid>
@@ -133,46 +126,36 @@ export const SlopesPoolCard = ({
                     <Grid item xs={12} md={6}>
                       <ValueDisplay
                         title={`Pending ${symbol} Rewards`}
-                        value={stats && stats.tokenRewards ? stats.tokenRewards : '0'}
+                        value={pool ? pool.tokenRewards : '0'}
                         decimals={decimals}
                       />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <ValueDisplay
                         title={`Pending PWDR Rewards`}
-                        value={stats && stats.pwdrRewards ? stats.pwdrRewards : '0'}
+                        value={pool ? pool.pwdrRewards : '0'}
                       />
                     </Grid>
                     <Grid item xs={12}>
                       <ValueDisplay
                         title={`${symbol} Staked  Balance`}
-                        startSymbol="$"
-                        value={stats && stats.stakedBalance ? stats.stakedBalance : '0'}
+                        value={pool ? pool.stakedBalance : '0'}
                         decimals={decimals}
                       />
                     </Grid>
-                    {/* <Grid item xs={12}>
-                      <ValueDisplay
-                        title={`${symbol} Shares Balance`}
-                        startSymbol="$"
-                        value={stats && stats.sharesBalance ? stats.sharesBalance : '0'}
-                        decimals={decimals}
-                      />
-                    </Grid> */}
                   </Grid>
-                  
                 </TabPanel>
               </TabContext>
               <FlexCenter flexDirection="column">
                 <Box mb={1} width="100%">
-                <Button
-                  onClick={showModal}
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                >
-                  View/Stake/Unstake in this Slope
-                </Button>
+                  <Button
+                    onClick={showModal}
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                  >
+                    Stake / Unstake
+                  </Button>
                 </Box>
                 
                 <Button
@@ -186,7 +169,7 @@ export const SlopesPoolCard = ({
                   fullWidth
                 >
                   {lpStaked 
-                  ? `Get ${symbol} LP Tokens` 
+                  ? `Add ${symbol} Liquidity` 
                   : `Buy ${symbol} on Uniswap`}
                 </Button>
               </FlexCenter>
