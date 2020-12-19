@@ -57,12 +57,6 @@ export const SlopesStats = ({ stats }) => {
                     value={stats && stats.length ? stats[0].tokenPrice : '0'}
                   />
                 </Grid>
-                {/* <Grid item xs={12} sm={6} md={4}>
-                  <ValueDisplay
-                    title="Total Value Locked Ξ"
-                    value={stats && stats.length ? tvl(stats) : '0'}
-                  />
-                </Grid> */}
                 <Grid item xs={12} sm={6}>
                   <ValueDisplay
                     title="Staking Fee"

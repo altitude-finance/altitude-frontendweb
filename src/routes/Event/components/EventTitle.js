@@ -1,4 +1,4 @@
-import { Typography } from '@material-ui/core'
+import { Typography, Box } from '@material-ui/core'
 import BigNumber from 'bignumber.js'
 import { ColumnView } from 'components/ColumnView'
 import { LGE_BALANCE_URL } from 'constants/Links'
@@ -28,13 +28,16 @@ export const EventTitle = ({ data }) => {
   }, [getContribution])
 
   return (
-    <ColumnView mb={2}>
+    <ColumnView>
+      <Box mb={2}>
       <Typography variant="h2" align="center">
         <b>{data ? getDisplayBalanceFixed(new BigNumber(data)) : getDisplayBalanceFixed(new BigNumber(value), 0)}</b>
       </Typography>
       <Typography variant="subtitle1" align="center">
         Total Contributed Ξ
       </Typography>
+      </Box>
+      
     </ColumnView>
   )
 }

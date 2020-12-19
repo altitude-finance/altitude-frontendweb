@@ -13,6 +13,7 @@ import { ValueDisplay } from 'components/ValueDisplay'
 import { ConnectView } from 'components/ConnectView'
 import { useModal } from 'hooks/useModal'
 import { SlopesDialog } from './SlopesDialog'
+import BigNumber from 'bignumber.js'
 
 const useStyles = makeStyles((theme) => ({
   slopeSign: {
@@ -108,14 +109,14 @@ export const SlopesPoolCard = ({
                       <ValueDisplay
                         title={`${symbol} Price Ξ`}
                         value={pool ? lpStaked ? pool.lpPrice : pool.tokenPrice : '0'}
-                        decimals={decimals}
+                        // decimals={decimals}
                       />
                     </Grid>
                     <Grid item xs={12}>
                       <ValueDisplay
                         title="Total Value Staked Ξ"
-                        value={pool ? pool.totalStaked : '0'}
-                        decimals={decimals}
+                        value={pool ? new BigNumber(pool.totalStaked).times(lpStaked ? pool.lpPrice : pool.tokenPrice) : '0'}
+                        // decimals={decimals}
                       />
                     </Grid>
                   </Grid>

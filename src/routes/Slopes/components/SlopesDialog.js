@@ -6,6 +6,7 @@ import { ValueDisplay } from 'components/ValueDisplay'
 import { useNotifications } from 'hooks/useNotifications'
 import { useSlopes } from 'hooks/useSlopes'
 import BigNumber from 'bignumber.js'
+import { getBalanceNumber } from 'utils'
 
 export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
   const { symbol, lpStaked, address, lpAddress, pid, decimals } = slope
@@ -24,11 +25,11 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
 
   const handleMax = useCallback((isDeposit) => {
     if (isDeposit) {
-      setDepositInput(pool ? pool.tokenBalance : '0')
+      setDepositInput(pool ? getBalanceNumber(pool.tokenBalance, decimals) : '0')
     } else {
-      setWithdrawInput(pool ? pool.stakedBalance : '0')
+      setWithdrawInput(pool ? getBalanceNumber(pool.stakedBalance, decimals) : '0')
     }
-  }, [pool])
+  }, [pool, decimals])
 
   const handleApprove = useCallback(async () => {
     const receipt = await approve(lpStaked ? lpAddress : address)
@@ -86,7 +87,7 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
 
     const receipt = await deposit(pid, value.toString())
     return receipt
-  }, [deposit, handleApprove, notify, pool, pid, lpStaked, depositInput, symbol])
+  }, [deposit, handleApprove, notify, pool, pid, decimals, lpStaked, depositInput, symbol])
 
   const handleUnstake = useCallback(async () => {
     if (!pool) {
@@ -103,7 +104,7 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
 
     const receipt = await withdraw(pid, value.toString())
     return receipt
-  }, [lpStaked, notify, pool, symbol, pid, withdraw, withdrawInput])
+  }, [lpStaked, notify, pool, symbol, pid, withdraw, withdrawInput, decimals])
 
   return (
     <Dialog 
@@ -144,7 +145,7 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
         <ValueDisplay 
           overline="My Balance" 
           align="left" 
-          value={pool ? lpStaked ? pool.tokenBalance : pool.lpBalance : '0'}
+          value={pool ? lpStaked ? pool.lpBalance : pool.tokenBalance : '0'}
           decimals={decimals}
         />
 
