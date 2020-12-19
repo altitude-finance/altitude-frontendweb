@@ -156,7 +156,7 @@ export const claimSlopes = async (Slopes, pid, user) => {
     const tx = await Slopes.methods
       .claim(pid)
       .send({ from: user })
-      .on('transactionHash', (tx) => tx)
+      .on('transactionHash', (tx) => tx.transactionHash)
       return tx 
   } catch (e) {
     console.log(e)
@@ -169,7 +169,7 @@ export const depositSlopes = async (Slopes, pid, user, amount) => {
     const tx = await Slopes.methods
       .deposit(pid, amount)
       .send({ from: user })
-      .on('transactionHash', (tx) => tx)
+      .on('transactionHash', (tx) => tx.transactionHash)
       return tx 
   } catch (e) {
     console.log(e)
@@ -182,7 +182,7 @@ export const withdrawSlopes = async (Slopes, pid, user, amount) => {
     const tx = await Slopes.methods
       .withdraw(pid, amount)
       .send({ from: user })
-      .on('transactionHash', (tx) => tx)
+      .on('transactionHash', (tx) => tx.transactionHash)
       return tx 
   } catch (e) {
     console.log(e)
@@ -195,7 +195,7 @@ export const claimAllSlopes = async (Slopes, user) => {
     const tx = await Slopes.methods
       .claimAll()
       .send({ from: user })
-      .on('transactionHash', (tx) => tx)
+      .on('transactionHash', (tx) => tx.transactionHash)
       return tx 
   } catch (e) {
     console.log(e)
@@ -208,7 +208,7 @@ export const migrateSlopes = async (Slopes, user) => {
     const tx = await Slopes.methods
       .migrate()
       .send({ from: user })
-      .on('transactionHash', (tx) => tx)
+      .on('transactionHash', (tx) => tx.transactionHash)
       return tx 
   } catch (e) {
     console.log(e)

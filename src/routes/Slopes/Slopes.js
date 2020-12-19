@@ -29,7 +29,7 @@ export const Slopes = () => {
 								<SlopesPoolCard
 									active={active}
 									slope={slope}
-									pool={stats && stats.length ? stats[i] : undefined}
+									pool={stats  ? stats[i] : undefined}
 								/>
 							</Grid>
 						))}

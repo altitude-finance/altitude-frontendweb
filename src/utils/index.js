@@ -1,8 +1,8 @@
 import Web3 from 'web3'
 import { BigNumber } from 'bignumber.js'
 import { ethers } from 'ethers'
-import IERC20 from '../eth/abi/IERC20.json'
-import IERC1155 from '../eth/abi/IERC1155.json'
+import IERC20 from '../eth/abi/ERC20.json'
+import IERC1155 from '../eth/abi/ERC1155.json'
 
 BigNumber.config({
   DECIMAL_PLACES: 80,
@@ -67,7 +67,7 @@ export const approve = async (
     const tokenContract = getContract(provider, tokenAddress)
     return tokenContract.methods
       .approve(spenderAddress,  ethers.constants.MaxUint256.toString())
-      .send({ from: account, gas: 80000 }, async (error, txHash) => {
+      .send({ from: account }, async (error, txHash) => {
         if (error) {
           console.log("ERC20 could not be approved", error);
           onTxHash && onTxHash("")

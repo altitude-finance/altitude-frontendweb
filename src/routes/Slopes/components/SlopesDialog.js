@@ -32,7 +32,11 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
 
   const handleApprove = useCallback(async () => {
     const receipt = await approve(lpStaked ? lpAddress : address)
-    return receipt
+    if (receipt) {
+      return true
+    } else {
+      return false
+    }
   }, [approve, lpStaked, address, lpAddress])
 
   const handleClaim = useCallback(async () => {
@@ -61,7 +65,7 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
       return
     }
 
-    const value = new BigNumber(depositInput)
+    const value = new BigNumber(depositInput).times(new BigNumber(10).pow(decimals))
 
     if (lpStaked && value.gt(pool.lpBalance)) {
       notify(`Input exceeds ${symbol} LP Token Balance`, 'error')
@@ -72,7 +76,7 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
     }
 
     if ((lpStaked && pool.lpAllowance === '0')
-      || (!lpStaked && pool.tokenAllowance === '0'))
+      && (!lpStaked && pool.tokenAllowance === '0'))
     {
       const approvalReceipt = await handleApprove()
       if (!approvalReceipt) {
@@ -80,9 +84,9 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
       }
     } 
 
-    const receipt = await deposit(value.toString())
+    const receipt = await deposit(pid, value.toString())
     return receipt
-  }, [deposit, handleApprove, notify, pool, lpStaked, depositInput, symbol])
+  }, [deposit, handleApprove, notify, pool, pid, lpStaked, depositInput, symbol])
 
   const handleUnstake = useCallback(async () => {
     if (!pool) {
@@ -90,16 +94,16 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
       return
     }
 
-    const value = new BigNumber(withdrawInput)
+    const value = new BigNumber(withdrawInput).times(new BigNumber(10).pow(decimals))
 
     if (!lpStaked && value.gt(pool.tokenBalance)) {
       notify(`Input exceeds ${symbol} Staked Balance`, 'error')
       return
     }
 
-    const receipt = await withdraw(value.toString())
+    const receipt = await withdraw(pid, value.toString())
     return receipt
-  }, [lpStaked, notify, pool, symbol, withdraw, withdrawInput])
+  }, [lpStaked, notify, pool, symbol, pid, withdraw, withdrawInput])
 
   return (
     <Dialog 

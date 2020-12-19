@@ -6,6 +6,7 @@ import { useAltitude } from "./useAltitude"
 import { useBlock } from "./useBlock"
 import { useNotifications } from "./useNotifications"
 import { approve, awaitReceipt } from "utils"
+import BigNumber from "bignumber.js"
 
 export const useSlopes = () => {
   const block = useBlock()
@@ -56,7 +57,7 @@ export const useSlopes = () => {
   }, [SlopesContract, account])
 
   const handleDeposit = useCallback(async (pid, amount) => {
-    const tx = await depositSlopes(SlopesContract, account, pid, amount)
+    const tx = await depositSlopes(SlopesContract, pid, account, new BigNumber(amount).toString())
     const receipt = await awaitReceipt(tx, ethereum, (txHash) => notify('Depositing tokens...', 'default', txHash))
     if (receipt) {
       notify('Successfully deposited tokens.', 'success')
@@ -68,7 +69,7 @@ export const useSlopes = () => {
   }, [SlopesContract, account, ethereum, notify])
 
   const handleWithdraw = useCallback(async (pid, amount) => {
-    const tx = await withdrawSlopes(SlopesContract, account, pid, amount)
+    const tx = await withdrawSlopes(SlopesContract, pid, account, amount)
     const receipt = await awaitReceipt(tx, ethereum, (txHash) => notify('Withdrawing tokens...', 'default', txHash))
     if (receipt) {
       notify('Successfully withdrew tokens.', 'success')
@@ -93,6 +94,8 @@ export const useSlopes = () => {
         lastReward: pool[2],
         totalShares: pool[3],
         totalStaked: pool[4],
+        tokenPrice: pool[7],
+        lpPrice: pool[8],
         tokenBalance: pool[10],
         tokenAllowance: pool[11],
         lpBalance: pool[12],
