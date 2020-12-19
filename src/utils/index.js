@@ -46,13 +46,13 @@ export const awaitReceipt = async (tx, provider, onTxHash) => {
 
 export const getContract = (provider, address) => {
   const web3 = new Web3(provider)
-  const contract = new web3.eth.Contract(IERC20.abi, address)
+  const contract = new web3.eth.Contract(IERC20, address)
   return contract
 }
 
 export const getMultiTokenContract = (provider, address) => {
   const web3 = new Web3(provider)
-  const contract = new web3.eth.Contract(IERC1155.abi, address)
+  const contract = new web3.eth.Contract(IERC1155, address)
   return contract
 }
 
@@ -101,7 +101,7 @@ export const approveAll = async (
     const tokenContract = getMultiTokenContract(provider, multiTokenAddress)
     return tokenContract.methods
       .setApprovalForAll(spenderAddress, true)
-      .send({ from: account, gas: 80000 }, async (error, txHash) => {
+      .send({ from: account } , async (error, txHash) => {
         if (error) {
           console.log("ERC1155 could not be approved", error);
           onTxHash && onTxHash("")

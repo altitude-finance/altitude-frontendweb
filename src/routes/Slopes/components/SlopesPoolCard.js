@@ -67,7 +67,7 @@ export const SlopesPoolCard = ({
           </FlexCenter>
         </Grid>
         <ConnectView>
-          {active ? (
+          {!active ? (
             <Typography
               variant="body1"
               color="textSecondary"

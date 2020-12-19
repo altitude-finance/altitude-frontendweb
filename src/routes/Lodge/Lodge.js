@@ -50,7 +50,7 @@ export const Lodge = () => {
 					<Grid item xs={12} md={6}>
 						<LodgePoolCard 
 							board={stats ? getBoard(stats.staked) : "Normal"} 
-							boost={stats ? `${stats.boost.toNumber() / 10}%` : "0%"}
+							boost={stats ? `${stats.boost / 10}%` : "0%"}
 						/>
 					</Grid>
 					<img 

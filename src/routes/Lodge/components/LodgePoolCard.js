@@ -30,7 +30,7 @@ export const LodgePoolCard = ({ board, boost }) => {
 				</Typography>
 
 				<ConnectView>
-					{active ? (
+					{!active ? (
 						<Typography
 							variant="body1"
 							color="textSecondary"
