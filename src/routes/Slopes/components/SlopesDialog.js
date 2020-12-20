@@ -6,7 +6,7 @@ import { ValueDisplay } from 'components/ValueDisplay'
 import { useNotifications } from 'hooks/useNotifications'
 import { useSlopes } from 'hooks/useSlopes'
 import BigNumber from 'bignumber.js'
-import { getBalanceNumber } from 'utils'
+import { getBalanceNumber, getFullDisplayBalance } from 'utils'
 
 BigNumber.config({
   DECIMAL_PLACES: 80,
@@ -30,12 +30,14 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
 
   const handleMax = useCallback((isDeposit) => {
     if (isDeposit) {
+      const balance = lpStaked ? new BigNumber(pool.lpBalance) : new BigNumber(pool.tokenBalance)
       setDepositInput(pool 
-        ? getBalanceNumber(lpStaked ? new BigNumber(pool.lpBalance) : new BigNumber(pool.tokenBalance), decimals) 
-        :
-         '0')
+        ? getFullDisplayBalance(balance, decimals) 
+        : '0')
     } else {
-      setWithdrawInput(pool ? getBalanceNumber(pool.stakedBalance, decimals) : '0')
+      setWithdrawInput(pool 
+        ? getFullDisplayBalance(new BigNumber(pool.stakedBalance), decimals) 
+        : '0')
     }
   }, [pool, decimals, lpStaked])
 
@@ -171,20 +173,20 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
           label={`Deposit ${symbol}`}
           variant="outlined"
           margin="dense" 
-          // InputProps={{
-          //   endAdornment: (
-          //     <InputAdornment position="end">
-          //       <Button
-          //         onClick={() => handleMax(true)}
-          //         style={{ padding: 0 }}
-          //         variant="contained"
-          //         color="secondary"
-          //       >
-          //         MAX
-          //       </Button>
-          //     </InputAdornment>
-          //   ),
-          // }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Button
+                  onClick={() => handleMax(true)}
+                  style={{ padding: 0 }}
+                  variant="contained"
+                  color="secondary"
+                >
+                  MAX
+                </Button>
+              </InputAdornment>
+            ),
+          }}
           fullWidth 
         />
         <Button
@@ -208,20 +210,20 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
           label={`Withdraw ${symbol}`}
           variant="outlined"
           margin="dense"
-          // InputProps={{
-          //   endAdornment: (
-          //     <InputAdornment position="end">
-          //       <Button 
-          //         onClick={() => handleMax(false)}
-          //         style={{ padding: 0 }}
-          //         variant="contained"
-          //         color="secondary"
-          //       >
-          //         MAX
-          //       </Button>
-          //     </InputAdornment>
-          //   ),
-          // }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <Button 
+                  onClick={() => handleMax(false)}
+                  style={{ padding: 0 }}
+                  variant="contained"
+                  color="secondary"
+                >
+                  MAX
+                </Button>
+              </InputAdornment>
+            ),
+          }}
           fullWidth 
         />
         <Button
