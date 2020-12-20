@@ -7,10 +7,12 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import { WHITEPAPER_URL } from 'constants/Links'
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
-import { FaBoxOpen } from 'react-icons/fa'
+import { useNetwork } from 'hooks/useNetwork'
+import Addresses from 'constants/Addresses'
 
 export const HomeButtonGroup = ({active}) => {
   const theme = useTheme()
+  const { chainId } = useNetwork()
   const history = useHistory()
 
   return (
@@ -18,7 +20,8 @@ export const HomeButtonGroup = ({active}) => {
       {active && (
         <FlexCenter>
           <Button
-            onClick={() => history.push('/lge')}
+            href={`https://info.uniswap.org/token/${Addresses.PWDR[chainId]}`}
+            target="_blank"
             variant="contained"
             color="primary"
             style={{marginLeft: theme.spacing(1)}}
@@ -27,7 +30,7 @@ export const HomeButtonGroup = ({active}) => {
             Trade
           </Button>
           <Button
-            onClick={() => history.push('/lge')}
+            onClick={() => history.push('/slopes')}
             variant="contained"
             color="primary"
             style={{marginLeft: theme.spacing(1)}}
@@ -46,20 +49,20 @@ export const HomeButtonGroup = ({active}) => {
           </Button>
         </FlexCenter>
       )}
-      <Box mt={1}>
+      {/* <Box mt={1}> */}
         <FlexCenter>
           <Button 
             href={WHITEPAPER_URL}
             target="_blank"
             variant="contained"
             color="default"
-            style={{backgroundColor: 'white', color: 'black'}}
+            style={{backgroundColor: 'white', color: 'black', marginTop: theme.spacing(1)}}
             endIcon={<OpenInNewIcon />}
           >
             Whitepaper
           </Button>
         </FlexCenter>
-      </Box>
+      {/* </Box> */}
     </Box>
   )
 }

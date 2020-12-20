@@ -37,7 +37,8 @@ export const LodgePoolCard = ({ board, boost }) => {
 							color="textSecondary"
 							align="center"
 						>
-							Waiting for LGE Completion
+							{/* Waiting for LGE Completion */}
+							Loading Lodge Stats...
 						</Typography>
 					) : (
 						<Box>
