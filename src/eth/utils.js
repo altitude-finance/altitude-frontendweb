@@ -222,7 +222,7 @@ export const getSlopesStats = async (Slopes, user) => {
     const stats = await Slopes.methods
       .getSlopesStats(user)
       .call()
-    console.log(stats)
+      
     return {
       active: stats._active,
       accumulating: stats._accumulating,

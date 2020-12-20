@@ -26,11 +26,7 @@ export const Slopes = () => {
 					>
 						{[...SlopesMap(chainId).pools].map((slope, i) => (
 							<Grid item key={i} xs={12} md={6}>
-								<SlopesPoolCard
-									active={active}
-									slope={slope}
-									pool={stats  ? stats[i] : undefined}
-								/>
+								<SlopesPoolCard slope={slope} />
 							</Grid>
 						))}
 					</Grid>

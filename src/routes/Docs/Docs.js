@@ -26,7 +26,6 @@ export const Docs = () => {
   const loadContent = useCallback(async (path) => {
     const response = await fetch(path)
     const text = await response.text()
-    // console.log(text)
     setContent(text)
   }, [setContent])
 

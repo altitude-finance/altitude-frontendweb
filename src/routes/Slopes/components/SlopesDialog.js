@@ -13,12 +13,13 @@ BigNumber.config({
   EXPONENTIAL_AT: 1000
 })
 
-export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
+export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
   const { symbol, lpStaked, address, lpAddress, pid, decimals } = slope
+  const { approve, claim, deposit, withdraw, stats } = useSlopes()
+  const pool = stats && stats.length ? stats[pid] : undefined
   const [depositInput, setDepositInput] = useState('')
   const [withdrawInput, setWithdrawInput] = useState('')
 
-  const { approve, claim, deposit, withdraw } = useSlopes()
 
   const notify = useNotifications()
 
@@ -109,14 +110,14 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
 
     const value = new BigNumber(withdrawInput).times(new BigNumber(10).pow(decimals))
 
-    if (!lpStaked && value.gt(pool.tokenBalance)) {
+    if (value.gt(pool.stakedBalance)) {
       notify(`Input exceeds ${symbol} Staked Balance`, 'error')
       return
     }
 
     const receipt = await withdraw(pid, value.toString())
     return receipt
-  }, [lpStaked, notify, pool, symbol, pid, withdraw, withdrawInput, decimals])
+  }, [notify, pool, symbol, pid, withdraw, withdrawInput, decimals])
 
   return (
     <Dialog 

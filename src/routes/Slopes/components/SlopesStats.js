@@ -7,6 +7,7 @@ import BigNumber from 'bignumber.js'
 import { ConnectView } from 'components/ConnectView'
 import SlopesMap from 'constants/SlopesMap'
 import { useNetwork } from 'hooks/useNetwork'
+import { useSlopes } from 'hooks/useSlopes'
 
 const useStyles = makeStyles((theme) => ({
   headerSign: {
@@ -19,9 +20,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export const SlopesStats = ({ stats, slope }) => {
+export const SlopesStats = ({ slope }) => {
   const classes = useStyles()
   const { chainId } = useNetwork()
+  const { stats } = useSlopes()
 
   const tvl = (pools) => {
     if (pools && pools.length) {

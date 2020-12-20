@@ -14,6 +14,7 @@ import { ConnectView } from 'components/ConnectView'
 import { useModal } from 'hooks/useModal'
 import { SlopesDialog } from './SlopesDialog'
 import BigNumber from 'bignumber.js'
+import { useSlopes } from 'hooks/useSlopes'
 
 const useStyles = makeStyles((theme) => ({
   slopeSign: {
@@ -29,18 +30,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export const SlopesPoolCard = ({
-  slope,
-  pool,
-  active
-}) => {
-  const { symbol, sign, name, decimals, lpStaked, address, lpAddress } = slope
-  const classes = useStyles();
+export const SlopesPoolCard = ({ slope }) => {
+  const { pid, symbol, sign, name, decimals, lpStaked, address, lpAddress } = slope
+  const { stats, active } = useSlopes()
+  const pool = stats && stats.length ? stats[pid] : undefined
+  const classes = useStyles()
   const [value, setValue] = useState('1')
   const theme = useTheme();
-  const [showModal] = useModal(<SlopesDialog active={active} slope={slope} pool={pool} />)
+  const [showModal] = useModal(<SlopesDialog slope={slope} />)
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (_, newValue) => {
     setValue(newValue)
   }
 
@@ -74,7 +73,8 @@ export const SlopesPoolCard = ({
               color="textSecondary"
               align="center"
             >
-              Waiting for LGE Completion
+              {/* Waiting for LGE Completion */}
+              Loading Slopes Stats...
             </Typography>
           ) : (
             <Box>

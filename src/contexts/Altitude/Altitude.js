@@ -24,7 +24,6 @@ const AltitudeProvider = ({ children }) => {
       })
       setAltitude(altitudeLib)
       window.altitude = altitudeLib
-      console.log(altitudeLib)
     }
   }, [account, ethereum, setAltitude])
 

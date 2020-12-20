@@ -20,7 +20,6 @@ class Contracts {
 
     this.setProvider(provider, chainId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
-    console.log(this.LGE, this.Slopes, this.Avalanche, this.Slopes)
   }
 
   // set contract provider and address

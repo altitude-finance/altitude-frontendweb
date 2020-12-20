@@ -17,7 +17,6 @@ export const useSlopes = () => {
   const [accumulating, setAccumulating] = useState(false)
   const notify = useNotifications()
 
-
   const SlopesContract = useMemo(() => {
     return getContractSlopes(altitude)
   }, [altitude])
@@ -86,7 +85,6 @@ export const useSlopes = () => {
     setAccumulating(accumulating)
 
     if (stats && stats.length) {
-      console.log(stats)
       setStats(stats.map((pool, i) => ({
         pid: i,
         active: pool[0],
