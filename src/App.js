@@ -13,14 +13,13 @@ const App = () => {
     <NetworkProvider>
       <AltitudeProvider>
         <ThemeProvider>
-            <SnackbarProvider>
-          <ModalsProvider>
+          <SnackbarProvider>
+            <ModalsProvider>
               <Box flexDirection="column" display="flex">
                 <Routes />
               </Box>
-          </ModalsProvider>
+            </ModalsProvider>
           </SnackbarProvider>
-
         </ThemeProvider>
       </AltitudeProvider>
     </NetworkProvider>

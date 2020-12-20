@@ -5,12 +5,13 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import { ConnectView } from 'components/ConnectView'
 import { ValueDisplay } from 'components/ValueDisplay'
 import { useLoyalty } from 'hooks/useLoyalty'
-import OPEN_SEA_STOREFRONT_URL from 'constants/Addresses'
+import { OPEN_SEA_STOREFRONT_URL } from 'constants/Links'
 import { useModal } from 'hooks/useModal'
 import { LodgeDialog } from './LodgeDialog'
+import { getBoard } from 'utils/lodge'
 
 export const LodgePoolCard = ({ board, boost }) => {
-	const { active } = useLoyalty()
+	const { active, stats } = useLoyalty()
 
 	const [handleModal] =  useModal(<LodgeDialog />)
 
@@ -45,13 +46,13 @@ export const LodgePoolCard = ({ board, boost }) => {
 									<Grid item xs={12} md={6}>
 										<ValueDisplay
 											title="Currently Equipped Board"
-											info={board}
+											info={stats ? getBoard(stats.staked) : getBoard('0')}
 										/>
 									</Grid>
 									<Grid item xs={12} md={6}>
 										<ValueDisplay
 											title="Total Boost"
-											info={boost}
+											info={stats ? `${stats.boost / 10}%` : "0%"}
 										/>
 									</Grid>
 								</Grid>

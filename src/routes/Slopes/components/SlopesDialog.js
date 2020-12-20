@@ -77,8 +77,6 @@ export const SlopesDialog = ({ isOpen, onDismiss, active, slope, pool }) => {
     }
 
     const value = new BigNumber(depositInput).times(new BigNumber(10).pow(decimals))
-    console.log(value)
-
 
     if (lpStaked && value.gt(pool.lpBalance)) {
       notify(`Input exceeds ${symbol} LP Token Balance`, 'error')

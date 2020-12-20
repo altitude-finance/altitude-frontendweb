@@ -171,7 +171,7 @@ export const getBalanceNumber = (balance, decimals = 18) => {
 export const getDisplayBalance = (balance, decimals = 18) => {
   const displayBalance = balance.dividedBy(new BigNumber(10).pow(decimals))
   if (displayBalance.lt(1)) {
-    return displayBalance.toPrecision(4)
+    return displayBalance.toFixed(4)
   } else {
     return displayBalance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }

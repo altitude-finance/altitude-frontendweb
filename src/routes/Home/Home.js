@@ -1,4 +1,4 @@
-import { Button, Typography } from '@material-ui/core'
+import { Button, Box, Typography } from '@material-ui/core'
 import React from 'react'
 import { DisplayView } from 'components/DisplayView'
 import { SocialButtonGroup } from 'components/SocialButtonGroup'
@@ -29,7 +29,21 @@ export const Home = () => {
         </Typography>
         <TextDecoration />
         <SocialButtonGroup />
-        <LGECountdown active={lgeActive} />
+        {!lgeActive ? (
+          <LGECountdown active={lgeActive} />
+        ) : (
+          <Box mb={1}>
+            <Typography
+              
+              variant="subtitle2"
+              color="textSecondary"
+              align="center"
+              style={{ fontSize: 16 }}
+            >
+              LGE has concluded.
+            </Typography>
+          </Box>
+        )}
         <HomeButtonGroup active={lgeActive} />
         
 

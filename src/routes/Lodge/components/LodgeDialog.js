@@ -14,7 +14,6 @@ export const LodgeDialog = ({ isOpen, onDismiss }) => {
 
   const notify = useNotifications()
 
-
   const handleApproveAll = useCallback(async () => {
     if (!stats) {
       notify('Please connect to Web3', 'info')
@@ -57,7 +56,7 @@ export const LodgeDialog = ({ isOpen, onDismiss }) => {
       return
     }
 
-    if (!stats.staked === (id + 1).toString()) {
+    if (stats.staked !== (id + 1).toString()) {
       notify('No NFTs staked to withdraw', 'error')
       return
     }

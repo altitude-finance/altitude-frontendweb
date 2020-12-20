@@ -48,10 +48,7 @@ export const Lodge = () => {
 					alignItems="center"
 				>
 					<Grid item xs={12} md={6}>
-						<LodgePoolCard 
-							board={stats ? getBoard(stats.staked) : "Normal"} 
-							boost={stats ? `${stats.boost / 10}%` : "0%"}
-						/>
+						<LodgePoolCard />
 					</Grid>
 					<img 
 						src={getBoardImage(stats ? stats.staked : undefined)} 

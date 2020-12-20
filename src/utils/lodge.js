@@ -17,11 +17,11 @@ export const getBoardImage = (staked) => {
 
 export const getBoard = (id) => {
   // id = staked id + 1
-  if (id === 1) {
+  if (id === '1') {
     return "Golden"
-  } else if (id === 2) {
+  } else if (id === '2') {
     return "Silver"
-  } else if (id === 3) {
+  } else if (id === '3') {
     return "Bronze"
   } else {
     return "Normal"
