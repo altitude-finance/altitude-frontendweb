@@ -8,5 +8,4 @@ All PWDR collected from the previous Accumulation phase via transfer fees, staki
 
 During the Distribution phase, rewards from the Avalanche are paid out **daily** over the course of **20 days**. Once this period has ended, PWDR will resume minting according to the Epoch schedule to both the Slopes and the Avalanche.
 
-**NOTE:** Once the 6th and final epoch occurs, the maximum supply of 21,000,000 PWDR will be reached and no further PWDR will be minted. The fixed APR model will sunset and PWDR rewards will instead be distributed to all Slopes and the Avalanche via a weighted average. The Avalanche (ETH-PWDR LP Pool) will have the highest weight.
-
+**NOTE:** Once the 6th and final epoch occurs, the maximum supply of 21,000,000 PWDR will be reached and no further PWDR will be minted. The fixed APR model will sunset and PWDR rewards will instead be distributed directly to the Avalanche.

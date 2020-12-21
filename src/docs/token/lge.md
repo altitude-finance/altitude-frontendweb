@@ -16,7 +16,7 @@ PWDR Tokens will be distributed evenly amongst contributors.
 
 PWDR will be available on Uniswap following the conclusion of the LGE event window and the [Slopes](../slopes) will open.
 
-##NFTs Issued during LGE
+## NFTs Issued during LGE
 
 Addresses that contribute 20 ETH or 15+ ETH also are eligible to receive a Gold or Silver NFT which grants boosts across the Altitude ecosystem. NFTs are limited in quantity and available on a first-come, first-served basis. See the [Lodge](../lodge) for additional details.
 

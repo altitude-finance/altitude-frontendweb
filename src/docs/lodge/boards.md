@@ -7,18 +7,19 @@ The breakdown of the Snowboard boosts are as follows:
 
 1. Gold Board
   - 20 ETH Contribution
-  - 30% Farming Yield Boost (5200%/1040% Total Accumulation APR)
-  - 30% Flash Loan Fee Discount
+  - 50% Farming Yield Boost (6000%/1200% Total Accumulation APR)
+  - 50% Flash Loan Fee Discount
+  - https://opensea.io/assets/0xab5b634f49b023c9f87d7ab0a591a18ab7b4df5a/0
 
 2. Silver Board
   - 15+ ETH Contribution
-  - 20% Farming Yield Boost (4800%/960% Total Accumulation APR)
-  - 20% Flash Loan Fee Discount
+  - 30% Farming Yield Boost (5200%/1040% Total Accumulation APR)
+  - 30% Flash Loan Fee Discount
+  - https://opensea.io/assets/0xab5b634f49b023c9f87d7ab0a591a18ab7b4df5a/1
 
 3. Bronze Board
   - 10 ETH Contribution (OpenSea.io)
   - 10% Farming Yield Boost (4400%/880% Total Accumulation APR)
   - 10% Flash Loan Fee Discount
+  - https://opensea.io/assets/0xab5b634f49b023c9f87d7ab0a591a18ab7b4df5a/2
 
-
-*Note: You can receive a maximum of one boost per address with the PWDR Boards*``

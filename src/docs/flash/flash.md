@@ -6,4 +6,8 @@ Flash Loans are special types of transactions which only occur on the blockchain
 
 ## Flash Loan Fees
 
-Whenever a developer wants to take a Flash Loan, they must pay a fee to complete the transaction. The fee amount is based on their Loyalty Points (detailed below). This fee is evenly split among all stakers in the Slope.
+Whenever a developer wants to take a Flash Loan, they must pay a fee to complete the transaction. The fee amount is based on their Loyalty Points deatiled in the [Loyalty Section](./loyalty). This fee is evenly split among all stakers in the Slope.
+
+<br />
+
+*Note: Flash Loan capabilities are currently disabled, pending external review/audits. Although our Flash Loan code has been internally tested and verified for safety/functionality, we feel it is best to wait for an external source of verification for this sensitive code.*
