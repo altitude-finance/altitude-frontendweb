@@ -42,7 +42,7 @@ export const SlopesStats = () => {
   }
 
   return (
-    <Box>
+    <Box mb={4}>
       <FlexCenter>
         <img 
           src={SlopesSign} 

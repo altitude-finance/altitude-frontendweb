@@ -4,17 +4,17 @@ import { SlopesStats } from './components/SlopesStats'
 import { SlopesPoolCard } from './components/SlopesPoolCard'
 import { Box, Container, Grid } from '@material-ui/core'
 import SlopesMap from 'constants/SlopesMap'
-import { useSlopes } from 'hooks/useSlopes'
 import { useNetwork } from 'hooks/useNetwork'
+import { UserStats } from './components/UserStats'
 
 export const Slopes = () => {
 	const { chainId } = useNetwork()
-	const { active, stats } = useSlopes()
 
 	return (
 		<HeaderView title="Slopes">
 			<Container maxWidth="md">
-				<SlopesStats stats={stats} />
+				<SlopesStats />
+				<UserStats />
 				
 				<Box py={4}>
 					<Grid

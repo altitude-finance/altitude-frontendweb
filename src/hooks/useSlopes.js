@@ -51,9 +51,16 @@ export const useSlopes = () => {
   }, [SlopesContract, account, ethereum, notify])
 
   const handleClaimAll = useCallback(async () => {
-    const txHash = await claimAllSlopes(SlopesContract, account)
-    return txHash
-  }, [SlopesContract, account])
+    const tx = await claimAllSlopes(SlopesContract, account)
+    const receipt = await awaitReceipt(tx, ethereum, (txHash) => notify('Claiming all pending rewards...', 'default', txHash))
+    if (receipt) {
+      notify('Successfully claimed all pending rewards', 'success')
+      return true
+    } else {
+      notify('Encountered an error during claim all', 'error')
+      return false
+    }
+  }, [SlopesContract, account, ethereum, notify])
 
   const handleDeposit = useCallback(async (pid, amount) => {
     const tx = await depositSlopes(SlopesContract, pid, account, new BigNumber(amount).toString())
