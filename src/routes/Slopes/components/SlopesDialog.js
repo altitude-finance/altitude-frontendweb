@@ -56,9 +56,7 @@ export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
       notify('Please connect to Web3', 'info')
       return
     }
-    if (pool.pwdrRewards.toString() === '0'
-      && pool.tokenRewards.toString() === '0') 
-    {
+    if (new BigNumber(pool.stakedBalance).eq('0')) {
       notify('No Pending Rewards available to claim', 'warning')
       return
     }
