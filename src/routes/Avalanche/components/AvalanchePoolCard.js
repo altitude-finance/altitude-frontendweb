@@ -38,7 +38,15 @@ export const AvalanchePoolCard = () => {
 							Waiting for Accumulation Completion
 						</Typography>
 					) : (
-						<Box></Box>
+						<Box>
+							<Typography
+								variant="body1"
+								color="textSecondary"
+								align="center"
+							>
+								Provide liquidity to earn daily PWDR rewards
+							</Typography>
+						</Box>
 					)}
 				</ConnectView>
 			</Box>

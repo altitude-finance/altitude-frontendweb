@@ -15,7 +15,8 @@ export const DocsContent = ({ content }) => {
       <Box p={3} display="flex" flexDirection="column" minHeight="100vh" height="100%">
         {useMobile && <DocsMenu />}
         <DocsBreadcrumb />
-        <Markdown children={content} />
+        {!content && <Typography>Loading Docs...</Typography>}
+        {content && <Markdown children={content} />}
         {/* <Button>Next</Button> */}
       </Box>
     </SafeAreaView>
