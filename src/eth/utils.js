@@ -1,3 +1,41 @@
+// PWDR 
+
+export const getCurrentEpoch = async (PWDR) => {
+  try {
+    const epoch = await PWDR.methods
+      .currentEpoch()
+      .call()
+    return epoch
+  } catch (e) {
+    console.log(e)
+    return '0'
+  }
+}
+
+export const getCurrentPhase = async (PWDR) => {
+  try {
+    const epoch = await PWDR.methods
+      .currentPhase()
+      .call()
+    return epoch
+  } catch (e) {
+    console.log(e)
+    return '0'
+  }
+}
+
+export const getCurrentMaxSupply = async (PWDR) => {
+  try {
+    const epoch = await PWDR.methods
+      .currentMaxSupply()
+      .call()
+    return epoch
+  } catch (e) {
+    console.log(e)
+    return '0'
+  }
+}
+
 // Lodge
 
 export const getLodgeBalances = async (Lodge, user, ids) => {
@@ -33,7 +71,7 @@ export const setLodgeApproval = async (Lodge, user, spender) => {
     return txHash
   } catch (e) {
     console.log(e)
-  
+    
   }
 }
 
@@ -247,6 +285,25 @@ export const getPoolStats = async (Slopes, user, pid) => {
   } catch (e) {
     console.log(e)
     return []
+  }
+}
+
+export const getTokenPrice = async (Slopes, lpToken, token) => {
+  try {
+    if (!!token) {
+      const price = await Slopes.methods
+        ._getTokenPrice(token, lpToken)
+        .call()
+      return price
+    } else {
+      const price = await Slopes.methods
+        ._getLpTokenPrice(lpToken)
+        .call()
+      return price
+    }
+  } catch (e) {
+    console.log(e)
+    return '0'
   }
 }
 

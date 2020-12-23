@@ -30,8 +30,8 @@ const Routes = () => {
         <Route path="/docs/:docId" component={Docs} />
         <Route path="/docs" component={Docs} />
         <Route path="/dashboard" component={Dashboard} />
+        <Route path="/event" component={Event} />
         <Route path="/legal" component={Legal} />
-        <Route path="/lge" component={Event} />
         <Route path="/lodge" component={Lodge} />
         <Route path="/slopes" component={Slopes} />
         

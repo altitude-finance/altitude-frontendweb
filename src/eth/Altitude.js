@@ -30,6 +30,7 @@ class Altitude {
     
     this.contracts = new Contracts(provider, this.web3, chainId, options)
     this.pwdrAddress = Addresses.PWDR[chainId];
+    this.pwdrLpAddress = Addresses.PWDRLP[chainId];
     this.lodgeAddress = Addresses.Lodge[chainId];
     this.lgeAddress = Addresses.LGE[chainId];
     this.slopesAddress = Addresses.Slopes[chainId];

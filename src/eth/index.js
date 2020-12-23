@@ -4,6 +4,10 @@ export const getAddressPWDR = (altitude) => {
   return altitude && altitude.pwdrAddress
 }
 
+export const getAddressPWDRLP = (altitude) => {
+  return altitude && altitude.pwdrLpAddress
+}
+
 export const getAddressLodge = (altitude) => {
   return altitude && altitude.lodgeAddress
 }

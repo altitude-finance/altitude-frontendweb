@@ -4,42 +4,41 @@ import TwitterIcon from '@material-ui/icons/Twitter'
 import TelegramIcon from '@material-ui/icons/Telegram'
 import { FaDiscord, FaMediumM, FaGithub } from "react-icons/fa"
 import { SocialButton } from './components/SocialButton'
+import { DISCORD_URL, GITHUB_URL, MEDIUM_URL, TELEGRAM_URL, TWITTER_URL } from 'constants/Links'
 
 export const SocialButtonGroup = () => {
   return (
     <Grid container direction="row" justify="center">
       <SocialButton
         name="twitter"
-        link="https://twitter.com/AltitudeFi"
+        link={TWITTER_URL}
       >
         <TwitterIcon />
       </SocialButton>
-      
-      {/* <SocialButton
+      <SocialButton
         name="github"
-        link="https://github.com/altitude-finance"
+        link={GITHUB_URL}
       >
         <FaGithub />
-      </SocialButton> */}
+      </SocialButton>
       <SocialButton
         name="medium"
-        link="https://altitudefi.medium.com/"
+        link={MEDIUM_URL}
       >
         <FaMediumM />
       </SocialButton>
       <SocialButton
         name="discord"
-        link="https://discord.gg/FRwPgaP4ZC"
+        link={DISCORD_URL}
       >
         <FaDiscord />
       </SocialButton>
       <SocialButton
         name="telegram"
-        link="https://t.me/AltitudeFi"
+        link={TELEGRAM_URL}
       >
         <TelegramIcon />
       </SocialButton>
-      
     </Grid>
   )
 }

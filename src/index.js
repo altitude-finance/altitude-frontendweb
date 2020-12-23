@@ -13,6 +13,13 @@ import "fontsource-league-spartan/latin-400.css"
 import "fontsource-league-spartan/latin-500.css"
 import "fontsource-league-spartan/latin-700.css"
 
+import { BigNumber } from 'bignumber.js'
+
+BigNumber.config({
+  DECIMAL_PLACES: 80,
+  EXPONENTIAL_AT: 1000
+})
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
