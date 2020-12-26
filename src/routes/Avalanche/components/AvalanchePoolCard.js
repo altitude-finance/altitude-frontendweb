@@ -1,28 +1,15 @@
 import React, { useState } from 'react'
 import { Button, Typography, Grid, Paper, Box } from '@material-ui/core'
 import { TextDecoration } from 'components/TextDecoration'
-import { makeStyles } from '@material-ui/core/styles'
 import { useAvalanche } from 'hooks/useAvalanche'
 import { ConnectView } from 'components/ConnectView'
 import { useModal } from 'hooks/useModal'
 import { AvalancheDialog } from './AvalancheDialog'
 import { ValueDisplay } from 'components/ValueDisplay'
-import { ColumnView } from 'components/ColumnView'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
-
-const useStyles = makeStyles((theme) => ({
-	// media: {
-	//   height: 64,
-	//   width: 64,
-	// },
-	// buttonPadding: {
-	//   padding: '5px',
-	// }
-}))
+import { FlexCenter } from 'components/FlexCenter'
 
 export const AvalanchePoolCard = () => {
-	const classes = useStyles()
-
 	const { active, accumulating, stats } = useAvalanche()
 	const [showModal] = useModal(<AvalancheDialog />)
 
@@ -32,7 +19,7 @@ export const AvalanchePoolCard = () => {
 				<Typography variant="h4" align="center">
 					<b>Avalanche</b>
 				</Typography>
-				<TextDecoration />
+				<TextDecoration align="center" />
 
 				<ConnectView>
 					{!active ? (
@@ -41,7 +28,8 @@ export const AvalanchePoolCard = () => {
 							color="textSecondary"
 							align="center"
 						>
-							Waiting for Accumulation Completion
+							{/* Waiting for Accumulation Completion */}
+							Loading Avalanche Stats...
 						</Typography>
 					) : (
 						<Box>
@@ -78,19 +66,19 @@ export const AvalanchePoolCard = () => {
 							{!accumulating ? (
 								<Box mb={2}>
 									<Grid container>
-										<Grid item xs={12} sm={4}>
+										<Grid item xs={12} md={4}>
 											<ValueDisplay
 												title="Payout Number"
 												info={stats ? stats.payoutNumber : "0"}
 											/>
 										</Grid>
-										<Grid item xs={12} sm={4}>
+										<Grid item xs={12} md={4}>
 											<ValueDisplay
 												title="Current Epoch PWDR Rewards"
 												value={stats ? stats.currentEpochReward : "0"}
 											/>
 										</Grid>
-										<Grid item xs={12} sm={4}>
+										<Grid item xs={12} md={4}>
 											<ValueDisplay
 												title="PWDR Rewards Per Payout"
 												value={stats ? stats.currentEpochRewardPerDay : "0"}
