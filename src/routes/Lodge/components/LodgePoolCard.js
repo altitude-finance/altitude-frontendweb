@@ -59,14 +59,14 @@ export const LodgePoolCard = ({ board, boost }) => {
 								</Grid>
 							</Box>
 							<Box mb={1}>
-							<Button
-								onClick={handleModal}
-								color="primary"
-								variant="contained"
-								fullWidth
-							>
-								Deposit / Withdraw
-							</Button>
+								<Button
+									onClick={handleModal}
+									color="primary"
+									variant="contained"
+									fullWidth
+								>
+									Deposit / Withdraw
+								</Button>
 							</Box>
 							
 							<Button

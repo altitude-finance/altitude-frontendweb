@@ -6,7 +6,7 @@ import { ValueDisplay } from 'components/ValueDisplay'
 import { useNotifications } from 'hooks/useNotifications'
 import { useSlopes } from 'hooks/useSlopes'
 import BigNumber from 'bignumber.js'
-import { getBalanceNumber, getFullDisplayBalance } from 'utils'
+import { getFullDisplayBalance } from 'utils'
 
 BigNumber.config({
   DECIMAL_PLACES: 80,
@@ -15,11 +15,10 @@ BigNumber.config({
 
 export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
   const { symbol, lpStaked, address, lpAddress, pid, decimals } = slope
-  const { approve, claim, deposit, withdraw, stats } = useSlopes()
+  const { approve, claim, deposit, migrate, withdraw, stats, accumulating } = useSlopes()
   const pool = stats && stats.length ? stats[pid] : undefined
   const [depositInput, setDepositInput] = useState('')
   const [withdrawInput, setWithdrawInput] = useState('')
-
 
   const notify = useNotifications()
 
@@ -116,6 +115,21 @@ export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
     const receipt = await withdraw(pid, value.toString())
     return receipt
   }, [notify, pool, symbol, pid, withdraw, withdrawInput, decimals])
+
+  const handleMigrate = useCallback(async () => {
+    if (!pool) {
+      notify('Please connect to Web3', 'info')
+      return
+    }
+
+    if (new BigNumber(pool.stakedBalance).eq('0')) {
+      notify(`No tokens to migrate`, 'error')
+      return
+    }
+
+    const receipt = await migrate()
+    return receipt
+  }, [notify, pool, migrate])
 
   return (
     <Dialog 
@@ -223,16 +237,30 @@ export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
           }}
           fullWidth 
         />
+        <Box mb={1} width="100%">
         <Button
           onClick={handleUnstake}
           variant="contained"
           color="primary"
+          fullWidth
         >
           Unstake {symbol}
         </Button>
+        </Box>
+        
+        {accumulating && pid === 0 && (
+          <Button
+            onClick={handleMigrate}
+            variant="contained"
+            color="default"
+          >
+            Migrate PWDR/ETH to Avalanche
+          </Button>
+        )}
       </ColumnView>
-      <Typography variant="subtitle2" align="center">All deposits/withdraws will claim any pending rewards from the Slopes.</Typography>
-
+      <Typography variant="subtitle2" align="center">
+        All deposits/withdraws will claim any pending rewards from the Slopes.
+      </Typography>
     </Dialog>
   )
 }

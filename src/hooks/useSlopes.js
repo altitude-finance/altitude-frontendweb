@@ -1,5 +1,5 @@
 import { getContractSlopes } from "eth"
-import { claimAllSlopes, claimSlopes, depositSlopes, getPoolStats, getSlopesStats, withdrawSlopes } from "eth/utils"
+import { claimAllSlopes, claimSlopes, depositSlopes, getPoolStats, getSlopesStats, migrateSlopes, withdrawSlopes } from "eth/utils"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useWallet } from "use-wallet"
 import { useAltitude } from "./useAltitude"
@@ -86,6 +86,18 @@ export const useSlopes = () => {
     }
   }, [SlopesContract, account, ethereum, notify])
 
+  const handleMigrate = useCallback(async () => {
+    const tx = await migrateSlopes(SlopesContract, account)
+    const receipt = await awaitReceipt(tx, ethereum, (txHash) => notify('Migrating tokens...', 'default', txHash))
+    if (receipt) {
+      notify('Successfully migrated tokens.', 'success')
+      return true
+    } else {
+      notify('Encountered an error during migration', 'error')
+      return false
+    }
+  }, [SlopesContract, account, ethereum, notify])
+
   const fetchStats = useCallback(async () => {
     const { active, accumulating, stats } = await getSlopesStats(SlopesContract, account)
     setActive(active)
@@ -157,5 +169,6 @@ export const useSlopes = () => {
     claimAll: handleClaimAll,
     deposit: handleDeposit,
     withdraw: handleWithdraw,
+    migrate: handleMigrate
   }
 }

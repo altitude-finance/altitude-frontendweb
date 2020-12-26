@@ -92,19 +92,19 @@ export const UserStats = () => {
               <Grid container>
                 <Grid item xs={12} sm={4}>
                   <ValueDisplay
-                    title="Total Pending PWDR Rewards"
+                    title="My Total Pending PWDR Rewards"
                     value={stats && stats.length ? rewards(stats) : '0'}
                   />
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <ValueDisplay
-                    title="Total Value Locked Ξ"
+                    title="My Total Value Locked Ξ"
                     value={stats && stats.length ? tvl(stats) : '0'}
                   />
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <ValueDisplay
-                    title="Pending Token Reward Value Ξ"
+                    title="My Pending Token Reward Value Ξ"
                     value={stats && stats.length ? tokens(stats) : '0'}
                   />
                 </Grid>

@@ -4,7 +4,6 @@ import { Dialog } from 'components/Dialog'
 import { ValueDisplay } from 'components/ValueDisplay'
 import { useLoyalty } from 'hooks/useLoyalty'
 import { useNotifications } from 'hooks/useNotifications'
-
 import { ColumnView } from 'components/ColumnView'
 import { FlexCenter } from 'components/FlexCenter'
 import { getBoard } from 'utils'
@@ -128,7 +127,9 @@ export const LodgeDialog = ({ isOpen, onDismiss }) => {
             ))}
           </Grid>
         </Box>
-        <Typography variant="subtitle2" align="center">All deposits/withdraws will claim any pending rewards from the Slopes and Avalanche.</Typography>
+        <Typography variant="subtitle2" align="center">
+          All deposits/withdraws will claim any pending rewards from the Slopes and Avalanche.
+        </Typography>
       </ColumnView>
     </Dialog>
   )

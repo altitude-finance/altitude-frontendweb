@@ -147,7 +147,7 @@ export const depositLoyalty = async (Loyalty, user, id) => {
       return txHash 
   } catch (e) {
     console.log(e)
-    // return 
+    return false
   }
 }
 
@@ -160,7 +160,7 @@ export const withdrawLoyalty = async (Loyalty, user, id) => {
       return txHash 
   } catch (e) {
     console.log(e)
-    // return 
+    return false
   }
 }
 
@@ -319,6 +319,7 @@ export const claimAvalanche = async (Avalanche, user) => {
   } catch (e) {
     console.log(e)
     // return 
+    return false
   }
 }
 
@@ -331,7 +332,7 @@ export const depositAvalanche = async (Avalanche, user, amount) => {
       return txHash 
   } catch (e) {
     console.log(e)
-    // return 
+    return false 
   }
 }
 
@@ -344,7 +345,7 @@ export const withdrawAvalanche = async (Avalanche, user, amount) => {
       return txHash 
   } catch (e) {
     console.log(e)
-    // return 
+    return false 
   }
 }
 

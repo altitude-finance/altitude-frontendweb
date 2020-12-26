@@ -1,15 +1,11 @@
 import React from 'react'
 import { LodgePoolCard } from './components/LodgePoolCard'
-import { makeStyles } from '@material-ui/core/styles';
-
-import { Box, Container, Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import { Container, Grid } from '@material-ui/core'
 import LodgeBackground from 'assets/img/lodge-bg.png'
-
-
 import { DisplayView } from 'components/DisplayView'
-import { FlexCenter } from 'components/FlexCenter'
 import { useLoyalty } from 'hooks/useLoyalty'
-import { getBoardImage, getBoard } from 'utils'
+import { getBoardImage } from 'utils'
 
 const useStyles = makeStyles((theme) => ({
 	lodgeBackground: {
@@ -35,9 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Lodge = () => {
 	const classes = useStyles()
-	const { active, stats } = useLoyalty()
-
-
+	const { stats } = useLoyalty()
 
 	return (
 		<DisplayView justify="center" className={classes.lodgeBackground}>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { AvalanchePoolCard } from './components/AvalanchePoolCard'
-import { AvalancheStats } from './components/AvalancheStats'
-import { Box, Container, Grid } from '@material-ui/core'
+import { Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import AvalancheBackground from 'assets/img/avalanche-bg.png'
 import { DisplayView } from 'components/DisplayView'
@@ -25,13 +24,10 @@ export const Avalanche = () => {
 
 	return (
     <DisplayView justify="center" className={classes.avalancheBackground}>
-			{/* <AvalancheHeader />
-			<AvalancheStats /> */}
-				
 			<Container maxWidth="md">
-				<FlexCenter>
+				{/* <FlexCenter> */}
 					<AvalanchePoolCard />
-				</FlexCenter>
+				{/* </FlexCenter> */}
 			</Container>
     </DisplayView>
   )
