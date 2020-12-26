@@ -6,6 +6,7 @@ import { approve, awaitReceipt } from 'utils'
 import { useAltitude } from './useAltitude'
 import { useBlock } from './useBlock'
 import { useNotifications } from './useNotifications'
+import BigNumber from "bignumber.js"
 
 export const useAvalanche = () => {
   const altitude = useAltitude()

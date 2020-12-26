@@ -4,10 +4,14 @@ import { Dialog } from 'components/Dialog'
 import { ValueDisplay } from 'components/ValueDisplay'
 import { useNotifications } from 'hooks/useNotifications'
 import { ColumnView } from 'components/ColumnView'
-import { FlexCenter } from 'components/FlexCenter'
-import { getBoard, getFullDisplayBalance } from 'utils'
+import { getFullDisplayBalance } from 'utils'
 import { useAvalanche } from 'hooks/useAvalanche'
 import BigNumber from 'bignumber.js'
+
+BigNumber.config({
+  DECIMAL_PLACES: 80,
+  EXPONENTIAL_AT: 1000
+})
 
 export const AvalancheDialog = ({ isOpen, onDismiss }) => {
   const { stats, approve, claim, deposit, withdraw } = useAvalanche()
@@ -52,13 +56,15 @@ export const AvalancheDialog = ({ isOpen, onDismiss }) => {
     return receipt
   }, [claim, notify, stats])
 
-  const handleStake = useCallback(async (amount) => {
+  const handleStake = useCallback(async () => {
     if (!stats) {
       notify('Please connect to Web3', 'info')
       return
     }
 
-    if (new BigNumber(stats.lpBalance).lt(amount)) {
+    const value = new BigNumber(depositInput).times(1e18)
+
+    if (value.gt(stats.lpBalance)) {
       notify('Not enough PWDR/ETH LP to deposit', 'warn')
       return
     }
@@ -70,24 +76,26 @@ export const AvalancheDialog = ({ isOpen, onDismiss }) => {
       }
     }
 
-    const receipt = await deposit(amount)
+    const receipt = await deposit(value.toString())
     return receipt
-  }, [handleApprove, deposit, notify, stats])
+  }, [handleApprove, deposit, notify, stats, depositInput])
 
-  const handleUnstake = useCallback(async (amount) => {
+  const handleUnstake = useCallback(async () => {
     if (!stats) {
       notify('Please connect to Web3', 'info')
       return
     }
 
-    if (new BigNumber(stats.stakedBalance).lt(amount)) {
+    const value = new BigNumber(withdrawInput).times(1e18)
+
+    if (value.gt(stats.stakedBalance)) {
       notify('Not enough staked PWDR/ETH LP to withdraw', 'error')
       return
     }
 
-    const receipt = await withdraw(amount)
+    const receipt = await withdraw(value.toString())
     return receipt
-  }, [withdraw, notify, stats])
+  }, [withdraw, notify, stats, withdrawInput])
 
   return (
     <Dialog 

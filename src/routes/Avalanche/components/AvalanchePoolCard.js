@@ -54,13 +54,19 @@ export const AvalanchePoolCard = () => {
 							</Typography>
 							<Box mb={2}>
 								<Grid container>
-									<Grid item xs={12} md={6}>
+									<Grid item xs={12} md={4}>
 										<ValueDisplay
 											title="Current Phase"
 											info={accumulating ? "Accumulation" : "Distribution"}
 										/>
 									</Grid>
-									<Grid item xs={12} md={6}>
+									<Grid item xs={12} md={4}>
+										<ValueDisplay
+											title="Total PWDR/ETH Staked"
+											value={stats ? `${stats.totalStaked}` : "0"}
+										/>
+									</Grid>
+									<Grid item xs={12} md={4}>
 										<ValueDisplay
 											title="Unstaking Fee"
 											info={stats ? `${stats.unstakingFee/10}%` : "0%"}
