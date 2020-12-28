@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const SlopesPoolCard = ({ slope }) => {
   const { pid, symbol, sign, name, decimals, lpStaked, address, lpAddress } = slope
-  const { stats, active } = useSlopes()
+  const { stats, active, accumulating } = useSlopes()
   const pool = stats && stats.length ? stats[pid] : undefined
   const classes = useStyles()
   const [value, setValue] = useState('1')
@@ -79,10 +79,18 @@ export const SlopesPoolCard = ({ slope }) => {
           ) : (
             <Box>
               <FlexCenter>
-                <ValueDisplay 
-                  title="Fixed APR" 
-                  info={pool ? `${pool.apr}%` : "800%"} 
-                />
+                {accumulating ? (
+                  <ValueDisplay 
+                    title="Fixed APR" 
+                    info={pool ? `${pool.apr}%` : "800%"} 
+                  />
+                ) : (
+                  <ValueDisplay
+                    title="Current Phase"
+                    info="Distribution"
+                  />
+                )}
+                
               </FlexCenter>
               <TabContext value={value}>
                 <TabList 
