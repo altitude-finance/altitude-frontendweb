@@ -1,4 +1,4 @@
-import { getContractSlopes } from "eth"
+import { getContractSlopes, getContractSlopesOld } from "eth"
 import { claimAllSlopes, claimSlopes, depositSlopes, getPoolStats, getSlopesStats, migrateSlopes, withdrawSlopes } from "eth/utils"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useWallet } from "use-wallet"
@@ -13,12 +13,17 @@ export const useSlopes = () => {
   const { account, chainId, ethereum } = useWallet()
   const altitude = useAltitude()
   const [stats, setStats] = useState([])
+  const [oldStats, setOldStats] = useState([])
   const [active, setActive] = useState(false)
   const [accumulating, setAccumulating] = useState(false)
   const notify = useNotifications()
 
   const SlopesContract = useMemo(() => {
     return getContractSlopes(altitude)
+  }, [altitude])
+
+  const SlopesOldContract = useMemo(() => {
+    return getContractSlopesOld(altitude)
   }, [altitude])
 
   const handleApprove = useCallback(async (tokenAddress) => {
@@ -86,6 +91,18 @@ export const useSlopes = () => {
     }
   }, [SlopesContract, account, ethereum, notify])
 
+  const handleWithdrawOld = useCallback(async (pid, amount) => {
+    const tx = await withdrawSlopes(SlopesOldContract, pid, account, amount)
+    const receipt = await awaitReceipt(tx, ethereum, (txHash) => notify('Withdrawing tokens...', 'default', txHash))
+    if (receipt) {
+      notify('Successfully withdrew tokens from SlopesV1.', 'success')
+      return true
+    } else {
+      notify('Encountered an error during withdrawal from SlopesV1', 'error')
+      return false
+    }
+  }, [SlopesOldContract, account, ethereum, notify])
+
   const handleMigrate = useCallback(async () => {
     const tx = await migrateSlopes(SlopesContract, account)
     const receipt = await awaitReceipt(tx, ethereum, (txHash) => notify('Migrating tokens...', 'default', txHash))
@@ -100,69 +117,54 @@ export const useSlopes = () => {
 
   const fetchStats = useCallback(async () => {
     const { active, accumulating, stats } = await getSlopesStats(SlopesContract, account)
+    const oldSlopes = await getSlopesStats(SlopesOldContract, account)
+    
     setActive(active)
     setAccumulating(accumulating)
 
     if (stats && stats.length) {
-      setStats(stats.map((pool, i) => ({
-        pid: i,
-        active: pool[0],
-        apr: pool[1],
-        lastReward: pool[2],
-        totalShares: pool[3],
-        totalStaked: pool[4],
-        tokenPrice: pool[7],
-        lpPrice: pool[8],
-        stakingFee: pool[9],
-        tokenBalance: pool[10],
-        tokenAllowance: pool[11],
-        lpBalance: pool[12],
-        lpAllowance: pool[13],
-        stakedBalance: pool[14],
-        sharesBalance: pool[15],
-        pwdrRewards: pool[16],
-        tokenRewards: pool[17]
-      })))
+      setStats(stats.map((pool, i) => formatSlopesData(pool, i)))
+      setOldStats(oldSlopes.stats.map((pool, i) => formatSlopesData(pool, i)))
     }
-  }, [setStats, setActive, SlopesContract, account])
+  }, [setStats, setOldStats, setActive, SlopesContract, SlopesOldContract, account])
 
-  const fetchTestNetStats = useCallback(async () => {
+  const fetchPoolStats = useCallback(async () => {
     const pool = await getPoolStats(SlopesContract, account, 0)
-
     if (pool) {
       setActive(true)
-      setStats([{
-        active: pool[0],
-        apr: pool[1],
-        lastReward: pool[2],
-        totalShares: pool[3],
-        totalStaked: pool[4],
-        tokenPrice: pool[7],
-        lpPrice: pool[8],
-        tokenBalance: pool[10],
-        tokenAllowance: pool[11],
-        lpBalance: pool[12],
-        lpAllowance: pool[13],
-        stakedBalance: pool[14],
-        sharesBalance: pool[15],
-        pwdrRewards: pool[16],
-        tokenRewards: pool[17]
-      }])
+      setStats([formatSlopesData(pool, 0)])
     }
   }, [SlopesContract, account])
 
+  const formatSlopesData = (pool, i) => ({
+    pid: i,
+    active: pool[0],
+    apr: pool[1],
+    lastReward: pool[2],
+    totalShares: pool[3],
+    totalStaked: pool[4],
+    tokenPrice: pool[7],
+    lpPrice: pool[8],
+    stakingFee: pool[9],
+    tokenBalance: pool[10],
+    tokenAllowance: pool[11],
+    lpBalance: pool[12],
+    lpAllowance: pool[13],
+    stakedBalance: pool[14],
+    sharesBalance: pool[15],
+    pwdrRewards: pool[16],
+    tokenRewards: pool[17]
+  })
+
   useEffect(() => {
     if (!!account) {
-      if (chainId === 4) {
-        fetchTestNetStats()
-      } else {
-        fetchStats()
-      }
+      fetchStats()
     }
-  }, [block, account, chainId, fetchStats, fetchTestNetStats])
+  }, [block, account, chainId, fetchStats])
 
   return {
     stats,
+    oldStats,
     active,
     accumulating,
     approve: handleApprove,
@@ -170,6 +172,7 @@ export const useSlopes = () => {
     claimAll: handleClaimAll,
     deposit: handleDeposit,
     withdraw: handleWithdraw,
+    withdrawOld: handleWithdrawOld,
     migrate: handleMigrate
   }
 }

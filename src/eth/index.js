@@ -28,6 +28,10 @@ export const getContractSlopes = (altitude) => {
   return altitude && altitude.contracts && altitude.contracts.Slopes
 }
 
+export const getContractSlopesOld = (altitude) => {
+  return altitude && altitude.contracts && altitude.contracts.SlopesOld
+}
+
 export const getContractAvalanche = (altitude) => {
   return altitude && altitude.contracts && altitude.contracts.Avalanche
 }

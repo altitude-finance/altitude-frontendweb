@@ -24,7 +24,8 @@ export const Slopes = () => {
 						justify="center"
 						alignItems="center"
 					>
-						{[...SlopesMap(chainId).pools].map((slope, i) => (
+						{[...SlopesMap(chainId).pools].slice(1).map((slope, i) => (
+							
 							<Grid item key={i} xs={12} md={6}>
 								<SlopesPoolCard slope={slope} />
 							</Grid>

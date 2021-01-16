@@ -3,6 +3,7 @@ import PWDR from '../abi/PWDR.json'
 import Lodge from '../abi/Lodge.json'
 import Avalanche from '../abi/Avalanche.json'
 import Slopes from '../abi/Slopes.json'
+import SlopesOld from '../abi/SlopesOld.json'
 import Loyalty from '../abi/Loyalty.json'
 import Addresses from 'constants/Addresses'
 
@@ -17,6 +18,7 @@ class Contracts {
     this.Loyalty = new this.web3.eth.Contract(Loyalty)
     this.Avalanche = new this.web3.eth.Contract(Avalanche)
     this.Slopes = new this.web3.eth.Contract(Slopes)
+    this.SlopesOld = new this.web3.eth.Contract(SlopesOld)
 
     this.setProvider(provider, chainId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
@@ -39,6 +41,7 @@ class Contracts {
     setProvider(this.Loyalty, Addresses.Loyalty[chainId])
     setProvider(this.Avalanche, Addresses.Avalanche[chainId])
     setProvider(this.Slopes, Addresses.Slopes[chainId])
+    setProvider(this.SlopesOld, Addresses.SlopesOld[chainId])
   }
 
   // set default sending account

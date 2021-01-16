@@ -15,8 +15,9 @@ BigNumber.config({
 
 export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
   const { symbol, lpStaked, address, lpAddress, pid, decimals } = slope
-  const { approve, claim, deposit, migrate, withdraw, stats, accumulating } = useSlopes()
+  const { approve, claim, deposit, migrate, withdraw, withdrawOld, stats, oldStats, accumulating } = useSlopes()
   const pool = stats && stats.length ? stats[pid] : undefined
+  const oldPool = oldStats && oldStats.length ? oldStats[pid] : undefined
   const [depositInput, setDepositInput] = useState('')
   const [withdrawInput, setWithdrawInput] = useState('')
 
@@ -116,20 +117,32 @@ export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
     return receipt
   }, [notify, pool, symbol, pid, withdraw, withdrawInput, decimals])
 
-  const handleMigrate = useCallback(async () => {
-    if (!pool) {
+  const handleUnstakeOld = useCallback(async () => {
+    if (!oldPool) {
       notify('Please connect to Web3', 'info')
       return
     }
 
-    if (new BigNumber(pool.stakedBalance).eq('0')) {
-      notify(`No tokens to migrate`, 'error')
-      return
-    }
+    const value = new BigNumber(oldPool.stakedBalance).times(new BigNumber(10).pow(decimals))
 
-    const receipt = await migrate()
+    const receipt = await withdrawOld(pid, value.toString())
     return receipt
-  }, [notify, pool, migrate])
+  }, [notify, oldPool, pid, withdrawOld, decimals])
+
+  // const handleMigrate = useCallback(async () => {
+  //   if (!pool) {
+  //     notify('Please connect to Web3', 'info')
+  //     return
+  //   }
+
+  //   if (new BigNumber(pool.stakedBalance).eq('0')) {
+  //     notify(`No tokens to migrate`, 'error')
+  //     return
+  //   }
+
+  //   const receipt = await migrate()
+  //   return receipt
+  // }, [notify, pool, migrate])
 
   return (
     <Dialog 
@@ -238,17 +251,27 @@ export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
           fullWidth 
         />
         <Box mb={1} width="100%">
-        <Button
-          onClick={handleUnstake}
-          variant="contained"
-          color="primary"
-          fullWidth
-        >
-          Unstake {symbol}
-        </Button>
+          <Button
+            onClick={handleUnstake}
+            variant="contained"
+            color="primary"
+            fullWidth
+          >
+            Unstake {symbol}
+          </Button>
         </Box>
+
+        {oldPool && new BigNumber(oldPool.stakedBalance).gt(0) && (
+          <Button
+            onClick={handleUnstakeOld}
+            variant="contained"
+            color="default"
+          >
+            Unstake Balance from SlopesV1
+          </Button>
+        )}
         
-        {accumulating && pid === 0 && (
+        {/* {accumulating && pid === 0 && (
           <Button
             onClick={handleMigrate}
             variant="contained"
@@ -256,7 +279,9 @@ export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
           >
             Migrate PWDR/ETH to Avalanche
           </Button>
-        )}
+        )} */}
+
+        {}
       </ColumnView>
       <Typography variant="subtitle2" align="center">
         All deposits/withdraws will claim any pending rewards from the Slopes.
