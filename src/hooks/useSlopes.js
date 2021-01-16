@@ -113,6 +113,7 @@ export const useSlopes = () => {
         totalStaked: pool[4],
         tokenPrice: pool[7],
         lpPrice: pool[8],
+        stakingFee: pool[9],
         tokenBalance: pool[10],
         tokenAllowance: pool[11],
         lpBalance: pool[12],

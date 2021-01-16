@@ -74,7 +74,7 @@ export const SlopesStats = () => {
                 <Grid item xs={12} sm={4}>
                   <ValueDisplay
                     title="Staking Fee"
-                    info="5%"
+                    info={stats && stats.length ? stats[0].stakingFee / 100 : '0%'}
                   />
                 </Grid>
               </Grid>
