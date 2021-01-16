@@ -30,11 +30,11 @@ const RouteMap = {
       path: "/lodge",
       icon: () => <EmojiEventsIcon />
     },
-    {
-      title: "Dashboard",
-      path: "/dashboard",
-      icon: () => <BarChartIcon />
-    },
+    // {
+    //   title: "Dashboard",
+    //   path: "/dashboard",
+    //   icon: () => <BarChartIcon />
+    // },
     {
       title: "Docs",
       path: "/docs",

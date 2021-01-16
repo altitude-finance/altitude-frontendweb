@@ -54,6 +54,25 @@
       {
         "indexed": false,
         "internalType": "uint256",
+        "name": "clearanceTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "ClearanceStarted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
       }
@@ -84,6 +103,31 @@
       }
     ],
     "name": "Distribution",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "EmergencyClearing",
     "type": "event"
   },
   {
@@ -348,6 +392,29 @@
       }
     ],
     "name": "depositFor",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "_reset",
+        "type": "bool"
+      }
+    ],
+    "name": "emergencyClearance",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
