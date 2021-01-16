@@ -103,18 +103,6 @@ export const useSlopes = () => {
     }
   }, [SlopesOldContract, account, ethereum, notify])
 
-  const handleMigrate = useCallback(async () => {
-    const tx = await migrateSlopes(SlopesContract, account)
-    const receipt = await awaitReceipt(tx, ethereum, (txHash) => notify('Migrating tokens...', 'default', txHash))
-    if (receipt) {
-      notify('Successfully migrated tokens.', 'success')
-      return true
-    } else {
-      notify('Encountered an error during migration', 'error')
-      return false
-    }
-  }, [SlopesContract, account, ethereum, notify])
-
   const fetchStats = useCallback(async () => {
     const { active, accumulating, stats } = await getSlopesStats(SlopesContract, account)
     const oldSlopes = await getSlopesStats(SlopesOldContract, account)
@@ -127,14 +115,6 @@ export const useSlopes = () => {
       setOldStats(oldSlopes.stats.map((pool, i) => formatSlopesData(pool, i)))
     }
   }, [setStats, setOldStats, setActive, SlopesContract, SlopesOldContract, account])
-
-  const fetchPoolStats = useCallback(async () => {
-    const pool = await getPoolStats(SlopesContract, account, 0)
-    if (pool) {
-      setActive(true)
-      setStats([formatSlopesData(pool, 0)])
-    }
-  }, [SlopesContract, account])
 
   const formatSlopesData = (pool, i) => ({
     pid: i,
@@ -172,7 +152,6 @@ export const useSlopes = () => {
     claimAll: handleClaimAll,
     deposit: handleDeposit,
     withdraw: handleWithdraw,
-    withdrawOld: handleWithdrawOld,
-    migrate: handleMigrate
+    withdrawOld: handleWithdrawOld
   }
 }

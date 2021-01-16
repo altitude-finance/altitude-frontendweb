@@ -1,5 +1,5 @@
-import { getAddressPWDRLP, getContractAvalanche } from 'eth'
-import { claimAvalanche, depositAvalanche, getAvalancheStats, withdrawAvalanche } from 'eth/utils'
+import { getAddressPWDRLP, getContractAvalanche, getContractSlopesOld } from 'eth'
+import { claimAvalanche, depositAvalanche, getAvalancheStats, getPoolStats, migrateSlopes, withdrawAvalanche, withdrawSlopes } from 'eth/utils'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useWallet } from 'use-wallet'
 import { approve, awaitReceipt } from 'utils'
@@ -15,12 +15,17 @@ export const useAvalanche = () => {
   const [active, setActive] = useState(false)
   const [accumulating, setAccumulating] = useState(false)
   const [stats, setStats] = useState()
+  const [pool, setPool] = useState()
 
   const notify = useNotifications()
 
   const AvalancheContract = useMemo(() => {
     return getContractAvalanche(altitude)
   }, [altitude])
+
+  const SlopesOldContract = useMemo(() => {
+    return getContractSlopesOld(altitude)
+  }, [altitude]) 
 
   const PwdrPoolAddress = useMemo(() => {
     return getAddressPWDRLP(altitude)
@@ -106,19 +111,75 @@ export const useAvalanche = () => {
     }
   }, [AvalancheContract, account, setActive, setStats])
 
+  const handleWithdrawOld = useCallback(async (amount) => {
+    const tx = await withdrawSlopes(SlopesOldContract, 0, account, amount)
+    const receipt = await awaitReceipt(tx, ethereum, (txHash) => notify('Withdrawing tokens...', 'default', txHash))
+    if (receipt) {
+      notify('Successfully withdrew tokens from SlopesV1.', 'success')
+      return true
+    } else {
+      notify('Encountered an error during withdrawal from SlopesV1', 'error')
+      return false
+    }
+  }, [SlopesOldContract, account, ethereum, notify]) 
+
+  const handleMigrate = useCallback(async () => {
+    const tx = await migrateSlopes(SlopesOldContract, account)
+    const receipt = await awaitReceipt(tx, ethereum, (txHash) => notify('Migrating tokens...', 'default', txHash))
+    if (receipt) {
+      notify('Successfully migrated tokens.', 'success')
+      return true
+    } else {
+      notify('Encountered an error during migration from SlopesV1', 'error')
+      return false
+    }
+  }, [SlopesOldContract, account, ethereum, notify])
+
+  const fetchPoolStats = useCallback(async () => {
+    const pool = await getPoolStats(SlopesOldContract, account, 0)
+    // console.log(pool)
+    if (pool) {
+      setPool(formatSlopesData(pool, 0))
+    }
+  }, [SlopesOldContract, account])
+
+  const formatSlopesData = (pool, i) => ({
+    pid: i,
+    active: pool[0],
+    apr: pool[1],
+    lastReward: pool[2],
+    totalShares: pool[3],
+    totalStaked: pool[4],
+    tokenPrice: pool[7],
+    lpPrice: pool[8],
+    stakingFee: pool[9],
+    tokenBalance: pool[10],
+    tokenAllowance: pool[11],
+    lpBalance: pool[12],
+    lpAllowance: pool[13],
+    stakedBalance: pool[14],
+    sharesBalance: pool[15],
+    pwdrRewards: pool[16],
+    tokenRewards: pool[17]
+  })
+
   useEffect(() => {
     if (!!account) {
       fetchStats()
+      fetchPoolStats()
     }
-  }, [account, block, fetchStats])
+  }, [account, block, fetchStats, fetchPoolStats])
   
   return {
     active,
     accumulating,
+    pool,
     stats,
     approve: handleApprove,
     claim: handleClaim,
     deposit: handleDeposit,
-    withdraw: handleWithdraw
+    migrate: handleMigrate,
+    withdraw: handleWithdraw,
+    withdrawOld: handleWithdrawOld
   }
 }

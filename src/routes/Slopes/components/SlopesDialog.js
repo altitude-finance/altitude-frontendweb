@@ -129,21 +129,6 @@ export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
     return receipt
   }, [notify, oldPool, pid, withdrawOld, decimals])
 
-  // const handleMigrate = useCallback(async () => {
-  //   if (!pool) {
-  //     notify('Please connect to Web3', 'info')
-  //     return
-  //   }
-
-  //   if (new BigNumber(pool.stakedBalance).eq('0')) {
-  //     notify(`No tokens to migrate`, 'error')
-  //     return
-  //   }
-
-  //   const receipt = await migrate()
-  //   return receipt
-  // }, [notify, pool, migrate])
-
   return (
     <Dialog 
       isOpen={isOpen} 
@@ -270,18 +255,6 @@ export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
             Unstake Balance from SlopesV1
           </Button>
         )}
-        
-        {/* {accumulating && pid === 0 && (
-          <Button
-            onClick={handleMigrate}
-            variant="contained"
-            color="default"
-          >
-            Migrate PWDR/ETH to Avalanche
-          </Button>
-        )} */}
-
-        {}
       </ColumnView>
       <Typography variant="subtitle2" align="center">
         All deposits/withdraws will claim any pending rewards from the Slopes.

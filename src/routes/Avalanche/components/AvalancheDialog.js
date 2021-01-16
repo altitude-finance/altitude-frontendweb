@@ -14,7 +14,7 @@ BigNumber.config({
 })
 
 export const AvalancheDialog = ({ isOpen, onDismiss }) => {
-  const { stats, approve, claim, deposit, withdraw } = useAvalanche()
+  const { stats, pool, approve, claim, deposit, withdraw, withdrawOld, migrate } = useAvalanche()
   const [depositInput, setDepositInput] = useState('')
   const [withdrawInput, setWithdrawInput] = useState('')
 
@@ -96,6 +96,33 @@ export const AvalancheDialog = ({ isOpen, onDismiss }) => {
     const receipt = await withdraw(value.toString())
     return receipt
   }, [withdraw, notify, stats, withdrawInput])
+
+  const handleUnstakeOld = useCallback(async () => {
+    if (!pool) {
+      notify('Please connect to Web3', 'info')
+      return
+    }
+
+    const value = new BigNumber(pool.stakedBalance).times(new BigNumber(10).pow(18))
+
+    const receipt = await withdrawOld(value.toString())
+    return receipt
+  }, [notify, pool, withdrawOld])
+
+  const handleMigrate = useCallback(async () => {
+    if (!pool) {
+      notify('Please connect to Web3', 'info')
+      return
+    }
+
+    if (new BigNumber(pool.stakedBalance).eq('0')) {
+      notify(`No tokens to migrate`, 'error')
+      return
+    }
+
+    const receipt = await migrate()
+    return receipt
+  }, [notify, pool, migrate])
 
   return (
     <Dialog 
@@ -194,13 +221,41 @@ export const AvalancheDialog = ({ isOpen, onDismiss }) => {
           }}
           fullWidth 
         />
+
+      <Box mb={1} width="100%">
         <Button
           onClick={handleUnstake}
           variant="contained"
           color="primary"
+          fullWidth
         >
           Unstake PWDR/ETH
         </Button>
+      </Box>
+
+      {pool && pool.stakedBalance && (
+        <Box mb={1} width="100%">
+          <Button
+            onClick={handleMigrate}
+            variant="contained"
+            color="default"
+            fullWidth
+          >
+            Migrate PWDR/ETH to Avalanche
+          </Button>
+        </Box>
+      )}
+
+      {pool && pool.stakedBalance && (
+        <Button
+          onClick={handleUnstakeOld}
+          variant="contained"
+          color="default"
+        >
+          Unstake PWDR/ETH from SlopesV1
+        </Button>
+      )}
+        
       </ColumnView>
       <Typography variant="subtitle2" align="center">
         All deposits/withdraws will claim any pending rewards from the Avalanche.
