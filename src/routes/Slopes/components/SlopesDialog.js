@@ -123,9 +123,7 @@ export const SlopesDialog = ({ isOpen, onDismiss, slope }) => {
       return
     }
 
-    const value = new BigNumber(oldPool.stakedBalance).times(new BigNumber(10).pow(decimals))
-
-    const receipt = await withdrawOld(pid, value.toString())
+    const receipt = await withdrawOld(pid, oldPool.stakedBalance)
     return receipt
   }, [notify, oldPool, pid, withdrawOld, decimals])
 

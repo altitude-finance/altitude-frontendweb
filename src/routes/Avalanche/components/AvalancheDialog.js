@@ -103,9 +103,7 @@ export const AvalancheDialog = ({ isOpen, onDismiss }) => {
       return
     }
 
-    const value = new BigNumber(pool.stakedBalance).times(new BigNumber(10).pow(18))
-
-    const receipt = await withdrawOld(value.toString())
+    const receipt = await withdrawOld(pool.stakedBalance)
     return receipt
   }, [notify, pool, withdrawOld])
 
