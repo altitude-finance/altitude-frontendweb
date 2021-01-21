@@ -22,16 +22,13 @@ export const AvalanchePoolCard = () => {
 				<TextDecoration align="center" />
 
 				<ConnectView>
-					{!active ? (
-						<Typography
+						{/* <Typography
 							variant="body1"
 							color="textSecondary"
 							align="center"
 						>
-							{/* Waiting for Accumulation Completion */}
 							Loading Avalanche Stats...
-						</Typography>
-					) : (
+						</Typography> */}
 						<Box>
 							<Typography
 								variant="body1"
@@ -153,7 +150,7 @@ export const AvalanchePoolCard = () => {
 								</Button>
 							</Box>
 						</Box>
-					)}
+					
 				</ConnectView>
 			</Box>
 		</Paper>
