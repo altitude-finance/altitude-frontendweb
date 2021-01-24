@@ -36,6 +36,7 @@ class Altitude {
     this.slopesAddress = Addresses.Slopes[chainId];
     this.slopesOldAddress = Addresses.SlopesOld[chainId];
     this.avalancheAddress = Addresses.Avalanche[chainId];
+    this.avalancheOldAddress = Addresses.AvalancheOld[chainId];
     this.loyaltyAddress = Addresses.Loyalty[chainId];
   }
 

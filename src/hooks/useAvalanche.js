@@ -1,4 +1,4 @@
-import { getAddressPWDRLP, getContractAvalanche, getContractSlopesOld } from 'eth'
+import { getAddressPWDRLP, getContractAvalanche, getContractAvalancheOld, getContractSlopesOld } from 'eth'
 import { claimAvalanche, depositAvalanche, getAvalancheStats, getPoolStats, migrateSlopes, withdrawAvalanche, withdrawSlopes } from 'eth/utils'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useWallet } from 'use-wallet'
@@ -6,7 +6,6 @@ import { approve, awaitReceipt } from 'utils'
 import { useAltitude } from './useAltitude'
 import { useBlock } from './useBlock'
 import { useNotifications } from './useNotifications'
-import BigNumber from "bignumber.js"
 
 export const useAvalanche = () => {
   const altitude = useAltitude()
@@ -15,12 +14,17 @@ export const useAvalanche = () => {
   const [active, setActive] = useState(false)
   const [accumulating, setAccumulating] = useState(false)
   const [stats, setStats] = useState()
+  const [oldStats, setOldStats] = useState()
   const [pool, setPool] = useState()
 
   const notify = useNotifications()
 
   const AvalancheContract = useMemo(() => {
     return getContractAvalanche(altitude)
+  }, [altitude])
+
+  const AvalancheOldContract = useMemo(() => {
+    return getContractAvalancheOld(altitude)
   }, [altitude])
 
   const SlopesOldContract = useMemo(() => {
@@ -83,35 +87,20 @@ export const useAvalanche = () => {
       return false
     }
   }, [account, ethereum, notify, AvalancheContract])
-  
-  const fetchStats = useCallback(async () => {
-    const { active, accumulating, stats } = await getAvalancheStats(AvalancheContract, account)
-    
-    setActive(active)
-    setAccumulating(accumulating)
-
-    if (stats && stats.length) {
-      setStats({
-        apr: stats[0],
-        totalStaked: stats[2],
-        pwdrPrice: stats[5],
-        lpPrice: stats[6],
-        nextEpochReward: stats[7],
-        currentEpochReward: stats[8],
-        currentEpochRewardPerDay: stats[9],
-        startTime: stats[10],
-        lastPayout: stats[11],
-        payoutNumber: stats[12],
-        unstakingFee: stats[13],
-        lpBalance: stats[14],
-        lpAllowance: stats[15],
-        stakedBalance: stats[16],
-        pwdrRewards: stats[18]
-      })
-    }
-  }, [AvalancheContract, account, setActive, setStats])
 
   const handleWithdrawOld = useCallback(async (amount) => {
+    const tx = await withdrawAvalanche(AvalancheOldContract, account, amount)
+    const receipt = await awaitReceipt(tx, ethereum, (txHash) => notify('Withdrawing tokens...', 'default', txHash))
+    if (receipt) {
+      notify('Successfully withdrew tokens from AvalancheV1.', 'success')
+      return true
+    } else {
+      notify('Encountered an error during withdrawal from AvalancheV1', 'error')
+      return false
+    }
+  }, [account, ethereum, notify, AvalancheOldContract])
+
+  const handleWithdrawOldSlopes = useCallback(async (amount) => {
     const tx = await withdrawSlopes(SlopesOldContract, 0, account, amount)
     const receipt = await awaitReceipt(tx, ethereum, (txHash) => notify('Withdrawing tokens...', 'default', txHash))
     if (receipt) {
@@ -134,6 +123,43 @@ export const useAvalanche = () => {
       return false
     }
   }, [SlopesOldContract, account, ethereum, notify])
+
+  const fetchStats = useCallback(async () => {
+    const { active, accumulating, stats } = await getAvalancheStats(AvalancheContract, account)
+    
+    setActive(active)
+    setAccumulating(accumulating)
+
+    if (stats && stats.length) {
+      setStats(formatAvalancheData(stats))
+    }
+  }, [AvalancheContract, account, setActive, setStats])
+
+  const fetchOldStats = useCallback(async () => {
+    const { stats } = await getAvalancheStats(AvalancheOldContract, account)
+    
+    if (stats && stats.length) {
+      setOldStats(formatAvalancheData(stats))
+    }
+  }, [AvalancheOldContract, account, setOldStats])
+
+  const formatAvalancheData = (stats) => ({
+    apr: stats[0],
+    totalStaked: stats[2],
+    pwdrPrice: stats[5],
+    lpPrice: stats[6],
+    nextEpochReward: stats[7],
+    currentEpochReward: stats[8],
+    currentEpochRewardPerDay: stats[9],
+    startTime: stats[10],
+    lastPayout: stats[11],
+    payoutNumber: stats[12],
+    unstakingFee: stats[13],
+    lpBalance: stats[14],
+    lpAllowance: stats[15],
+    stakedBalance: stats[16],
+    pwdrRewards: stats[18]
+  })
 
   const fetchPoolStats = useCallback(async () => {
     const pool = await getPoolStats(SlopesOldContract, account, 0)
@@ -167,19 +193,22 @@ export const useAvalanche = () => {
     if (!!account) {
       fetchStats()
       fetchPoolStats()
+      fetchOldStats()
     }
-  }, [account, block, fetchStats, fetchPoolStats])
+  }, [account, block, fetchStats, fetchOldStats, fetchPoolStats])
   
   return {
     active,
     accumulating,
     pool,
     stats,
+    oldStats,
     approve: handleApprove,
     claim: handleClaim,
     deposit: handleDeposit,
     migrate: handleMigrate,
     withdraw: handleWithdraw,
-    withdrawOld: handleWithdrawOld
+    withdrawOld: handleWithdrawOld,
+    withdrawOldSlopes: handleWithdrawOldSlopes
   }
 }

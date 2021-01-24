@@ -14,7 +14,7 @@ BigNumber.config({
 })
 
 export const AvalancheDialog = ({ isOpen, onDismiss }) => {
-  const { stats, pool, approve, claim, deposit, withdraw, withdrawOld, migrate } = useAvalanche()
+  const { stats, oldStats, pool, approve, claim, deposit, withdraw, withdrawOld, withdrawOldSlopes, migrate } = useAvalanche()
   const [depositInput, setDepositInput] = useState('')
   const [withdrawInput, setWithdrawInput] = useState('')
 
@@ -97,15 +97,25 @@ export const AvalancheDialog = ({ isOpen, onDismiss }) => {
     return receipt
   }, [withdraw, notify, stats, withdrawInput])
 
-  const handleUnstakeOld = useCallback(async () => {
+  const handleWithdrawOld = useCallback(async () => {
+    if (!oldStats) {
+      notify('Please connect to Web3', 'info')
+      return
+    }
+
+    const receipt = await withdrawOld(oldStats.stakedBalance)
+    return receipt
+  }, [notify, oldStats, withdrawOld])
+
+  const handleWithdrawOldSlopes = useCallback(async () => {
     if (!pool) {
       notify('Please connect to Web3', 'info')
       return
     }
 
-    const receipt = await withdrawOld(pool.stakedBalance)
+    const receipt = await withdrawOldSlopes(pool.stakedBalance)
     return receipt
-  }, [notify, pool, withdrawOld])
+  }, [notify, pool, withdrawOldSlopes])
 
   const handleMigrate = useCallback(async () => {
     if (!pool) {
@@ -231,7 +241,7 @@ export const AvalancheDialog = ({ isOpen, onDismiss }) => {
         </Button>
       </Box>
 
-      {pool && pool.stakedBalance && (
+      {pool && pool.stakedBalance !== '0' && (
         <Box mb={1} width="100%">
           <Button
             onClick={handleMigrate}
@@ -244,13 +254,23 @@ export const AvalancheDialog = ({ isOpen, onDismiss }) => {
         </Box>
       )}
 
-      {pool && pool.stakedBalance && (
+      {pool && pool.stakedBalance !== '0' && (
         <Button
-          onClick={handleUnstakeOld}
+          onClick={handleWithdrawOldSlopes}
           variant="contained"
           color="default"
         >
           Unstake PWDR/ETH from SlopesV1
+        </Button>
+      )}
+
+      {oldStats && oldStats.stakedBalance !== '0' && (
+        <Button
+          onClick={handleWithdrawOld}
+          variant="contained"
+          color="default"
+        >
+          Unstake PWDR/ETH from AvalancheV1
         </Button>
       )}
         
